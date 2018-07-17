@@ -1,0 +1,239 @@
+{
+	"info": {
+		"_postman_id": "7c0ab408-5522-4720-b4d4-f17bf3da579f",
+		"name": "shopAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Category",
+			"description": "",
+			"item": [
+				{
+					"name": "Get all categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{server_url}}/categories",
+							"host": [
+								"{{server_url}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get category by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{server_url}}/categories/5b4824ec62f47931880180b9",
+							"host": [
+								"{{server_url}}"
+							],
+							"path": [
+								"categories",
+								"5b4824ec62f47931880180b9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add a category",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\":\"Name\",\n  \"image\":\"Image\",\n  \"description\":\"Description\"\n}"
+						},
+						"url": {
+							"raw": "{{server_url}}/categories",
+							"host": [
+								"{{server_url}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update category",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\":\"New name\",\n  \"image\":\"Image\",\n  \"description\":\"Description\"\n}"
+						},
+						"url": {
+							"raw": "{{server_url}}/categories/5b484ba2dfdebf3f50e50da4",
+							"host": [
+								"{{server_url}}"
+							],
+							"path": [
+								"categories",
+								"5b484ba2dfdebf3f50e50da4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a category",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{server_url}}/categories/5b483fccc7dbcc2fa8a2eb25",
+							"host": [
+								"{{server_url}}"
+							],
+							"path": [
+								"categories",
+								"5b483fccc7dbcc2fa8a2eb25"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"description": "",
+			"item": [
+				{
+					"name": "Get all products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{server_url}}/products",
+							"host": [
+								"{{server_url}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get product by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{server_url}}/products/5b4824ec62f47931880180b9",
+							"host": [
+								"{{server_url}}"
+							],
+							"path": [
+								"products",
+								"5b4824ec62f47931880180b9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add a product",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\":\"Name\",\n  \"image\":\"Image\",\n  \"description\":\"Description\"\n  \"price\": 79000,\n  \"category\":\"5b4862412edfbe3a180db01c\"\n}"
+						},
+						"url": {
+							"raw": "{{server_url}}/products",
+							"host": [
+								"{{server_url}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update product",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"New name\",\n\t\"image\":\"Image\",\n\t\"description\":\"Description\"\n}"
+						},
+						"url": {
+							"raw": "{{server_url}}/products/5b484ba2dfdebf3f50e50da4",
+							"host": [
+								"{{server_url}}"
+							],
+							"path": [
+								"products",
+								"5b484ba2dfdebf3f50e50da4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{server_url}}/products/5b483fccc7dbcc2fa8a2eb25",
+							"host": [
+								"{{server_url}}"
+							],
+							"path": [
+								"products",
+								"5b483fccc7dbcc2fa8a2eb25"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
