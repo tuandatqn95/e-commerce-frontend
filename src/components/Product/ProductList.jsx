@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import productForm from "./ProductForm";
+import ProductForm from "./ProductForm";
 
 class ProductList extends Component {
     render() {
@@ -6,7 +8,9 @@ class ProductList extends Component {
 
         return (
             <div className={`col-md-${size}`}>
+                 
                 <div className="card">
+                  
                     <div className="card-header card-header-primary">
                         <div className="pull-left">
                             <h4 className="card-title ">ProductList</h4>
@@ -15,18 +19,12 @@ class ProductList extends Component {
 
                         <div className="nav nav-tabs pull-right">
                             <div className="nav-item">
-                                <a
-                                    href="#"
-                                    style={{ paddingTop: 2, paddingBottom: 2 }}
-                                    className={`nav-link ${isFormOpen &&
-                                        "active"}`}
-                                    onClick={() => this.props.onToggleForm()}>
+                                    <button className="btn btn-block btn-info" data-toggle="modal" data-target="#myModal">
+                                        <i className="material-icons">library_books</i>
+                                        Classic
+                                        <div className="ripple-container"></div>
+                                    </button>
 
-                                    <i className="material-icons">
-                                        {isFormOpen ? "cancel" : "add_circle"}
-                                    </i>{" "}
-                                    {isFormOpen ? "Close Form" : "Add Category"}
-                                </a>
                             </div>
                         </div>
                     </div>

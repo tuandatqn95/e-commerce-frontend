@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Card from "../Card/Card";
 
-class CategoryForm extends Component {
+class ProductForm extends Component {
     constructor(props) {
         super(props);
 
@@ -13,194 +13,62 @@ class CategoryForm extends Component {
         };
     }
 
-    onHandleChange = event => {
-        let target = event.target;
-        let name = target.name;
-        let value = target.value;
-        this.setState({
-            [name]: value
-        });
-    };
-
-    onHandleFocus = event => {
-        let target = event.target;
-        let name = target.name;
-        this.setState({
-            isFocusing: name
-        });
-    };
-
-    onBlurFocus = () => {
-        this.setState({
-            isFocusing: undefined
-        });
-    };
-
-    validateInput() {
-        return true;
-    }
-
-    resetForm = () => {
-        this.setState({
-            id: "",
-            name: "",
-            image: "",
-            description: ""
-        });
-    };
-
-    onSubmit = event => {
-        event.preventDefault();
-        if (this.validateInput()) {
-            this.props.onSubmitCategory({
-                id: this.state.id,
-                name: this.state.name,
-                image: this.state.image,
-                description: this.state.description
-            });
-            this.resetForm();
-        }
-    };
-
-    onReset = () => {
-        this.resetForm();
-        this.props.onCloseForm();
-    };
-
-    componentWillReceiveProps = nextProps => {
-        if (nextProps.selectedCategory) {
-            this.setState({
-                id: nextProps.selectedCategory.id,
-                name: nextProps.selectedCategory.name,
-                image: nextProps.selectedCategory.image,
-                description: nextProps.selectedCategory.description
-            });
-            nextProps.onClearSelectedCategory();
-        }
-        if (nextProps.isOpen === false) {
-            this.resetForm();
-        }
-    };
-
     render() {
-        const { isOpen, size = 4 } = this.props;
+        const { status = 12 } = this.props;
         return (
-            isOpen && (
-                <Card
-                    cardHeader={
-                        this.state.id ? "Edit Category" : "Add Category"
-                    }
-                    size={size}
-                >
-                    <form onSubmit={this.onSubmit} onReset={this.onReset}>
-                        <div className="row">
-                            {this.state.id && (
-                                <div className="col-md-12">
-                                    <div
-                                        className={`form-group bmd-form-group ${this
-                                            .state.id && "is-filled"} ${this
-                                            .state.isFocusing === "id" &&
-                                            "is-focused"}`}
-                                    >
-                                        <label className="bmd-label-floating">
-                                            Category ID
-                                        </label>
-                                        <input
-                                            name="id"
-                                            className="form-control"
-                                            disabled="disabled"
-                                            type="text"
-                                            value={this.state.id}
-                                            onFocus={this.onHandleFocus}
-                                            onBlur={this.onBlurHandle}
-                                        />
+                <div className="modal fade col-md-12" id="myModal" tabindex="-1" role="dialog" style={{ padding: 17, display: "none" }}>
+                {/* <div className="modal modal-dialog"  id="myModal" role="document"> */}
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header text-center">
+                                <h5 className="modal-title text-center" id="exampleModalLabel">New Product</h5>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div className="modal-body">
+                                <form>
+                                    <div className="form-group">
+                                        <label for="product-name" className="col-form-label col-md-2"> Name: </label>
+                                        <input type="text" className="form-control" id="product-name"/>
                                     </div>
-                                </div>
-                            )}
-                            <div className="col-md-12">
-                                <div
-                                    className={`form-group bmd-form-group ${this
-                                        .state.name && "is-filled"} ${this.state
-                                        .isFocusing === "name" &&
-                                        "is-focused"}`}
-                                >
-                                    <label className="bmd-label-floating">
-                                        Category Name
-                                    </label>
-                                    <input
-                                        name="name"
-                                        className="form-control"
-                                        type="text"
-                                        value={this.state.name}
-                                        onChange={this.onHandleChange}
-                                        onFocus={this.onHandleFocus}
-                                        onBlur={this.onBlurHandle}
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="col-md-12">
-                                <div
-                                    className={`form-group bmd-form-group ${this
-                                        .state.image && "is-filled"} ${this
-                                        .state.isFocusing === "image" &&
-                                        "is-focused"}`}
-                                >
-                                    <label className="bmd-label-floating">
-                                        Image URL
-                                    </label>
-                                    <input
-                                        name="image"
-                                        className="form-control"
-                                        type="text"
-                                        value={this.state.image}
-                                        onChange={this.onHandleChange}
-                                        onFocus={this.onHandleFocus}
-                                        onBlur={this.onBlurHandle}
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="col-md-12">
-                                <div
-                                    className={`form-group bmd-form-group ${this
-                                        .state.description &&
-                                        "is-filled"} ${this.state.isFocusing ===
-                                        "description" && "is-focused"}`}
-                                >
-                                    <label className="bmd-label-floating">
-                                        Description
-                                    </label>
-                                    <textarea
-                                        name="description"
-                                        className="form-control"
-                                        rows="5"
-                                        value={this.state.description}
-                                        onChange={this.onHandleChange}
-                                        onFocus={this.onHandleFocus}
-                                        onBlur={this.onBlurHandle}
-                                    />
-                                </div>
+                                    <div className="form-group">
+                                        <label for="description" className="col-form-label col-md-2">Description:</label>
+                                        <textarea className="form-control" id="description"></textarea>
+                                    </div>
+                                    <div className="form-row">
+                                        <div className="form-group col-md-4">
+                                            <label for="inputPrice">Price:</label>
+                                            <input type="text" className="form-control text-right" id="inputPrice" placeholder="VND" value="0"/>
+                                        </div>
+                                        <div className="form-group col-md-3">
+                                            <label for="inputInventory">Inventory:</label>
+                                            <input type="text" className="form-control text-right" id="inputInventory" value="0"/>
+                                        </div>
+                                        <div className="form-group col-md-5">
+                                            <label for="inputState">Category</label>
+                                            <select id="inputState" className="form-control text-right">
+                                                <option  selected>Choose...</option>
+                                                <option>...</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div className="form-group">
+                                        <label for="linkImage">Image Url... :</label>
+                                        <input type="text" className="form-control" id="linkImage"/>
+                                    </div>
+                                    <div className="modal-body">
+                                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Reset</button>
+                                        <button type="button" className="btn btn-primary">Save</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                        <button
-                            type="submit"
-                            className="btn btn-primary pull-right"
-                        >
-                            Save
-                        </button>
-                        <button
-                            type="reset"
-                            className="btn btn-default pull-right"
-                        >
-                            Cancel
-                        </button>
-                        <div className="clearfix" />
-                    </form>
-                </Card>
-            )
+                    </div>
+                </div>
         );
     }
+    
 }
 
-export default CategoryForm;
+export default ProductForm;
