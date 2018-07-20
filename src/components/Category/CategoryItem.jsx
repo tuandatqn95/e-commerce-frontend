@@ -12,7 +12,7 @@ class CategoryItem extends Component {
     };
 
     onShowProduct = () => {
-        // this.props.onShowProduct(id);
+        //this.props.onShowProduct(id);
     };
     render() {
         const { id, name, description, image } = this.props.category;

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Card from "../Card/Card";
 
-class UserForm extends Component {
+class UserFormModal extends Component {
     constructor(props) {
         super(props);
 
@@ -59,7 +59,6 @@ class UserForm extends Component {
                 description: this.state.description
             });
             this.resetForm();
-            this.props.onCloseForm();
         }
     };
 
@@ -71,8 +70,27 @@ class UserForm extends Component {
     render() {
         const { isOpen, size = 4 } = this.props;
         return (
-            //isOpen && 
-            (
+            isOpen && (
+                <div>
+                     <a class="btn btn-primary" data-toggle="modal" href='#modal-id'>Trigger modal</a>
+                     <div class="modal fade" id="modal-id">
+                         <div class="modal-dialog">
+                             <div class="modal-content">
+                                 <div class="modal-header">
+                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                     <h4 class="modal-title">Modal title</h4>
+                                 </div>
+                                 <div class="modal-body">
+                                     
+                                 </div>
+                                 <div class="modal-footer">
+                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                     <button type="button" class="btn btn-primary">Save changes</button>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                     
                 <Card
                     cardHeader={
                         this.state.id ? "Edit User" : "Add User"
@@ -86,7 +104,7 @@ class UserForm extends Component {
                                     <div
                                         className={`form-group bmd-form-group ${this
                                             .state.id && "is-filled"} ${this
-                                            .state.isFocusing === "id" &&
+                                                .state.isFocusing === "id" &&
                                             "is-focused"}`}
                                     >
                                         <label className="bmd-label-floating">
@@ -108,7 +126,7 @@ class UserForm extends Component {
                                 <div
                                     className={`form-group bmd-form-group ${this
                                         .state.name && "is-filled"} ${this.state
-                                        .isFocusing === "name" &&
+                                            .isFocusing === "name" &&
                                         "is-focused"}`}
                                 >
                                     <label className="bmd-label-floating">
@@ -130,7 +148,7 @@ class UserForm extends Component {
                                 <div
                                     className={`form-group bmd-form-group ${this
                                         .state.image && "is-filled"} ${this
-                                        .state.isFocusing === "image" &&
+                                            .state.isFocusing === "image" &&
                                         "is-focused"}`}
                                 >
                                     <label className="bmd-label-floating">
@@ -170,7 +188,6 @@ class UserForm extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div class="modal-footer">
                         <button
                             type="submit"
                             className="btn btn-primary pull-right"
@@ -180,18 +197,16 @@ class UserForm extends Component {
                         <button
                             type="reset"
                             className="btn btn-default pull-right"
-                            data-dismiss="modal"
-                            onClick={() => this.props.onCloseForm()}
                         >
                             Cancel
                         </button>
                         <div className="clearfix" />
-                        </div>
                     </form>
                 </Card>
+                </div>
             )
         );
     }
 }
 
-export default UserForm;
+export default UserFormModal;

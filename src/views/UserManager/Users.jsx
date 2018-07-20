@@ -63,33 +63,52 @@ class Users extends Component {
                         <UserItems />
                     </UserList>
 
-                    <UserForm
+                    {/* <UserForm
                         size="4"
                         onSubmitUser={this.onSubmitUser}
                         onCloseForm={this.onCloseForm}
                         selectedUser={this.state.selectedUser}
                         isOpen={this.state.isFormOpen}
                         onClearSelectedUser={this.onClearSelectedUser}
-                    />
-                <button title='remove all' onClick={()=>{localStorage.removeItem('@USERS')}}/>
+                    /> */}
+                    {/* show modal form  */}
+                    <div class="modal fade" id="modal-id">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                    <div class="modal-body">
+                                        <UserForm
+                                            size="12"
+                                            onSubmitUser={this.onSubmitUser}
+                                            onCloseForm={this.onCloseForm}
+                                            selectedUser={this.state.selectedUser}
+                                            isOpen={this.state.isFormOpen}
+                                            onClearSelectedUser={this.onClearSelectedUser}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <button title='remove all' onClick={() => { localStorage.removeItem('@USERS') }} />
+                    </div>
                 </div>
-            </div>
-        );
-    }
-}
+                );
+            }
+        }
 const mapStateToProps = state => {
     return {
-        users: state.users
-    };
-}
-
+                    users: state.users
+            };
+        }
+        
 const mapDispatchToProps = dispatch => {
     return {
-        onAddUser: user => dispatch(addUserRequest(user)),
-    };
-}
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Users);
-
+                    onAddUser: user => dispatch(addUserRequest(user)),
+            };
+        }
+        export default connect(
+            mapStateToProps,
+            mapDispatchToProps
+        )(Users);
+        

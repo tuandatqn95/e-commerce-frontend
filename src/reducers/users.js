@@ -4,7 +4,6 @@ let data = JSON.parse(localStorage.getItem('@USERS'));
 const initialState = data ? data : [];
 
 let reducer = (state = initialState, action) => {
-    console.log(state);
     switch (action.type) {
         case Types.ADD_USER:
             var newUser = {
