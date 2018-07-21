@@ -16,7 +16,7 @@ class CategoryList extends Component {
                         <div className="nav nav-tabs pull-right">
                             <div className="nav-item">
                                 <a
-                                    href="#"
+                                    href=""
                                     style={{ paddingTop: 2, paddingBottom: 2 }}
                                     className={`nav-link ${isFormOpen &&
                                         "active"}`}

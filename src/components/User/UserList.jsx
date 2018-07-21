@@ -1,13 +1,11 @@
 import React, { Component } from "react";
-import UserFormModal from "./UserFormModal";
 
 class UserList extends Component {
-
     render() {
-        const { isFormOpen, size = 12 } = this.props;
+        const { isFormOpen } = this.props;
 
         return (
-            <div className={`col-md-${12}`}>
+            <div className={`col-md-12`}>
                 <div className="card">
                     <div className="card-header card-header-primary">
                         <div className="pull-left">
@@ -18,22 +16,17 @@ class UserList extends Component {
                         <div className="nav nav-tabs pull-right">
                             <div className="nav-item">
                                 <a
-                                    href="#"
                                     style={{ paddingTop: 2, paddingBottom: 2 }}
                                     className={`nav-link ${isFormOpen &&
                                         "active"}`}
-                                    data-toggle="modal" href='#modal-id'
+                                    href=""
                                     onClick={() => this.props.onToggleForm()}
                                 >
-                                    {/* <i className="material-icons">
+                                    <i className="material-icons">
                                         {isFormOpen ? "cancel" : "add_circle"}
                                     </i>{" "}
-                                    {isFormOpen ? "Close Form" : "Add User"} */}
-                                    <i className="material-icons">
-                                        {"add_circle"}
-                                    </i>{" "}{"Add User"}
+                                    {isFormOpen ? "Close Form" : "Add User"}
                                 </a>
-
                             </div>
                         </div>
                     </div>
@@ -44,7 +37,7 @@ class UserList extends Component {
                                     <tr>
                                         <th>ID</th>
                                         <th style={{ width: "34%" }}>Name</th>
-                                        <th style={{ width: "34%" }}>Description</th>
+                                        <th style={{ width: "34%" }}>Email</th>
                                         <th className="text-center">Image</th>
                                         <th />
                                     </tr>

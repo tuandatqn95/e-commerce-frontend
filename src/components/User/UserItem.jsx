@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-const descriptionLength = 70;
+//const descriptionLength = 70;
 
 class UserItem extends Component {
     onEditUser = () => {
@@ -8,16 +8,16 @@ class UserItem extends Component {
     };
     onShowProfile = () => {
         // this.props.onShowProduct(id);
-        console.log("onShowProfile")
+        console.log("onShowProfile");
     };
     render() {
-        const { id, name, description, image } = this.props.user;
+        const { id, name, email, image } = this.props.user;
 
-        const Description =
-            description.substring(
-                0,
-                description.indexOf(" ", descriptionLength)
-            ) + (description.length > descriptionLength ? "..." : "");
+        // const Description =
+        //     description.substring(
+        //         0,
+        //         description.indexOf(" ", descriptionLength)
+        //     ) + (description.length > descriptionLength ? "..." : "");
 
         const Image = <img alt={name} style={{ maxHeight: 150 }} src={image} />;
 
@@ -25,7 +25,7 @@ class UserItem extends Component {
             <tr>
                 <td>{id}</td>
                 <td>{name}</td>
-                <td>{Description}</td>
+                <td>{email}</td>
                 <td>{Image}</td>
                 <td>
                     <button

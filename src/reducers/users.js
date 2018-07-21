@@ -1,10 +1,12 @@
 import * as Types from "../constants/ActionTypes";
 
-let data = JSON.parse(localStorage.getItem('@USERS'));
-const initialState = data ? data : [];
+const initialState = [];
 
 let reducer = (state = initialState, action) => {
     switch (action.type) {
+        case Types.FETCH_USER:
+            console.log(action.users);
+            return [...action.users];
         case Types.ADD_USER:
             var newUser = {
                 id: 123,

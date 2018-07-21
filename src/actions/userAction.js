@@ -1,9 +1,39 @@
 import * as Types from "./../constants/ActionTypes";
 import callApi from "../utils/ApiCaller";
 
-export const addUserRequest = user =>{
+export const fetchUsersRequest = () => {
+    return dispatch => {
+        return callApi("users", "GET", null)
+            .then(res => {
+                dispatch(
+                    fetchUsers(
+                        res.data.map(user => {
+                            return {
+                                id: user._id,
+                                email: user.email,
+                                name: user.name,
+                                phone: user.phone,
+                                address: user.address,
+                                hashPassword: user.hashPassword
+                            };
+                        })
+                    )
+                );
+            })
+            .catch(error => console.log(error));
+    };
+};
+
+export const fetchUsers = users => {
     return {
-        type:Types.ADD_USER,
+        type: Types.FETCH_USER,
+        users
+    };
+};
+
+export const addUserRequest = user => {
+    return {
+        type: Types.ADD_USER,
         user
-    }
-}
+    };
+};
