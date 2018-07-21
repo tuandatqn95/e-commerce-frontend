@@ -5,6 +5,7 @@ class UserItem extends Component {
         this.props.onDeleteUser(this.props.user.id);
     };
     onShowProfile = () => {
+        // TODO: show user profile
         console.log("onShowProfile");
     };
     render() {
@@ -44,10 +45,57 @@ class UserItem extends Component {
                             paddingLeft: 15,
                             paddingRight: 15
                         }}
-                        onClick={this.onDeleteUser}
                     >
-                        <i className="material-icons">delete</i>
+                        <i
+                            className="material-icons"
+                            data-toggle="modal"
+                            href={`#${id}`}
+                        >
+                            delete
+                        </i>
                     </button>
+                </td>
+                <td>
+                    <div className="modal fade" id={id}>
+                        <div className="modal-dialog">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <h4 className="modal-title">Confirm</h4>
+                                    <button
+                                        type="button"
+                                        className="close"
+                                        data-dismiss="modal"
+                                        aria-hidden="true"
+                                    >
+                                        &times;
+                                    </button>
+                                </div>
+                                <div className="modal-body">
+                                    <h5>{`Are you sure to delete ${
+                                        this.props.user.name
+                                    } ?`}</h5>
+                                </div>
+                                <div className="modal-footer">
+                                    <button
+                                        type="button"
+                                        className="btn btn-default"
+                                        data-toggle="modal"
+                                        href={`#${id}`}
+                                        onClick={this.onDeleteUser}
+                                    >
+                                        Delete
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className="btn btn-primary"
+                                        data-dismiss="modal"
+                                    >
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </td>
             </tr>
         );

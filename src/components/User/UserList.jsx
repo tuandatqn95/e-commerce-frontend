@@ -4,7 +4,7 @@ class UserList extends Component {
     render() {
         const { isFormOpen } = this.props;
         return (
-            <div className={`col-md-12`}>
+            <div className="col-md-12">
                 <div className="card">
                     <div className="card-header card-header-primary">
                         <div className="pull-left">
