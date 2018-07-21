@@ -3,12 +3,13 @@ import { Styles } from "../../constants/Styles";
 class UserForm extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             id: "",
             name: "",
-            image: "",
-            description: ""
+            email: "",
+            password: "",
+            phone: "",
+            address: ""
         };
     }
 
@@ -43,8 +44,10 @@ class UserForm extends Component {
         this.setState({
             id: "",
             name: "",
-            image: "",
-            description: ""
+            email: "",
+            password: "",
+            phone: "",
+            address: ""
         });
     };
 
@@ -54,11 +57,12 @@ class UserForm extends Component {
             this.props.onSubmitUser({
                 id: this.state.id,
                 name: this.state.name,
-                image: this.state.image,
-                description: this.state.description
+                email: this.state.email,
+                password: this.state.password,
+                phone: this.state.phone,
+                address: this.state.address
             });
-            this.resetForm();
-            //this.props.onCloseForm();
+            this.onReset();
         }
     };
 
@@ -68,20 +72,10 @@ class UserForm extends Component {
     };
 
     render() {
-        const { isOpen } = this.props;
+        //const { isOpen } = this.props;
         return (
-            //isOpen &&
-            // <Card
-            //     cardHeader={
-            //         this.state.id ? "Edit User" : "Add User"
-            //     }
-            //     size={size}
-            // >
             <div>
-                <div
-                    className={isOpen ? "modal fade show" : "modal fade "}
-                    id="modal-id"
-                >
+                <div className="modal fade" id="modal-id">
                     <div className="modal-dialog">
                         <div className="modal-content">
                             <div
@@ -161,23 +155,22 @@ class UserForm extends Component {
                                                 />
                                             </div>
                                         </div>
-
                                         <div className="col-md-12">
                                             <div
                                                 className={`form-group bmd-form-group ${this
-                                                    .state.image &&
+                                                    .state.email &&
                                                     "is-filled"} ${this.state
-                                                    .isFocusing === "image" &&
+                                                    .isFocusing === "email" &&
                                                     "is-focused"}`}
                                             >
                                                 <label className="bmd-label-floating">
-                                                    Image URL
+                                                    Email
                                                 </label>
                                                 <input
-                                                    name="image"
+                                                    name="email"
                                                     className="form-control"
-                                                    type="text"
-                                                    value={this.state.image}
+                                                    type="email"
+                                                    value={this.state.email}
                                                     onChange={
                                                         this.onHandleChange
                                                     }
@@ -186,26 +179,71 @@ class UserForm extends Component {
                                                 />
                                             </div>
                                         </div>
-
                                         <div className="col-md-12">
                                             <div
                                                 className={`form-group bmd-form-group ${this
-                                                    .state.description &&
+                                                    .state.password &&
                                                     "is-filled"} ${this.state
                                                     .isFocusing ===
-                                                    "description" &&
+                                                    "password" &&
                                                     "is-focused"}`}
                                             >
                                                 <label className="bmd-label-floating">
-                                                    Description
+                                                    Password
                                                 </label>
-                                                <textarea
-                                                    name="description"
+                                                <input
+                                                    name="password"
                                                     className="form-control"
-                                                    rows="5"
-                                                    value={
-                                                        this.state.description
+                                                    type="password"
+                                                    value={this.state.password}
+                                                    onChange={
+                                                        this.onHandleChange
                                                     }
+                                                    onFocus={this.onHandleFocus}
+                                                    onBlur={this.onBlurHandle}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="col-md-12">
+                                            <div
+                                                className={`form-group bmd-form-group ${this
+                                                    .state.phone &&
+                                                    "is-filled"} ${this.state
+                                                    .isFocusing === "phone" &&
+                                                    "is-focused"}`}
+                                            >
+                                                <label className="bmd-label-floating">
+                                                    Phone
+                                                </label>
+                                                <input
+                                                    name="phone"
+                                                    className="form-control"
+                                                    type="text"
+                                                    value={this.state.phone}
+                                                    onChange={
+                                                        this.onHandleChange
+                                                    }
+                                                    onFocus={this.onHandleFocus}
+                                                    onBlur={this.onBlurHandle}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="col-md-12">
+                                            <div
+                                                className={`form-group bmd-form-group ${this
+                                                    .state.address &&
+                                                    "is-filled"} ${this.state
+                                                    .isFocusing === "address" &&
+                                                    "is-focused"}`}
+                                            >
+                                                <label className="bmd-label-floating">
+                                                    Address
+                                                </label>
+                                                <input
+                                                    name="address"
+                                                    className="form-control"
+                                                    type="text"
+                                                    value={this.state.address}
                                                     onChange={
                                                         this.onHandleChange
                                                     }
@@ -219,6 +257,8 @@ class UserForm extends Component {
                                         <button
                                             type="submit"
                                             className="btn btn-primary pull-right"
+                                            data-toggle="modal"
+                                            href="#modal-id"
                                         >
                                             Save
                                         </button>
@@ -238,7 +278,6 @@ class UserForm extends Component {
                     </div>
                 </div>
             </div>
-            //  </Card>
         );
     }
 }

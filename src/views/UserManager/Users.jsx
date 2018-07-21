@@ -25,12 +25,14 @@ class Users extends Component {
             isFormOpen: false,
             selectedUser: undefined
         });
-        console.log(this.state.selectedUser);
     };
 
     onSubmitUser = user => {
-        this.props.onAddUser(user);
-        this.onCloseForm();
+        if (user.id) {
+        } else {
+            this.props.onAddUser(user);
+        }
+        //this.onCloseForm();
         //this.onToggleForm();
     };
 
@@ -59,7 +61,6 @@ class Users extends Component {
                     </UserList>
                     {/* show modal form  */}
                     <UserForm
-                        //size="12"
                         onSubmitUser={this.onSubmitUser}
                         onCloseForm={this.onCloseForm}
                         selectedUser={this.state.selectedUser}

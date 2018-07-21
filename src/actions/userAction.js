@@ -24,6 +24,26 @@ export const fetchUsersRequest = () => {
     };
 };
 
+export const addUserRequest = user => {
+    return dispatch => {
+        return callApi("users", "POST", user)
+            .then(res => {
+                if (res.status === 201)
+                    dispatch(
+                        addUser({
+                            id: res.data._id,
+                            name: res.data.name,
+                            email: res.data.email,
+                            password: res.data.hashPassword,
+                            phone: res.data.phone,
+                            address: res.data.address
+                        })
+                    );
+            })
+            .catch(error => console.log(error));
+    };
+};
+
 export const fetchUsers = users => {
     return {
         type: Types.FETCH_USER,
@@ -31,7 +51,7 @@ export const fetchUsers = users => {
     };
 };
 
-export const addUserRequest = user => {
+export const addUser = user => {
     return {
         type: Types.ADD_USER,
         user

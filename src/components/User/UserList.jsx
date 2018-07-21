@@ -3,7 +3,6 @@ import React, { Component } from "react";
 class UserList extends Component {
     render() {
         const { isFormOpen } = this.props;
-
         return (
             <div className={`col-md-12`}>
                 <div className="card">
@@ -19,7 +18,8 @@ class UserList extends Component {
                                     style={{ paddingTop: 2, paddingBottom: 2 }}
                                     className={`nav-link ${isFormOpen &&
                                         "active"}`}
-                                    href=""
+                                    data-toggle="modal"
+                                    href="#modal-id"
                                     onClick={() => this.props.onToggleForm()}
                                 >
                                     <i className="material-icons">
@@ -38,7 +38,7 @@ class UserList extends Component {
                                         <th>ID</th>
                                         <th style={{ width: "34%" }}>Name</th>
                                         <th style={{ width: "34%" }}>Email</th>
-                                        <th className="text-center">Image</th>
+                                        <th className="text-center">Phone</th>
                                         <th />
                                     </tr>
                                 </thead>

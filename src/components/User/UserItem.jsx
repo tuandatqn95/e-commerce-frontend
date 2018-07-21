@@ -1,32 +1,20 @@
 import React, { Component } from "react";
 
-//const descriptionLength = 70;
-
 class UserItem extends Component {
-    onEditUser = () => {
-        this.props.onEditUser(this.props.user);
+    onDeleteUser = () => {
+        console.log("delete user");
     };
     onShowProfile = () => {
-        // this.props.onShowProduct(id);
         console.log("onShowProfile");
     };
     render() {
-        const { id, name, email, image } = this.props.user;
-
-        // const Description =
-        //     description.substring(
-        //         0,
-        //         description.indexOf(" ", descriptionLength)
-        //     ) + (description.length > descriptionLength ? "..." : "");
-
-        const Image = <img alt={name} style={{ maxHeight: 150 }} src={image} />;
-
+        const { id, name, email, phone } = this.props.user;
         return (
             <tr>
                 <td>{id}</td>
                 <td>{name}</td>
                 <td>{email}</td>
-                <td>{Image}</td>
+                <td>{phone}</td>
                 <td>
                     <button
                         type="button"
@@ -46,7 +34,6 @@ class UserItem extends Component {
                             paddingLeft: 15,
                             paddingRight: 15
                         }}
-                        onClick={this.onEditUser}
                     >
                         <i className="material-icons">edit</i>
                     </button>{" "}
@@ -57,7 +44,7 @@ class UserItem extends Component {
                             paddingLeft: 15,
                             paddingRight: 15
                         }}
-                        //onClick={}
+                        onClick={this.onDeleteUser}
                     >
                         <i className="material-icons">delete</i>
                     </button>
