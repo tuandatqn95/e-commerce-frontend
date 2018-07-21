@@ -17,11 +17,8 @@ class CategoryItem extends Component {
     render() {
         const { id, name, description, image } = this.props.category;
 
-        const Description =
-            description.substring(
-                0,
-                description.indexOf(" ", descriptionLength)
-            ) + (description.length > descriptionLength ? "..." : "");
+        // Get short description
+        let shortDescription = description.substring(0, descriptionLength);
 
         const Image = <img alt={name} style={{ maxHeight: 150 }} src={image} />;
 
@@ -29,7 +26,7 @@ class CategoryItem extends Component {
             <tr>
                 <td>{id}</td>
                 <td>{name}</td>
-                <td>{Description}</td>
+                <td>{shortDescription}</td>
                 <td>{Image}</td>
                 <td>
                     <button

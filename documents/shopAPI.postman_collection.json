@@ -234,6 +234,169 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "User",
+			"description": "",
+			"item": [
+				{
+					"name": "Get all users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{server_url}}/users",
+							"host": [
+								"{{server_url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get userby ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{server_url}}/users/5b4824ec62f47931880180b9",
+							"host": [
+								"{{server_url}}"
+							],
+							"path": [
+								"users",
+								"5b4824ec62f47931880180b9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add a user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\":\"tuandatqn95@gmail.com\",\n  \"name\": \"Nguyễn Tuấn Đạt\",\n  \"password\": \"123456\",\n  \"phone\": \"0987654321\",\n  \"address\":\"Hồ Chí Minh\"\n}"
+						},
+						"url": {
+							"raw": "{{server_url}}/users",
+							"host": [
+								"{{server_url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\":\"New name\",\n  \"image\":\"Image\",\n  \"description\":\"Description\"\n}"
+						},
+						"url": {
+							"raw": "{{server_url}}/users/5b484ba2dfdebf3f50e50da4",
+							"host": [
+								"{{server_url}}"
+							],
+							"path": [
+								"users",
+								"5b484ba2dfdebf3f50e50da4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{server_url}}/users/5b483fccc7dbcc2fa8a2eb25",
+							"host": [
+								"{{server_url}}"
+							],
+							"path": [
+								"users",
+								"5b483fccc7dbcc2fa8a2eb25"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset password",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{server_url}}/users/5b4ee465e563c53a202147ce/reset-password",
+							"host": [
+								"{{server_url}}"
+							],
+							"path": [
+								"users",
+								"5b4ee465e563c53a202147ce",
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update password",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"oldPassword\": \"123456\",\n    \"newPassword\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{server_url}}/users/5b4ee465e563c53a202147ce/update-password",
+							"host": [
+								"{{server_url}}"
+							],
+							"path": [
+								"users",
+								"5b4ee465e563c53a202147ce",
+								"update-password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

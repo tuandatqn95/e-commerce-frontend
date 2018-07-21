@@ -4,18 +4,19 @@ import callApi from "../utils/ApiCaller";
 export const fetchCategoriesRequest = () => {
     return dispatch => {
         return callApi("categories", "GET", null).then(res => {
-            dispatch(
-                fetchCategories(
-                    res.data.map(category => {
-                        return {
-                            id: category._id,
-                            name: category.name,
-                            image: category.image,
-                            description: category.description
-                        };
-                    })
-                )
-            );
+            if (res.status === 200)
+                dispatch(
+                    fetchCategories(
+                        res.data.map(category => {
+                            return {
+                                id: category._id,
+                                name: category.name,
+                                image: category.image,
+                                description: category.description
+                            };
+                        })
+                    )
+                );
         });
     };
 };
@@ -23,25 +24,43 @@ export const fetchCategoriesRequest = () => {
 export const addCategoryRequest = category => {
     return dispatch => {
         return callApi("categories", "POST", category).then(res => {
-            dispatch(addCategory(res.data));
+            if (res.status === 201)
+                dispatch(
+                    addCategory({
+                        id: res.data._id,
+                        name: res.data.name,
+                        image: res.data.image,
+                        description: res.data.description
+                    })
+                );
         });
     };
 };
 
 export const updateCategoryRequest = category => {
     return dispatch => {
-        return callApi(`categories/${category.id}`, "PUT", category).then(
+        return callApi(`categories/${category.id}`, "PATCH", category).then(
             res => {
-                dispatch(updateCategory(category));
+                if (res.status === 201)
+                    dispatch(
+                        updateCategory({
+                            id: res.data._id,
+                            name: res.data.name,
+                            image: res.data.image,
+                            description: res.data.description
+                        })
+                    );
             }
         );
     };
 };
 
 export const deleteCategoryRequest = id => {
+    console.log(id);
+
     return dispatch => {
         return callApi(`categories/${id}`, "DELETE", null).then(res => {
-            dispatch(deleteCategory(id));
+            if (res.status === 204) dispatch(deleteCategory(id));
         });
     };
 };
