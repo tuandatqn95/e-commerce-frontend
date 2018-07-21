@@ -44,6 +44,16 @@ export const addUserRequest = user => {
     };
 };
 
+export const deleteUserRequest = id => {
+    return dispatch => {
+        return callApi(`users/${id}`, "DELETE", null)
+            .then(res => {
+                dispatch(deleteUser(id));
+            })
+            .catch(error => console.log(error));
+    };
+};
+
 export const fetchUsers = users => {
     return {
         type: Types.FETCH_USER,
@@ -55,5 +65,12 @@ export const addUser = user => {
     return {
         type: Types.ADD_USER,
         user
+    };
+};
+
+export const deleteUser = id => {
+    return {
+        type: Types.DELETE_USER,
+        id
     };
 };

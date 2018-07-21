@@ -3,7 +3,11 @@ import { connect } from "react-redux";
 import UserItem from "../../components/User/UserItem";
 import UserList from "../../components/User/UserList";
 import UserForm from "../../components/User/UserForm";
-import { fetchUsersRequest, addUserRequest } from "../../actions/userAction";
+import {
+    fetchUsersRequest,
+    addUserRequest,
+    deleteUserRequest
+} from "../../actions/userAction";
 
 class Users extends Component {
     constructor(props) {
@@ -32,8 +36,6 @@ class Users extends Component {
         } else {
             this.props.onAddUser(user);
         }
-        //this.onCloseForm();
-        //this.onToggleForm();
     };
 
     onClearSelectedUser = () => {
@@ -47,7 +49,13 @@ class Users extends Component {
     render() {
         const UserItems = () =>
             this.props.users.map((user, index) => {
-                return <UserItem key={index} user={user} />;
+                return (
+                    <UserItem
+                        key={index}
+                        user={user}
+                        onDeleteUser={this.props.onDeleteUser}
+                    />
+                );
             });
 
         return (
@@ -81,7 +89,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onFetchUsers: () => dispatch(fetchUsersRequest()),
-        onAddUser: user => dispatch(addUserRequest(user))
+        onAddUser: user => dispatch(addUserRequest(user)),
+        onDeleteUser: id => dispatch(deleteUserRequest(id))
     };
 };
 export default connect(

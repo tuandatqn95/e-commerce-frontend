@@ -9,6 +9,9 @@ let reducer = (state = initialState, action) => {
         case Types.ADD_USER:
             state.push(action.user);
             return [...state];
+        case Types.DELETE_USER:
+            state = state.filter(user => user.id !== action.id);
+            return [...state];
         default:
             return [...state];
     }

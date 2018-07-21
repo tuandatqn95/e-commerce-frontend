@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class UserItem extends Component {
     onDeleteUser = () => {
-        console.log("delete user");
+        this.props.onDeleteUser(this.props.user.id);
     };
     onShowProfile = () => {
         console.log("onShowProfile");
