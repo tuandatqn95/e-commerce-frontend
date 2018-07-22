@@ -1,15 +1,35 @@
 import React, { Component } from "react";
 import { Styles } from "../../constants/Styles";
+import ChangePassword from "./ChangePassword";
 
 class UserProfile extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isChangePassword: false
+        };
+    }
+    onChangePassword = () => {
+        if (this.state.isChangePassword) {
+            console.log("Change password");
+        } else {
+            this.changeState();
+        }
+    };
+    changeState = () => {
+        this.setState({
+            isChangePassword: !this.state.isChangePassword
+        });
+    };
     render() {
         const { id, name, email, phone, address } = this.props.user;
+        const { isChangePassword } = this.state;
         const Image = (
             <img
                 className="img-raised rounded-circle img-fluid"
                 alt=""
                 style={Styles.circleImage}
-                src="https://scontent.fsgn2-3.fna.fbcdn.net/v/t1.0-9/24059201_2183309631694535_209216005089080199_n.png?_nc_cat=0&oh=31e83688b389d526dd1f756bd149c3e8&oe=5BDBDF35"
+                src="http://www.tombakintan.com/frontend/assets/round-account-button-with-user-inside.png"
             />
         );
         return (
@@ -24,7 +44,7 @@ class UserProfile extends Component {
                                 className="modal-title"
                                 style={Styles.colorModalHeader}
                             >
-                                User Profile
+                                Profile Information
                             </h4>
                             <button
                                 type="button"
@@ -61,14 +81,26 @@ class UserProfile extends Component {
                                     </tr>
                                 </tbody>
                             </table>
+                            {isChangePassword ? <ChangePassword /> : ""}
                         </div>
                         <div className="modal-footer">
                             <button
                                 type="submit"
                                 className="btn btn-primary pull-right"
+                                onClick={this.onChangePassword}
                             >
                                 Change Password
                             </button>
+                            {isChangePassword ? (
+                                <button
+                                    className="btn btn-default pull-right"
+                                    onClick={this.changeState}
+                                >
+                                    Cancel
+                                </button>
+                            ) : (
+                                ""
+                            )}
                             <button
                                 type="reset"
                                 className="btn btn-default pull-right"

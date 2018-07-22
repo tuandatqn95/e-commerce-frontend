@@ -37,7 +37,9 @@ class Users extends Component {
             this.props.onAddUser(user);
         }
     };
-
+    onDeleteUser = user => {
+        this.props.onDeleteUser(user.id);
+    };
     onClearSelectedUser = () => {
         this.setState({
             selectedUser: undefined
@@ -53,7 +55,7 @@ class Users extends Component {
                     <UserItem
                         key={index}
                         user={user}
-                        onDeleteUser={this.props.onDeleteUser}
+                        onDeleteUser={this.onDeleteUser}
                     />
                 );
             });

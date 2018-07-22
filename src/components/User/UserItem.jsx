@@ -4,7 +4,7 @@ import ModalConfirm from "./ModalComfirm";
 
 class UserItem extends Component {
     onDeleteUser = () => {
-        this.props.onDeleteUser(this.props.user.id);
+        this.props.onDeleteUser(this.props.user);
     };
     render() {
         const { id, name, email, phone } = this.props.user;
@@ -34,6 +34,8 @@ class UserItem extends Component {
                             paddingLeft: 15,
                             paddingRight: 15
                         }}
+                        data-toggle="modal"
+                        href={`#modal-profile-${id}`}
                     >
                         <i className="material-icons">edit</i>
                     </button>{" "}
@@ -56,8 +58,9 @@ class UserItem extends Component {
                 </td>
                 <td>
                     <ModalConfirm
-                        user={this.props.user}
-                        onDeleteUser={this.onDeleteUser}
+                        modalId={`modal-confirm-${id}`}
+                        name={name}
+                        onConfirm={this.onDeleteUser}
                     />
                 </td>
                 <td>

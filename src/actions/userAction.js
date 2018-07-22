@@ -5,20 +5,21 @@ export const fetchUsersRequest = () => {
     return dispatch => {
         return callApi("users", "GET", null)
             .then(res => {
-                dispatch(
-                    fetchUsers(
-                        res.data.map(user => {
-                            return {
-                                id: user._id,
-                                email: user.email,
-                                name: user.name,
-                                phone: user.phone,
-                                address: user.address,
-                                hashPassword: user.hashPassword
-                            };
-                        })
-                    )
-                );
+                if (res.status === 200)
+                    dispatch(
+                        fetchUsers(
+                            res.data.map(user => {
+                                return {
+                                    id: user._id,
+                                    email: user.email,
+                                    name: user.name,
+                                    phone: user.phone,
+                                    address: user.address,
+                                    hashPassword: user.hashPassword
+                                };
+                            })
+                        )
+                    );
             })
             .catch(error => console.log(error));
     };
@@ -48,7 +49,7 @@ export const deleteUserRequest = id => {
     return dispatch => {
         return callApi(`users/${id}`, "DELETE", null)
             .then(res => {
-                dispatch(deleteUser(id));
+                if (res.status === 204) dispatch(deleteUser(id));
             })
             .catch(error => console.log(error));
     };

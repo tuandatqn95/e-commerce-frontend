@@ -2,9 +2,10 @@ import React, { Component } from "react";
 
 class ModalConfirm extends Component {
     render() {
-        let { id, name } = this.props.user;
+        let { name } = this.props;
+        let { modalId } = this.props;
         return (
-            <div className="modal fade" id={`modal-confirm-${id}`}>
+            <div className="modal fade" id={modalId}>
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
@@ -26,8 +27,8 @@ class ModalConfirm extends Component {
                                 type="button"
                                 className="btn btn-default"
                                 data-toggle="modal"
-                                href={`#modal-confirm-${id}`}
-                                onClick={this.props.onDeleteUser}
+                                href={`#${modalId}`}
+                                onClick={this.props.onConfirm}
                             >
                                 Delete
                             </button>

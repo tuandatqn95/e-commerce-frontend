@@ -71,8 +71,14 @@ class UserForm extends Component {
         this.props.onCloseForm();
     };
 
+    initUser = () => {
+        console.log("init");
+    };
+
     render() {
         //const { isOpen } = this.props;
+        const { user } = this.props;
+        if (user) this.initUser();
         return (
             <div>
                 <div className="modal fade" id="modal-form">
