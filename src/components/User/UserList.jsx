@@ -19,7 +19,7 @@ class UserList extends Component {
                                     className={`nav-link ${isFormOpen &&
                                         "active"}`}
                                     data-toggle="modal"
-                                    href="#modal-id"
+                                    href="#modal-form"
                                     onClick={() => this.props.onToggleForm()}
                                 >
                                     <i className="material-icons">
@@ -36,8 +36,8 @@ class UserList extends Component {
                                 <thead className=" text-primary">
                                     <tr>
                                         <th>ID</th>
-                                        <th style={{ width: "34%" }}>Name</th>
-                                        <th style={{ width: "34%" }}>Email</th>
+                                        <th style={{ width: "35%" }}>Name</th>
+                                        <th style={{ width: "35%" }}>Email</th>
                                         <th className="text-center">Phone</th>
                                         <th />
                                     </tr>

@@ -75,7 +75,7 @@ class UserForm extends Component {
         //const { isOpen } = this.props;
         return (
             <div>
-                <div className="modal fade" id="modal-id">
+                <div className="modal fade" id="modal-form">
                     <div className="modal-dialog">
                         <div className="modal-content">
                             <div
@@ -258,7 +258,7 @@ class UserForm extends Component {
                                             type="submit"
                                             className="btn btn-primary pull-right"
                                             data-toggle="modal"
-                                            href="#modal-id"
+                                            href="#modal-form"
                                         >
                                             Save
                                         </button>

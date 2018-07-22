@@ -1,12 +1,9 @@
 import React, { Component } from "react";
+import UserProfile from "./UserProfile";
 
 class UserItem extends Component {
     onDeleteUser = () => {
         this.props.onDeleteUser(this.props.user.id);
-    };
-    onShowProfile = () => {
-        // TODO: show user profile
-        console.log("onShowProfile");
     };
     render() {
         const { id, name, email, phone } = this.props.user;
@@ -24,7 +21,8 @@ class UserItem extends Component {
                             paddingLeft: 15,
                             paddingRight: 15
                         }}
-                        onClick={this.onShowProfile}
+                        data-toggle="modal"
+                        href="#modal-profile"
                     >
                         <i className="material-icons">library_books</i>
                     </button>{" "}
@@ -87,8 +85,8 @@ class UserItem extends Component {
                                     </button>
                                     <button
                                         type="button"
-                                        className="btn btn-primary"
                                         data-dismiss="modal"
+                                        className="btn btn-primary"
                                     >
                                         Cancel
                                     </button>
@@ -96,6 +94,9 @@ class UserItem extends Component {
                             </div>
                         </div>
                     </div>
+                </td>
+                <td>
+                    <UserProfile />
                 </td>
             </tr>
         );
