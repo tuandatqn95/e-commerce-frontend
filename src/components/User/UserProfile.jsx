@@ -3,6 +3,7 @@ import { Styles } from "../../constants/Styles";
 
 class UserProfile extends Component {
     render() {
+        const { id, name, email, phone, address } = this.props.user;
         const Image = (
             <img
                 className="img-raised rounded-circle img-fluid"
@@ -12,56 +13,70 @@ class UserProfile extends Component {
             />
         );
         return (
-            <div>
-                <div className="modal fade" id="modal-profile">
-                    <div className="modal-dialog">
-                        <div className="modal-content">
-                            <div
-                                className="modal-header "
-                                style={Styles.backgroundModalHeader}
+            <div className="modal fade" id={`modal-profile-${id}`}>
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div
+                            className="modal-header "
+                            style={Styles.backgroundModalHeader}
+                        >
+                            <h4
+                                className="modal-title"
+                                style={Styles.colorModalHeader}
                             >
-                                <h4
-                                    className="modal-title"
-                                    style={Styles.colorModalHeader}
-                                >
-                                    User Profile
-                                </h4>
-                                <button
-                                    type="button"
-                                    className="close"
-                                    data-dismiss="modal"
-                                >
-                                    &times;
-                                </button>
+                                User Profile
+                            </h4>
+                            <button
+                                type="button"
+                                className="close"
+                                data-dismiss="modal"
+                            >
+                                &times;
+                            </button>
+                        </div>
+                        <div className="modal-body">
+                            <div className="container text-center">
+                                <div className="avatar">{Image}</div>
+                                <h3>
+                                    <b>{name}</b>
+                                </h3>
                             </div>
-                            <div className="modal-body">
-                                <div className="container text-center">
-                                    <div className="avatar">{Image}</div>
-                                    <h3>
-                                        <b>username</b>
-                                    </h3>
-                                </div>
-                                <p>ID: </p>
-                                <p>Email: </p>
-                                <p>Phone:</p>
-                                <p>Address</p>
-                            </div>
-                            <div className="modal-footer">
-                                <button
-                                    type="submit"
-                                    className="btn btn-primary pull-right"
-                                >
-                                    Change Password
-                                </button>
-                                <button
-                                    type="reset"
-                                    className="btn btn-default pull-right"
-                                    data-dismiss="modal"
-                                >
-                                    Close
-                                </button>
-                                <div className="clearfix" />
-                            </div>
+                            <table className="table">
+                                <tbody>
+                                    <tr>
+                                        <td>ID: </td>
+                                        <td>{id}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Email: </td>
+                                        <td>{email}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Phone: </td>
+                                        <td>{phone}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Address: </td>
+                                        <td>{address}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div className="modal-footer">
+                            <button
+                                type="submit"
+                                className="btn btn-primary pull-right"
+                            >
+                                Change Password
+                            </button>
+                            <button
+                                type="reset"
+                                className="btn btn-default pull-right"
+                                data-dismiss="modal"
+                            >
+                                Close
+                            </button>
+                            <div className="clearfix" />
                         </div>
                     </div>
                 </div>

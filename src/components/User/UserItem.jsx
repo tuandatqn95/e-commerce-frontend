@@ -22,7 +22,7 @@ class UserItem extends Component {
                             paddingRight: 15
                         }}
                         data-toggle="modal"
-                        href="#modal-profile"
+                        href={`#modal-profile-${id}`}
                     >
                         <i className="material-icons">library_books</i>
                     </button>{" "}
@@ -47,14 +47,14 @@ class UserItem extends Component {
                         <i
                             className="material-icons"
                             data-toggle="modal"
-                            href={`#${id}`}
+                            href={`#modal-confirm-${id}`}
                         >
                             delete
                         </i>
                     </button>
                 </td>
                 <td>
-                    <div className="modal fade" id={id}>
+                    <div className="modal fade" id={`modal-confirm-${id}`}>
                         <div className="modal-dialog">
                             <div className="modal-content">
                                 <div className="modal-header">
@@ -78,7 +78,7 @@ class UserItem extends Component {
                                         type="button"
                                         className="btn btn-default"
                                         data-toggle="modal"
-                                        href={`#${id}`}
+                                        href={`#modal-confirm-${id}`}
                                         onClick={this.onDeleteUser}
                                     >
                                         Delete
@@ -96,7 +96,7 @@ class UserItem extends Component {
                     </div>
                 </td>
                 <td>
-                    <UserProfile />
+                    <UserProfile user={this.props.user} />
                 </td>
             </tr>
         );
