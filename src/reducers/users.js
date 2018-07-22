@@ -8,11 +8,11 @@ let reducer = (state = initialState, action) => {
             return [...action.users];
         case Types.ADD_USER:
             state.push(action.user);
-            console.log("ADDED USER");
+            alert("Add user successfully");
             return [...state];
         case Types.DELETE_USER:
             state = state.filter(user => user.id !== action.id);
-            console.log("DELETED USER");
+            alert("Delete user successfully");
             return [...state];
         default:
             return [...state];
