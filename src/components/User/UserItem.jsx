@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import UserProfile from "./UserProfile";
 import ModalConfirm from "./ModalComfirm";
+import ChangePassword from "./ChangePassword";
 
 class UserItem extends Component {
     onDeleteUser = () => {
@@ -35,7 +36,7 @@ class UserItem extends Component {
                             paddingRight: 15
                         }}
                         data-toggle="modal"
-                        href={`#modal-profile-${id}`}
+                        href={`#modal-change-password-${id}`}
                     >
                         <i className="material-icons">edit</i>
                     </button>{" "}
@@ -55,6 +56,9 @@ class UserItem extends Component {
                             delete
                         </i>
                     </button>
+                </td>
+                <td>
+                    <ChangePassword user={this.props.user} />
                 </td>
                 <td>
                     <ModalConfirm

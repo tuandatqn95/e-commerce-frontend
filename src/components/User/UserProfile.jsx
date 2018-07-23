@@ -1,29 +1,79 @@
 import React, { Component } from "react";
 import { Styles } from "../../constants/Styles";
-import ChangePassword from "./ChangePassword";
 
 class UserProfile extends Component {
     constructor(props) {
         super(props);
+        const { id, name, email, phone, address } = this.props.user;
         this.state = {
-            isChangePassword: false
+            isFocusing: "",
+            isEditing: false,
+            id: id,
+            name: name,
+            email: email,
+            phone: phone,
+            address: address
         };
     }
-    onChangePassword = () => {
-        if (this.state.isChangePassword) {
-            console.log("Change password");
-        } else {
-            this.changeState();
-        }
-    };
-    changeState = () => {
+    onHandleChange = event => {
+        let target = event.target;
+        let name = target.name;
+        let value = target.value;
         this.setState({
-            isChangePassword: !this.state.isChangePassword
+            [name]: value
         });
     };
+    onHandleFocus = event => {
+        let target = event.target;
+        let name = target.name;
+        this.setState({
+            isFocusing: name
+        });
+    };
+
+    onBlurFocus = () => {
+        this.setState({
+            isFocusing: undefined
+        });
+    };
+
+    validateInput() {
+        return true;
+    }
+
+    resetForm = () => {
+        this.setState({
+            user: undefined
+        });
+    };
+
+    onSubmit = event => {
+        event.preventDefault();
+        if (this.validateInput()) {
+            // this.props.onSubmitUser({
+            //     id: this.state.id,
+            //     name: this.state.name,
+            //     email: this.state.email,
+            //     password: this.props.user.password,
+            //     phone: this.state.phone,
+            //     address: this.state.address
+            // });
+            console.log("Submit update ");
+            this.onReset();
+        }
+    };
+
+    changeEditing = () => {
+        this.setState({ isEditing: !this.state.isEditing });
+    };
+
+    onReset = () => {
+        this.resetForm();
+        this.changeEditing();
+    };
+
     render() {
-        const { id, name, email, phone, address } = this.props.user;
-        const { isChangePassword } = this.state;
+        const { id, name, email, phone, address, isEditing } = this.state;
         const Image = (
             <img
                 className="img-raised rounded-circle img-fluid"
@@ -54,53 +104,106 @@ class UserProfile extends Component {
                                 &times;
                             </button>
                         </div>
-                        <div className="modal-body">
-                            <div className="container text-center">
-                                <div className="avatar">{Image}</div>
-                                <h3>
-                                    <b>{name}</b>
-                                </h3>
+                        <form onSubmit={this.onSubmit} onReset={this.onReset}>
+                            <div className="modal-body">
+                                <div className="container text-center">
+                                    <div className="avatar">{Image}</div>
+                                    <h3>
+                                        <b>{name}</b>
+                                    </h3>
+                                </div>
+                                <table className="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>ID: </td>
+                                            <td>{id}</td>
+                                        </tr>
+                                        <tr hidden={isEditing ? false : true}>
+                                            <td>Name: </td>
+                                            <td>
+                                                <input
+                                                    name="name"
+                                                    className="form-control"
+                                                    type="text"
+                                                    value={name}
+                                                    onChange={
+                                                        this.onHandleChange
+                                                    }
+                                                />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Email: </td>
+                                            <td>
+                                                <input
+                                                    name="email"
+                                                    className="form-control"
+                                                    type="email"
+                                                    disabled={
+                                                        isEditing ? false : true
+                                                    }
+                                                    value={email}
+                                                    onChange={
+                                                        this.onHandleChange
+                                                    }
+                                                    onFocus={this.onHandleFocus}
+                                                    onBlur={this.onBlurHandle}
+                                                />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Phone: </td>
+                                            <td>
+                                                <input
+                                                    name="phone"
+                                                    className="form-control"
+                                                    type="text"
+                                                    disabled={
+                                                        isEditing ? false : true
+                                                    }
+                                                    value={phone}
+                                                    onChange={
+                                                        this.onHandleChange
+                                                    }
+                                                />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Address: </td>
+                                            <td>
+                                                <input
+                                                    name="address"
+                                                    className="form-control"
+                                                    type="text"
+                                                    disabled={
+                                                        isEditing ? false : true
+                                                    }
+                                                    value={address}
+                                                    onChange={
+                                                        this.onHandleChange
+                                                    }
+                                                />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
-                            <table className="table">
-                                <tbody>
-                                    <tr>
-                                        <td>ID: </td>
-                                        <td>{id}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Email: </td>
-                                        <td>{email}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Phone: </td>
-                                        <td>{phone}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Address: </td>
-                                        <td>{address}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            {isChangePassword ? <ChangePassword /> : ""}
-                        </div>
+                        </form>
                         <div className="modal-footer">
                             <button
                                 type="submit"
                                 className="btn btn-primary pull-right"
-                                onClick={this.onChangePassword}
+                                hidden={isEditing ? false : true}
+                                onClick={this.onSubmit}
                             >
-                                Change Password
+                                Update
                             </button>
-                            {isChangePassword ? (
-                                <button
-                                    className="btn btn-default pull-right"
-                                    onClick={this.changeState}
-                                >
-                                    Cancel
-                                </button>
-                            ) : (
-                                ""
-                            )}
+                            <button
+                                className="btn btn-success pull-right"
+                                onClick={this.changeEditing}
+                            >
+                                {isEditing ? "Cancel" : "Edit"}
+                            </button>
                             <button
                                 type="reset"
                                 className="btn btn-default pull-right"

@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+import { Styles } from "../../constants/Styles";
 
 class ChangePassword extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            isFocusing: "",
             oldPassword: "",
             newPassword: "",
             confPassword: ""
@@ -47,82 +49,139 @@ class ChangePassword extends Component {
     onSubmit = event => {
         event.preventDefault();
         if (this.validateInput()) {
-            this.props.onSubmitUser({
-                oldPassword: this.state.oldPassword,
-                newPassword: this.state.newPassword,
-                confPassword: this.state.confPassword
-            });
+            // this.props.onSubmitUser({
+            //     oldPassword: this.state.oldPassword,
+            //     newPassword: this.state.newPassword,
+            //     confPassword: this.state.confPassword
+            // });
+            console.log("change password " + this.state.newPassword);
             this.resetForm();
         }
     };
 
     render() {
+        const { id } = this.props.user;
         return (
-            <form onSubmit={this.onSubmit} onReset={this.onReset}>
-                <div className="row">
-                    <div className="col-md-12">
+            <div className="modal fade" id={`modal-change-password-${id}`}>
+                <div className="modal-dialog">
+                    <div className="modal-content">
                         <div
-                            className={`form-group bmd-form-group ${this.state
-                                .oldPassword && "is-filled"} ${this.state
-                                .isFocusing === "oldPassword" && "is-focused"}`}
+                            className="modal-header "
+                            style={Styles.backgroundModalHeader}
                         >
-                            <label className="bmd-label-floating">
-                                Old Password
-                            </label>
-                            <input
-                                name="oldPassword"
-                                className="form-control"
-                                type="password"
-                                value={this.state.oldPassword}
-                                onChange={this.onHandleChange}
-                                onFocus={this.onHandleFocus}
-                                onBlur={this.onBlurHandle}
-                            />
+                            <h4
+                                className="modal-title"
+                                style={Styles.colorModalHeader}
+                            >
+                                Change Password
+                            </h4>
+                            <button
+                                type="button"
+                                className="close"
+                                data-dismiss="modal"
+                                onClick={() => this.onReset()}
+                            >
+                                &times;
+                            </button>
                         </div>
-                    </div>
-                    <div className="col-md-12">
-                        <div
-                            className={`form-group bmd-form-group ${this.state
-                                .newPassword && "is-filled"} ${this.state
-                                .isFocusing === "newPassword" && "is-focused"}`}
-                        >
-                            <label className="bmd-label-floating">
-                                New Password
-                            </label>
-                            <input
-                                name="newPassword"
-                                className="form-control"
-                                type="password"
-                                value={this.state.newPassword}
-                                onChange={this.onHandleChange}
-                                onFocus={this.onHandleFocus}
-                                onBlur={this.onBlurHandle}
-                            />
-                        </div>
-                    </div>
-                    <div className="col-md-12">
-                        <div
-                            className={`form-group bmd-form-group ${this.state
-                                .confPassword && "is-filled"} ${this.state
-                                .isFocusing === "confPassword" &&
-                                "is-focused"}`}
-                        >
-                            <label className="bmd-label-floating">
-                                Confirm New Password
-                            </label>
-                            <input
-                                name="confPassword"
-                                className="form-control"
-                                type="password"
-                                value={this.state.confPassword}
-                                onChange={this.onHandleChange}
-                                onFocus={this.onHandleFocus}
-                                onBlur={this.onBlurHandle}
-                            />
+                        <div className="modal-body">
+                            <form
+                                onSubmit={this.onSubmit}
+                                onReset={this.onReset}
+                            >
+                                <div className="row">
+                                    <div className="col-md-12">
+                                        <div
+                                            className={`form-group bmd-form-group ${this
+                                                .state.oldPassword &&
+                                                "is-filled"} ${this.state
+                                                .isFocusing === "oldPassword" &&
+                                                "is-focused"}`}
+                                        >
+                                            <label className="bmd-label-floating">
+                                                Old Password
+                                            </label>
+                                            <input
+                                                name="oldPassword"
+                                                className="form-control"
+                                                type="password"
+                                                value={this.state.oldPassword}
+                                                onChange={this.onHandleChange}
+                                                onFocus={this.onHandleFocus}
+                                                onBlur={this.onBlurHandle}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="col-md-12">
+                                        <div
+                                            className={`form-group bmd-form-group ${this
+                                                .state.newPassword &&
+                                                "is-filled"} ${this.state
+                                                .isFocusing === "newPassword" &&
+                                                "is-focused"}`}
+                                        >
+                                            <label className="bmd-label-floating">
+                                                New Password
+                                            </label>
+                                            <input
+                                                name="newPassword"
+                                                className="form-control"
+                                                type="password"
+                                                value={this.state.newPassword}
+                                                onChange={this.onHandleChange}
+                                                onFocus={this.onHandleFocus}
+                                                onBlur={this.onBlurHandle}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="col-md-12">
+                                        <div
+                                            className={`form-group bmd-form-group ${this
+                                                .state.confPassword &&
+                                                "is-filled"} ${this.state
+                                                .isFocusing ===
+                                                "confPassword" &&
+                                                "is-focused"}`}
+                                        >
+                                            <label className="bmd-label-floating">
+                                                Confirm New Password
+                                            </label>
+                                            <input
+                                                name="confPassword"
+                                                className="form-control"
+                                                type="password"
+                                                value={this.state.confPassword}
+                                                onChange={this.onHandleChange}
+                                                onFocus={this.onHandleFocus}
+                                                onBlur={this.onBlurHandle}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="modal-footer">
+                                    <button
+                                        type="submit"
+                                        className="btn btn-primary pull-right"
+                                        data-toggle="modal"
+                                        href={`#modal-change-password-${id}`}
+                                    >
+                                        Save
+                                    </button>
+                                    <button
+                                        type="reset"
+                                        className="btn btn-default pull-right"
+                                        data-dismiss="modal"
+                                        onClick={this.resetForm}
+                                    >
+                                        Cancel
+                                    </button>
+                                    <div className="clearfix" />
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
         );
     }
 }

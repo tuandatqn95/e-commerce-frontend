@@ -55,6 +55,16 @@ export const deleteUserRequest = id => {
     };
 };
 
+export const updateUserRequest = user => {
+    return dispatch => {
+        return callApi(`users/${user.id}`, "PATCH", user)
+            .then(res => {
+                if (res === 201) dispatch(updateUser(user));
+            })
+            .catch(error => console.log(error));
+    };
+};
+
 export const fetchUsers = users => {
     return {
         type: Types.FETCH_USER,
@@ -73,5 +83,19 @@ export const deleteUser = id => {
     return {
         type: Types.DELETE_USER,
         id
+    };
+};
+
+export const updateUser = user => {
+    return {
+        type: Types.UPDATE_USER,
+        user
+    };
+};
+
+export const selectedEditUser = user => {
+    return {
+        type: Types.SELECT_EDIT_USER,
+        user
     };
 };
