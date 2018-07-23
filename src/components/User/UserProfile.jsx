@@ -42,28 +42,37 @@ class UserProfile extends Component {
     }
 
     resetForm = () => {
+        let { name, email, phone, address } = this.props.user;
         this.setState({
-            user: undefined
+            name: name,
+            email: email,
+            phone: phone,
+            address: address
         });
     };
 
     onSubmit = event => {
         event.preventDefault();
         if (this.validateInput()) {
-            // this.props.onSubmitUser({
-            //     id: this.state.id,
-            //     name: this.state.name,
-            //     email: this.state.email,
-            //     password: this.props.user.password,
-            //     phone: this.state.phone,
-            //     address: this.state.address
-            // });
-            console.log("Submit update ");
+            this.props.onSubmitUser({
+                id: this.state.id,
+                name: this.state.name,
+                email: this.state.email,
+                phone: this.state.phone,
+                address: this.state.address,
+                hashPassword: this.props.user.hashPassword,
+                created_at: this.props.user.created_at,
+                updated_at: this.props.user.updated_at,
+                __v: this.props.user.__v
+            });
             this.onReset();
         }
     };
 
     changeEditing = () => {
+        if (this.state.isEditing) {
+            this.resetForm();
+        }
         this.setState({ isEditing: !this.state.isEditing });
     };
 
@@ -74,6 +83,7 @@ class UserProfile extends Component {
 
     render() {
         const { id, name, email, phone, address, isEditing } = this.state;
+        const { modalId } = this.props;
         const Image = (
             <img
                 className="img-raised rounded-circle img-fluid"
@@ -83,7 +93,7 @@ class UserProfile extends Component {
             />
         );
         return (
-            <div className="modal fade" id={`modal-profile-${id}`}>
+            <div className="modal fade" id={modalId}>
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div
@@ -193,6 +203,7 @@ class UserProfile extends Component {
                             <button
                                 type="submit"
                                 className="btn btn-primary pull-right"
+                                data-dismiss="modal"
                                 hidden={isEditing ? false : true}
                                 onClick={this.onSubmit}
                             >

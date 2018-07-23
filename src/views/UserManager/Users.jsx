@@ -6,7 +6,8 @@ import UserForm from "../../components/User/UserForm";
 import {
     fetchUsersRequest,
     addUserRequest,
-    deleteUserRequest
+    deleteUserRequest,
+    updateUserRequest
 } from "../../actions/userAction";
 
 class Users extends Component {
@@ -33,12 +34,16 @@ class Users extends Component {
 
     onSubmitUser = user => {
         if (user.id) {
+            this.props.onUpdateUser(user);
         } else {
             this.props.onAddUser(user);
         }
     };
     onDeleteUser = user => {
         this.props.onDeleteUser(user.id);
+    };
+    onEditUser = user => {
+        this.setState({ selectedUser: user });
     };
     onClearSelectedUser = () => {
         this.setState({
@@ -56,6 +61,7 @@ class Users extends Component {
                         key={index}
                         user={user}
                         onDeleteUser={this.onDeleteUser}
+                        onSubmitUser={this.onSubmitUser}
                     />
                 );
             });
@@ -73,9 +79,7 @@ class Users extends Component {
                     <UserForm
                         onSubmitUser={this.onSubmitUser}
                         onCloseForm={this.onCloseForm}
-                        selectedUser={this.state.selectedUser}
                         isOpen={this.state.isFormOpen}
-                        onClearSelectedUser={this.onClearSelectedUser}
                     />
                 </div>
             </div>
@@ -92,7 +96,8 @@ const mapDispatchToProps = dispatch => {
     return {
         onFetchUsers: () => dispatch(fetchUsersRequest()),
         onAddUser: user => dispatch(addUserRequest(user)),
-        onDeleteUser: id => dispatch(deleteUserRequest(id))
+        onDeleteUser: id => dispatch(deleteUserRequest(id)),
+        onUpdateUser: user => dispatch(updateUserRequest(user))
     };
 };
 export default connect(

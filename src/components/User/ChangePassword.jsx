@@ -61,8 +61,9 @@ class ChangePassword extends Component {
 
     render() {
         const { id } = this.props.user;
+        const { modalId } = this.props;
         return (
-            <div className="modal fade" id={`modal-change-password-${id}`}>
+            <div className="modal fade" id={modalId}>
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div
@@ -79,7 +80,7 @@ class ChangePassword extends Component {
                                 type="button"
                                 className="close"
                                 data-dismiss="modal"
-                                onClick={() => this.onReset()}
+                                onClick={this.resetForm}
                             >
                                 &times;
                             </button>

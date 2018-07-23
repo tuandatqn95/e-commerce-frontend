@@ -10,7 +10,11 @@ let reducer = (state = initialState, action) => {
             state.push(action.user);
             return [...state];
         case Types.DELETE_USER:
-            state = state.filter(user => user.id !== action.id);
+            state = state.filter(i => i.id !== action.id);
+            return [...state];
+        case Types.UPDATE_USER:
+            let index = state.findIndex(i => i.id === action.user.id);
+            state[index] = action.user;
             return [...state];
         default:
             return [...state];

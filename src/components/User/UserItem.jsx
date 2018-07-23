@@ -58,7 +58,10 @@ class UserItem extends Component {
                     </button>
                 </td>
                 <td>
-                    <ChangePassword user={this.props.user} />
+                    <ChangePassword
+                        user={this.props.user}
+                        modalId={`modal-change-password-${id}`}
+                    />
                 </td>
                 <td>
                     <ModalConfirm
@@ -68,7 +71,11 @@ class UserItem extends Component {
                     />
                 </td>
                 <td>
-                    <UserProfile user={this.props.user} />
+                    <UserProfile
+                        user={this.props.user}
+                        modalId={`modal-profile-${id}`}
+                        onSubmitUser={this.props.onSubmitUser}
+                    />
                 </td>
             </tr>
         );

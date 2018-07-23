@@ -6,7 +6,7 @@ import users from "./users";
 const appReducer = combineReducers({
     categories,
     selectedCategory,
-    users,
+    users
 });
 
 export default appReducer;

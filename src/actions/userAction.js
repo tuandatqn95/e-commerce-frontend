@@ -15,7 +15,10 @@ export const fetchUsersRequest = () => {
                                     name: user.name,
                                     phone: user.phone,
                                     address: user.address,
-                                    hashPassword: user.hashPassword
+                                    hashPassword: user.hashPassword,
+                                    created_at: user.created_at,
+                                    updated_at: user.updated_at,
+                                    __v: user.__v
                                 };
                             })
                         )
@@ -35,9 +38,12 @@ export const addUserRequest = user => {
                             id: res.data._id,
                             name: res.data.name,
                             email: res.data.email,
-                            password: res.data.hashPassword,
+                            hashPassword: res.data.hashPassword,
                             phone: res.data.phone,
-                            address: res.data.address
+                            address: res.data.address,
+                            created_at: res.data.created_at,
+                            updated_at: res.data.updated_at,
+                            __v: res.data.__v
                         })
                     );
             })
@@ -59,7 +65,7 @@ export const updateUserRequest = user => {
     return dispatch => {
         return callApi(`users/${user.id}`, "PATCH", user)
             .then(res => {
-                if (res === 201) dispatch(updateUser(user));
+                if (res.status === 201) dispatch(updateUser(user));
             })
             .catch(error => console.log(error));
     };
