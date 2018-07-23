@@ -16,6 +16,9 @@ let reducer = (state = initialState, action) => {
             let index = state.findIndex(i => i.id === action.user.id);
             state[index] = action.user;
             return [...state];
+        case Types.UPDATE_PASSWORD:
+            console.log(action.oldPassword + " - " + action.newPassword);
+            return [...state];
         default:
             return [...state];
     }

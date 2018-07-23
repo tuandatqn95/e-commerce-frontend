@@ -14,11 +14,7 @@ export const fetchUsersRequest = () => {
                                     email: user.email,
                                     name: user.name,
                                     phone: user.phone,
-                                    address: user.address,
-                                    hashPassword: user.hashPassword,
-                                    created_at: user.created_at,
-                                    updated_at: user.updated_at,
-                                    __v: user.__v
+                                    address: user.address
                                 };
                             })
                         )
@@ -38,12 +34,8 @@ export const addUserRequest = user => {
                             id: res.data._id,
                             name: res.data.name,
                             email: res.data.email,
-                            hashPassword: res.data.hashPassword,
                             phone: res.data.phone,
-                            address: res.data.address,
-                            created_at: res.data.created_at,
-                            updated_at: res.data.updated_at,
-                            __v: res.data.__v
+                            address: res.data.address
                         })
                     );
             })
@@ -66,6 +58,21 @@ export const updateUserRequest = user => {
         return callApi(`users/${user.id}`, "PATCH", user)
             .then(res => {
                 if (res.status === 201) dispatch(updateUser(user));
+            })
+            .catch(error => console.log(error));
+    };
+};
+
+export const updatePasswordRequest = (id, oldPassword, newPassword) => {
+    return dispatch => {
+        return callApi(`users/${id}/update-password`, "PATCH", {
+            oldPassword,
+            newPassword
+        })
+            .then(res => {
+                console.log(res);
+                // if (res.status === 201)
+                //     dispatch(updatePassword(id, oldPassword, newPassword));
             })
             .catch(error => console.log(error));
     };
@@ -103,5 +110,14 @@ export const selectedEditUser = user => {
     return {
         type: Types.SELECT_EDIT_USER,
         user
+    };
+};
+
+export const updatePassword = (id, oldPassword, newPassword) => {
+    return {
+        type: Types.UPDATE_PASSWORD,
+        id,
+        oldPassword,
+        newPassword
     };
 };

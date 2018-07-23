@@ -35,6 +35,7 @@ class ChangePassword extends Component {
     };
 
     validateInput() {
+        if (this.state.newPassword !== this.state.confPassword) return false;
         return true;
     }
 
@@ -49,14 +50,15 @@ class ChangePassword extends Component {
     onSubmit = event => {
         event.preventDefault();
         if (this.validateInput()) {
-            // this.props.onSubmitUser({
-            //     oldPassword: this.state.oldPassword,
-            //     newPassword: this.state.newPassword,
-            //     confPassword: this.state.confPassword
-            // });
-            console.log("change password " + this.state.newPassword);
-            this.resetForm();
+            this.props.onUpdatePassword(
+                this.props.user.id,
+                this.state.oldPassword,
+                this.state.newPassword
+            );
+        } else {
+            console.log("invalidate input");
         }
+        this.resetForm();
     };
 
     render() {
@@ -164,7 +166,7 @@ class ChangePassword extends Component {
                                         type="submit"
                                         className="btn btn-primary pull-right"
                                         data-toggle="modal"
-                                        href={`#modal-change-password-${id}`}
+                                        href={`#${modalId}`}
                                     >
                                         Save
                                     </button>

@@ -59,11 +59,7 @@ class UserProfile extends Component {
                 name: this.state.name,
                 email: this.state.email,
                 phone: this.state.phone,
-                address: this.state.address,
-                hashPassword: this.props.user.hashPassword,
-                created_at: this.props.user.created_at,
-                updated_at: this.props.user.updated_at,
-                __v: this.props.user.__v
+                address: this.state.address
             });
             this.onReset();
         }
