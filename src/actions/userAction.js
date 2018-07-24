@@ -70,7 +70,7 @@ export const updatePasswordRequest = (id, oldPassword, newPassword) => {
             newPassword
         })
             .then(res => {
-                console.log(res);
+                if (res.status === 201) console.log(res);
             })
             .catch(error => console.log(error));
     };
@@ -79,7 +79,7 @@ export const resetPasswordRequest = id => {
     return dispatch => {
         return callApi(`users/${id}/reset-password`, "PATCH", null)
             .then(res => {
-                console.log(res);
+                if (res.status === 201) console.log(res);
             })
             .catch(error => console.log(error));
     };
