@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import ProductItem from "../../components/Product/ProductItem";
 import ProductList from "../../components/Product/ProductList";
 import ProductForm from "../../components/Product/ProductForm";
+
 import {
     fetchProductsRequest,
     addProductRequest,
@@ -18,21 +19,17 @@ class Products extends Component {
         super(props);
         this.state = {
             isFormOpen: false
-           // selectedProduct: undefined
         };
     }
-    
-    onToggleForm = () => {
-        this.setState({
-            isFormOpen: !this.state.isFormOpen
-            // selectedProduct: undefined
-        });
-    };
 
+    onShowForm = () => {
+        this.setState({
+            isFormOpen: true,
+        })
+    }
     onCloseForm = () => {
         this.setState({
             isFormOpen: false,
-            //selectedProduct: {}
         });
     };
 
@@ -42,7 +39,6 @@ class Products extends Component {
         } else {
             this.props.onAddProduct(product);
         }
-        // this.onToggleForm();
     };
 
     onEditProduct = product => {
@@ -84,23 +80,28 @@ class Products extends Component {
             <div className="container-fluid">
                 <div className="row">
                     <ProductList
+                        onClearSelectedProduct={this.state.onClearSelectedProduct}
                         isFormOpen={this.state.isFormOpen}
-                        onToggleForm={this.onToggleForm}
+                        onShowForm={this.onShowForm}
                     >
                         <ProductItems/>
+                        
                     </ProductList>
-                </div>
-                <ProductForm
-                    onSubmitProduct={this.onSubmitProduct}
+                    <ProductForm
+                    isFormOpen={this.state.isFormOpen}
                     onCloseForm={this.onCloseForm}
+                    onEditProduct={this.onEditProduct}
+                    onSubmitProduct={this.onSubmitProduct}
                     selectedProduct={this.state.selectedProduct}
-                    isOpen={this.state.isFormOpen}
                     onClearSelectedProduct={this.onClearSelectedProduct} />
 
+                </div>
+            
             </div>
         )
     }
 }
+
 function mapStateToProps(state) {
     return {
         products: state.products

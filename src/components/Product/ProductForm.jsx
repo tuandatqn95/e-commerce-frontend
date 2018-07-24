@@ -52,13 +52,12 @@ class ProductForm extends Component {
             name: "",
             image: "",
             description: "",
-            price : 0,
-            inventory: 0,
-            category: ""
+            price : "",
+            inventory: "",
+            category: null
         });
     };
 
-    // lưu
     onSubmit = event => {
         event.preventDefault();
         if (this.validateInput()) {
@@ -76,6 +75,11 @@ class ProductForm extends Component {
     };
 
     onReset = () => {
+        this.resetForm();
+        this.props.onCloseForm();
+    };
+
+    onCloseForm = () =>{
         this.resetForm();
         this.props.onCloseForm();
     };
@@ -104,24 +108,26 @@ class ProductForm extends Component {
 
     render() {
         const Categories = () =>
-        this.props.categories.map((category) => {
+        this.props.categories.map((category,index) => {
             return (
-                <option>{category.id}</option>
+                <option key={index}>{category.id}</option>
             );
         });
 
         return (
-                <div className="modal fade col-md-12 display-none" id="myModal" tabIndex="-1" role="dialog" style={{ padding: 17 }}>
-                    <div className="modal-dialog">
+
+                <div className="modal fade show" id="longModal" tabIndex="-1" role="dialog" style={{ display: this.props.isFormOpen ?'block' : 'none'}}>
+                    <div className="modal-dialog" role="document">
                         <div className="modal-content">
+                            <div className="card card-plain">
                             <div className="modal-header">
-                                <h4 className="modal-title text-center"><b> New Product</b></h4>
-                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                <h5 className="modal-title card-title">{ this.state.id ===""  ? "New Product" : "Edit Product"}</h5>
+                                <button type="button" className="close" onClick={this.onCloseForm} aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div className="modal-body">
-                                <form onSubmit={this.onSubmit} onReset={this.onReset} >
+                                <form onSubmit={this.onSubmit} onReset={this.onReset}>
                                     {this.state.id && (
                                     <div 
                                         className={`form-group  ${this
@@ -132,7 +138,6 @@ class ProductForm extends Component {
                                             <label
                                                 className="col-form-label col-md-2"> ID: 
                                             </label>
-
                                             <input
                                                 name="id"
                                                 id="idProduct"
@@ -149,8 +154,8 @@ class ProductForm extends Component {
                                         .state.name && "is-filled"} ${this.state
                                         .isFocusing === "name" &&
                                         "is-focused"}`}>
-                                        <label className="col-form-label col-md-2"> Name: </label>
                                         <input 
+                                            placeholder="Product Name"
                                             name="name"
                                             className="form-control"
                                             type="text"
@@ -164,14 +169,12 @@ class ProductForm extends Component {
                                         .state.description &&
                                         "is-filled"} ${this.state.isFocusing ===
                                         "description" && "is-focused"}`}>
-                                        <label className="col-form-label col-md-2">
-                                            Description:
-                                        </label>
                                         <textarea 
+                                            placeholder="Description ..."
                                             className="form-control" 
                                             id="description"
                                             name="description"
-                                            rows="5"
+                                            rows="2"
                                             value={this.state.description}
                                             onChange={this.onHandleChange}
                                             onFocus={this.onHandleFocus}
@@ -179,11 +182,9 @@ class ProductForm extends Component {
                                         </textarea>
                                     </div>
                                     <div className="form-row">
-                                        <div className={`form-group col-md-4 ${this.state.price && "is-filled"} ${this.state.isFocusing === "price" && "is-focused"}`}>
-                                            <label>
-                                                Price:
-                                            </label> 
+                                        <div className={`form-group col-md-3 ${this.state.price && "is-filled"} ${this.state.isFocusing === "price" && "is-focused"}`}>
                                             <input
+                                                placeholder="VNĐ"
                                                 name="price"
                                                 value={this.state.price}
                                                 onChange={this.onHandleChange}
@@ -194,12 +195,15 @@ class ProductForm extends Component {
                                                 className="form-control text-right"
                                                 id="price" />
                                         </div>
+                                        <p className={`form-group col-md-1 ${this.state.price && "is-filled"} ${this.state.isFocusing === "price" && "is-focused"}`}>
+                                            VNĐ
+                                        </p>
                                         <div className={`form-group col-md-3    
                                         ${this.state.price && "is-filled"} 
                                         ${this.state.isFocusing === "inventory" && "is-focused"}`
                                         }>
-                                            <label>Inventory:</label>
                                             <input
+                                                placeholder="Amount"
                                                 name="inventory"
                                                 value={this.state.inventory}
                                                 onChange={this.onHandleChange}
@@ -210,26 +214,26 @@ class ProductForm extends Component {
                                                 id="inventory" />
                                         </div>
                                         <div className={`form-group col-md-5   
-                                        ${this.state.price && "is-filled"} 
-                                        ${this.state.isFocusing === "inventory" && "is-focused"}`
+                                        ${this.state.category && "is-filled"} 
+                                        ${this.state.isFocusing === "category" && "is-focused"}`
                                         }>
-                                            <label>Category</label>
                                             <select
+
                                                 name="category"
-                                                value={this.state.inventory}
+                                                default="Chưa phân loại"
                                                 onChange={this.onHandleChange}
                                                 onFocus={this.onHandleFocus}
                                                 onBlur={this.onBlurHandle}
                                                 className="form-control text-right"
                                                 id="categories">
-                                                    <option  selected>{this.state.category === null ? "Chưa phân loại" : this.state.category.id}</option>
+                                                    <option  selected>{this.state.category === null ? "Chưa phân loại" : this.state.category._id}</option>
                                                     <Categories />
                                             </select>
                                         </div>
                                     </div>
                                     <div className="form-group">
-                                        <label>Image Url... :</label>
                                         <input 
+                                            placeholder="Image Link"
                                             type="text" 
                                             className="form-control" 
                                             id="linkImage"
@@ -245,6 +249,7 @@ class ProductForm extends Component {
                                     </div>
                                     <div className="clearfix" />
                                 </form>
+                            </div>
                             </div>
                         </div>
                     </div>

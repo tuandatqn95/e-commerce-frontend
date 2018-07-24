@@ -11,9 +11,10 @@ class ProductItem extends Component {
         this.props.onDeleteProduct(this.props.product);
     };
 
-    onShowProduct = () => {
-        // this.props.onShowProduct(id);
-    };
+    // onShowProduct = () => {
+    //     // this.props.onShowProduct(id);
+    // };
+    
     render() {
         const { id, name, description, image } = this.props.product;
 
@@ -43,8 +44,6 @@ class ProductItem extends Component {
                     <button
                         type="button"
                         className="btn btn-warning"
-                        data-toggle="modal" 
-                        data-target="#myModal"
                         style={{
                             paddingLeft: 15,
                             paddingRight: 15
