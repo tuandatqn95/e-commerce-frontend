@@ -8,7 +8,8 @@ import {
     addUserRequest,
     deleteUserRequest,
     updateUserRequest,
-    updatePasswordRequest
+    updatePasswordRequest,
+    resetPasswordRequest
 } from "../../actions/userAction";
 
 class Users extends Component {
@@ -19,20 +20,17 @@ class Users extends Component {
             selectedUser: undefined
         };
     }
-
     onToggleForm = () => {
         this.setState({
             isFormOpen: !this.state.isFormOpen
         });
     };
-
     onCloseForm = () => {
         this.setState({
             isFormOpen: false,
             selectedUser: undefined
         });
     };
-
     onSubmitUser = user => {
         if (user.id) {
             this.props.onUpdateUser(user);
@@ -48,6 +46,9 @@ class Users extends Component {
     };
     onUpdatePassword = (id, oldPassword, newPassword) => {
         this.props.onUpdatePassword(id, oldPassword, newPassword);
+    };
+    onResetPassword = id => {
+        this.props.onResetPassword(id);
     };
     onClearSelectedUser = () => {
         this.setState({
@@ -67,6 +68,7 @@ class Users extends Component {
                         onDeleteUser={this.onDeleteUser}
                         onSubmitUser={this.onSubmitUser}
                         onUpdatePassword={this.onUpdatePassword}
+                        onResetPassword={this.onResetPassword}
                     />
                 );
             });
@@ -104,7 +106,8 @@ const mapDispatchToProps = dispatch => {
         onDeleteUser: id => dispatch(deleteUserRequest(id)),
         onUpdateUser: user => dispatch(updateUserRequest(user)),
         onUpdatePassword: (id, oldPassword, newPassword) =>
-            dispatch(updatePasswordRequest(id, oldPassword, newPassword))
+            dispatch(updatePasswordRequest(id, oldPassword, newPassword)),
+        onResetPassword: id => dispatch(resetPasswordRequest(id))
     };
 };
 export default connect(

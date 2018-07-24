@@ -71,13 +71,19 @@ export const updatePasswordRequest = (id, oldPassword, newPassword) => {
         })
             .then(res => {
                 console.log(res);
-                // if (res.status === 201)
-                //     dispatch(updatePassword(id, oldPassword, newPassword));
             })
             .catch(error => console.log(error));
     };
 };
-
+export const resetPasswordRequest = id => {
+    return dispatch => {
+        return callApi(`users/${id}/reset-password`, "PATCH", null)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(error => console.log(error));
+    };
+};
 export const fetchUsers = users => {
     return {
         type: Types.FETCH_USER,
@@ -119,5 +125,12 @@ export const updatePassword = (id, oldPassword, newPassword) => {
         id,
         oldPassword,
         newPassword
+    };
+};
+
+export const resetPassword = id => {
+    return {
+        type: Types.RESET_PASSWORD,
+        id
     };
 };

@@ -62,6 +62,7 @@ class UserItem extends Component {
                         user={this.props.user}
                         modalId={`modal-change-password-${id}`}
                         onUpdatePassword={this.props.onUpdatePassword}
+                        onResetPassword={this.props.onResetPassword}
                     />
                 </td>
                 <td>

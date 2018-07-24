@@ -60,9 +60,11 @@ class ChangePassword extends Component {
         }
         this.resetForm();
     };
+    onResetPassword = () => {
+        this.props.onResetPassword(this.props.user.id);
+    };
 
     render() {
-        const { id } = this.props.user;
         const { modalId } = this.props;
         return (
             <div className="modal fade" id={modalId}>
@@ -161,26 +163,33 @@ class ChangePassword extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="modal-footer">
-                                    <button
-                                        type="submit"
-                                        className="btn btn-primary pull-right"
-                                        data-toggle="modal"
-                                        href={`#${modalId}`}
-                                    >
-                                        Save
-                                    </button>
-                                    <button
-                                        type="reset"
-                                        className="btn btn-default pull-right"
-                                        data-dismiss="modal"
-                                        onClick={this.resetForm}
-                                    >
-                                        Cancel
-                                    </button>
-                                    <div className="clearfix" />
-                                </div>
                             </form>
+                            <div className="modal-footer">
+                                <button
+                                    className="btn btn-danger pull-right"
+                                    data-dismiss="modal"
+                                    onClick={this.onResetPassword}
+                                >
+                                    Reset Password
+                                </button>
+                                <button
+                                    type="submit"
+                                    className="btn btn-primary pull-right"
+                                    data-dismiss="modal"
+                                    onClick={this.onSubmit}
+                                >
+                                    Save
+                                </button>
+                                <button
+                                    type="reset"
+                                    className="btn btn-default pull-right"
+                                    data-dismiss="modal"
+                                    onClick={this.resetForm}
+                                >
+                                    Cancel
+                                </button>
+                                <div className="clearfix" />
+                            </div>
                         </div>
                     </div>
                 </div>
