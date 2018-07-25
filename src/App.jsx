@@ -4,6 +4,7 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import appRoutes from "./routes/app";
+import LoginPage from "./views/LoginPage/LoginPage";
 
 const switchRoutes = (
     <Switch>
@@ -32,14 +33,26 @@ class App extends Component {
     render() {
         return (
             <BrowserRouter>
-                <div className="wrapper ">
-                    <SideBar routes={appRoutes} />
-                    <div className="main-panel">
-                        <Header routes={appRoutes} />
-                        <div className="content">{switchRoutes}</div>
-                        <Footer />
-                    </div>
-                </div>
+                <Switch>
+                    <Route exact path="/login" component={LoginPage} />
+                    <Route
+                        path="/"
+                        render={() => {
+                            return (
+                                <div className="wrapper ">
+                                    <SideBar routes={appRoutes} />
+                                    <div className="main-panel">
+                                        <Header routes={appRoutes} />
+                                        <div className="content">
+                                            {switchRoutes}
+                                        </div>
+                                        <Footer />
+                                    </div>
+                                </div>
+                            );
+                        }}
+                    />
+                </Switch>
             </BrowserRouter>
         );
     }
