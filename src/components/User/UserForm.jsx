@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Styles } from "../../constants/Styles";
+import { modalUserFormId } from "../../constants/ModalId";
 class UserForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: "",
             name: "",
             email: "",
             password: "",
@@ -42,7 +42,6 @@ class UserForm extends Component {
 
     resetForm = () => {
         this.setState({
-            id: "",
             name: "",
             email: "",
             password: "",
@@ -55,7 +54,6 @@ class UserForm extends Component {
         event.preventDefault();
         if (this.validateInput()) {
             this.props.onSubmitUser({
-                id: this.state.id,
                 name: this.state.name,
                 email: this.state.email,
                 password: this.state.password,
@@ -72,209 +70,166 @@ class UserForm extends Component {
     };
 
     render() {
-        const { isOpen } = this.props;
-        const { user } = this.props;
         return (
-            <div>
-                <div className="modal fade" id="modal-form">
-                    <div className="modal-dialog">
-                        <div className="modal-content">
-                            <div
-                                className="modal-header "
-                                style={Styles.backgroundModalHeader}
+            <div className="modal fade" id={modalUserFormId}>
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div
+                            className="modal-header "
+                            style={Styles.backgroundModalHeader}
+                        >
+                            <h4
+                                className="modal-title"
+                                style={Styles.colorModalHeader}
                             >
-                                <h4
-                                    className="modal-title"
-                                    style={Styles.colorModalHeader}
-                                >
-                                    Add User
-                                </h4>
-                                <button
-                                    type="button"
-                                    className="close"
-                                    data-dismiss="modal"
-                                    onClick={() => this.onReset()}
-                                >
-                                    &times;
-                                </button>
-                            </div>
-                            <div className="modal-body">
-                                <form
-                                    onSubmit={this.onSubmit}
-                                    onReset={this.onReset}
-                                >
-                                    <div className="row">
-                                        {this.state.id && (
-                                            <div className="col-md-12">
-                                                <div
-                                                    className={`form-group bmd-form-group ${this
-                                                        .state.id &&
-                                                        "is-filled"} ${this
-                                                        .state.isFocusing ===
-                                                        "id" && "is-focused"}`}
-                                                >
-                                                    <label className="bmd-label-floating">
-                                                        User ID
-                                                    </label>
-                                                    <input
-                                                        name="id"
-                                                        className="form-control"
-                                                        disabled="disabled"
-                                                        type="text"
-                                                        value={this.state.id}
-                                                        onFocus={
-                                                            this.onHandleFocus
-                                                        }
-                                                        onBlur={
-                                                            this.onBlurHandle
-                                                        }
-                                                    />
-                                                </div>
-                                            </div>
-                                        )}
-                                        <div className="col-md-12">
-                                            <div
-                                                className={`form-group bmd-form-group ${this
-                                                    .state.name &&
-                                                    "is-filled"} ${this.state
-                                                    .isFocusing === "name" &&
-                                                    "is-focused"}`}
-                                            >
-                                                <label className="bmd-label-floating">
-                                                    User Name
-                                                </label>
-                                                <input
-                                                    name="name"
-                                                    className="form-control"
-                                                    type="text"
-                                                    value={this.state.name}
-                                                    onChange={
-                                                        this.onHandleChange
-                                                    }
-                                                    onFocus={this.onHandleFocus}
-                                                    onBlur={this.onBlurHandle}
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="col-md-12">
-                                            <div
-                                                className={`form-group bmd-form-group ${this
-                                                    .state.email &&
-                                                    "is-filled"} ${this.state
-                                                    .isFocusing === "email" &&
-                                                    "is-focused"}`}
-                                            >
-                                                <label className="bmd-label-floating">
-                                                    Email
-                                                </label>
-                                                <input
-                                                    name="email"
-                                                    className="form-control"
-                                                    type="email"
-                                                    value={this.state.email}
-                                                    onChange={
-                                                        this.onHandleChange
-                                                    }
-                                                    onFocus={this.onHandleFocus}
-                                                    onBlur={this.onBlurHandle}
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="col-md-12">
-                                            <div
-                                                className={`form-group bmd-form-group ${this
-                                                    .state.password &&
-                                                    "is-filled"} ${this.state
-                                                    .isFocusing ===
-                                                    "password" &&
-                                                    "is-focused"}`}
-                                            >
-                                                <label className="bmd-label-floating">
-                                                    Password
-                                                </label>
-                                                <input
-                                                    name="password"
-                                                    className="form-control"
-                                                    type="password"
-                                                    value={this.state.password}
-                                                    onChange={
-                                                        this.onHandleChange
-                                                    }
-                                                    onFocus={this.onHandleFocus}
-                                                    onBlur={this.onBlurHandle}
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="col-md-12">
-                                            <div
-                                                className={`form-group bmd-form-group ${this
-                                                    .state.phone &&
-                                                    "is-filled"} ${this.state
-                                                    .isFocusing === "phone" &&
-                                                    "is-focused"}`}
-                                            >
-                                                <label className="bmd-label-floating">
-                                                    Phone
-                                                </label>
-                                                <input
-                                                    name="phone"
-                                                    className="form-control"
-                                                    type="text"
-                                                    value={this.state.phone}
-                                                    onChange={
-                                                        this.onHandleChange
-                                                    }
-                                                    onFocus={this.onHandleFocus}
-                                                    onBlur={this.onBlurHandle}
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="col-md-12">
-                                            <div
-                                                className={`form-group bmd-form-group ${this
-                                                    .state.address &&
-                                                    "is-filled"} ${this.state
-                                                    .isFocusing === "address" &&
-                                                    "is-focused"}`}
-                                            >
-                                                <label className="bmd-label-floating">
-                                                    Address
-                                                </label>
-                                                <input
-                                                    name="address"
-                                                    className="form-control"
-                                                    type="text"
-                                                    value={this.state.address}
-                                                    onChange={
-                                                        this.onHandleChange
-                                                    }
-                                                    onFocus={this.onHandleFocus}
-                                                    onBlur={this.onBlurHandle}
-                                                />
-                                            </div>
+                                Add User
+                            </h4>
+                            <button
+                                type="button"
+                                className="close"
+                                data-dismiss="modal"
+                                onClick={() => this.onReset()}
+                            >
+                                &times;
+                            </button>
+                        </div>
+                        <div className="modal-body">
+                            <form
+                                onSubmit={this.onSubmit}
+                                onReset={this.onReset}
+                            >
+                                <div className="row">
+                                    <div className="col-md-12">
+                                        <div
+                                            className={`form-group bmd-form-group ${this
+                                                .state.name &&
+                                                "is-filled"} ${this.state
+                                                .isFocusing === "name" &&
+                                                "is-focused"}`}
+                                        >
+                                            <label className="bmd-label-floating">
+                                                User Name
+                                            </label>
+                                            <input
+                                                name="name"
+                                                className="form-control"
+                                                type="text"
+                                                value={this.state.name}
+                                                onChange={this.onHandleChange}
+                                                onFocus={this.onHandleFocus}
+                                                onBlur={this.onBlurHandle}
+                                            />
                                         </div>
                                     </div>
-                                    <div className="modal-footer">
-                                        <button
-                                            type="submit"
-                                            className="btn btn-primary pull-right"
-                                            data-toggle="modal"
-                                            href="#modal-form"
+                                    <div className="col-md-12">
+                                        <div
+                                            className={`form-group bmd-form-group ${this
+                                                .state.email &&
+                                                "is-filled"} ${this.state
+                                                .isFocusing === "email" &&
+                                                "is-focused"}`}
                                         >
-                                            Save
-                                        </button>
-                                        <button
-                                            type="reset"
-                                            className="btn btn-default pull-right"
-                                            data-dismiss="modal"
-                                            onClick={() => this.onReset()}
-                                        >
-                                            Cancel
-                                        </button>
-                                        <div className="clearfix" />
+                                            <label className="bmd-label-floating">
+                                                Email
+                                            </label>
+                                            <input
+                                                name="email"
+                                                className="form-control"
+                                                type="email"
+                                                value={this.state.email}
+                                                onChange={this.onHandleChange}
+                                                onFocus={this.onHandleFocus}
+                                                onBlur={this.onBlurHandle}
+                                            />
+                                        </div>
                                     </div>
-                                </form>
-                            </div>
+                                    <div className="col-md-12">
+                                        <div
+                                            className={`form-group bmd-form-group ${this
+                                                .state.password &&
+                                                "is-filled"} ${this.state
+                                                .isFocusing === "password" &&
+                                                "is-focused"}`}
+                                        >
+                                            <label className="bmd-label-floating">
+                                                Password
+                                            </label>
+                                            <input
+                                                name="password"
+                                                className="form-control"
+                                                type="password"
+                                                value={this.state.password}
+                                                onChange={this.onHandleChange}
+                                                onFocus={this.onHandleFocus}
+                                                onBlur={this.onBlurHandle}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="col-md-12">
+                                        <div
+                                            className={`form-group bmd-form-group ${this
+                                                .state.phone &&
+                                                "is-filled"} ${this.state
+                                                .isFocusing === "phone" &&
+                                                "is-focused"}`}
+                                        >
+                                            <label className="bmd-label-floating">
+                                                Phone
+                                            </label>
+                                            <input
+                                                name="phone"
+                                                className="form-control"
+                                                type="text"
+                                                value={this.state.phone}
+                                                onChange={this.onHandleChange}
+                                                onFocus={this.onHandleFocus}
+                                                onBlur={this.onBlurHandle}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="col-md-12">
+                                        <div
+                                            className={`form-group bmd-form-group ${this
+                                                .state.address &&
+                                                "is-filled"} ${this.state
+                                                .isFocusing === "address" &&
+                                                "is-focused"}`}
+                                        >
+                                            <label className="bmd-label-floating">
+                                                Address
+                                            </label>
+                                            <input
+                                                name="address"
+                                                className="form-control"
+                                                type="text"
+                                                value={this.state.address}
+                                                onChange={this.onHandleChange}
+                                                onFocus={this.onHandleFocus}
+                                                onBlur={this.onBlurHandle}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="modal-footer">
+                                    <button
+                                        type="submit"
+                                        className="btn btn-primary pull-right"
+                                        data-toggle="modal"
+                                        href={`#${modalUserFormId}`}
+                                    >
+                                        Save
+                                    </button>
+                                    <button
+                                        type="reset"
+                                        className="btn btn-default pull-right"
+                                        data-dismiss="modal"
+                                        onClick={() => this.onReset()}
+                                    >
+                                        Cancel
+                                    </button>
+                                    <div className="clearfix" />
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

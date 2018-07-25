@@ -1,11 +1,14 @@
 import React, { Component } from "react";
+import { modalConfirmId } from "../../constants/ModalId";
 
 class ModalConfirm extends Component {
+    onConfirm = () => {
+        this.props.onConfirm(this.props.user);
+    };
     render() {
-        let { name } = this.props;
-        let { modalId } = this.props;
+        const { user } = this.props;
         return (
-            <div className="modal fade" id={modalId}>
+            <div className="modal fade" id={modalConfirmId}>
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
@@ -20,15 +23,19 @@ class ModalConfirm extends Component {
                             </button>
                         </div>
                         <div className="modal-body">
-                            <h5>{`Are you sure to delete ${name} ?`}</h5>
+                            <h5>
+                                {user
+                                    ? `Are you sure to delete ${user.name} ?`
+                                    : ""}
+                            </h5>
                         </div>
                         <div className="modal-footer">
                             <button
                                 type="button"
                                 className="btn btn-default"
                                 data-toggle="modal"
-                                href={`#${modalId}`}
-                                onClick={this.props.onConfirm}
+                                href={`#${modalConfirmId}`}
+                                onClick={this.onConfirm}
                             >
                                 Delete
                             </button>

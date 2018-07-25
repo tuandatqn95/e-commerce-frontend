@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { modalUserFormId } from "../../constants/ModalId";
 
 class UserList extends Component {
     render() {
@@ -19,7 +20,7 @@ class UserList extends Component {
                                     className={`nav-link ${isFormOpen &&
                                         "active"}`}
                                     data-toggle="modal"
-                                    href="#modal-form"
+                                    href={`#${modalUserFormId}`}
                                     onClick={() => this.props.onToggleForm()}
                                 >
                                     <i className="material-icons">

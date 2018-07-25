@@ -1,18 +1,19 @@
 import React, { Component } from "react";
 import { Styles } from "../../constants/Styles";
+import { modalUserProfileId } from "../../constants/ModalId";
 
 class UserProfile extends Component {
     constructor(props) {
         super(props);
-        const { id, name, email, phone, address } = this.props.user;
         this.state = {
             isFocusing: "",
             isEditing: false,
-            id: id,
-            name: name,
-            email: email,
-            phone: phone,
-            address: address
+            user: undefined,
+            id: "",
+            name: "",
+            email: "",
+            phone: "",
+            address: ""
         };
     }
     onHandleChange = event => {
@@ -42,12 +43,12 @@ class UserProfile extends Component {
     }
 
     resetForm = () => {
-        let { name, email, phone, address } = this.props.user;
+        const { user } = this.state;
         this.setState({
-            name: name,
-            email: email,
-            phone: phone,
-            address: address
+            name: user.name,
+            email: user.email,
+            phone: user.phone,
+            address: user.address
         });
     };
 
@@ -76,10 +77,20 @@ class UserProfile extends Component {
         this.resetForm();
         this.changeEditing();
     };
-
+    componentWillReceiveProps = nextProps => {
+        if (nextProps.user) {
+            this.setState({
+                user: nextProps.user,
+                id: nextProps.user.id,
+                name: nextProps.user.name,
+                email: nextProps.user.email,
+                phone: nextProps.user.phone,
+                address: nextProps.user.address
+            });
+        }
+    };
     render() {
-        const { id, name, email, phone, address, isEditing } = this.state;
-        const { modalId } = this.props;
+        const { name, email, phone, address, isEditing } = this.state;
         const Image = (
             <img
                 className="img-raised rounded-circle img-fluid"
@@ -89,7 +100,7 @@ class UserProfile extends Component {
             />
         );
         return (
-            <div className="modal fade" id={modalId}>
+            <div className="modal fade" id={modalUserProfileId}>
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div
@@ -120,10 +131,6 @@ class UserProfile extends Component {
                                 </div>
                                 <table className="table">
                                     <tbody>
-                                        <tr>
-                                            <td>ID: </td>
-                                            <td>{id}</td>
-                                        </tr>
                                         <tr hidden={isEditing ? false : true}>
                                             <td>Name: </td>
                                             <td>

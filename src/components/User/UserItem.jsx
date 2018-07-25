@@ -1,11 +1,15 @@
 import React, { Component } from "react";
-import UserProfile from "./UserProfile";
-import ModalConfirm from "./ModalComfirm";
-import ChangePassword from "./ChangePassword";
-
+import {
+    modalChangePasswordId,
+    modalConfirmId,
+    modalUserProfileId
+} from "../../constants/ModalId";
 class UserItem extends Component {
     onDeleteUser = () => {
         this.props.onDeleteUser(this.props.user);
+    };
+    onEditUser = () => {
+        this.props.onEditUser(this.props.user);
     };
     render() {
         const { id, name, email, phone } = this.props.user;
@@ -24,7 +28,8 @@ class UserItem extends Component {
                             paddingRight: 15
                         }}
                         data-toggle="modal"
-                        href={`#modal-profile-${id}`}
+                        href={`#${modalUserProfileId}`}
+                        onClick={this.onEditUser}
                     >
                         <i className="material-icons">library_books</i>
                     </button>{" "}
@@ -36,7 +41,8 @@ class UserItem extends Component {
                             paddingRight: 15
                         }}
                         data-toggle="modal"
-                        href={`#modal-change-password-${id}`}
+                        href={`#${modalChangePasswordId}`}
+                        onClick={this.onEditUser}
                     >
                         <i className="material-icons">edit</i>
                     </button>{" "}
@@ -51,33 +57,12 @@ class UserItem extends Component {
                         <i
                             className="material-icons"
                             data-toggle="modal"
-                            href={`#modal-confirm-${id}`}
+                            href={`#${modalConfirmId}`}
+                            onClick={this.onEditUser}
                         >
                             delete
                         </i>
                     </button>
-                </td>
-                <td>
-                    <ChangePassword
-                        user={this.props.user}
-                        modalId={`modal-change-password-${id}`}
-                        onUpdatePassword={this.props.onUpdatePassword}
-                        onResetPassword={this.props.onResetPassword}
-                    />
-                </td>
-                <td>
-                    <ModalConfirm
-                        modalId={`modal-confirm-${id}`}
-                        name={name}
-                        onConfirm={this.onDeleteUser}
-                    />
-                </td>
-                <td>
-                    <UserProfile
-                        user={this.props.user}
-                        modalId={`modal-profile-${id}`}
-                        onSubmitUser={this.props.onSubmitUser}
-                    />
                 </td>
             </tr>
         );

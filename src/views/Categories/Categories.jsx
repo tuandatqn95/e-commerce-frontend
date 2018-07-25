@@ -22,14 +22,14 @@ class Categories extends Component {
     onToggleForm = () => {
         this.setState({
             isFormOpen: !this.state.isFormOpen
-            // selectedCategory: undefined
+            //selectedCategory: undefined
         });
     };
 
     onCloseForm = () => {
         this.setState({
             isFormOpen: false
-            // selectedCategory: {}
+            //selectedCategory: {}
         });
     };
 

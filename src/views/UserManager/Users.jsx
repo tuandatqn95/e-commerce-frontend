@@ -3,6 +3,9 @@ import { connect } from "react-redux";
 import UserItem from "../../components/User/UserItem";
 import UserList from "../../components/User/UserList";
 import UserForm from "../../components/User/UserForm";
+import ChangePassword from "../../components/User/ChangePassword";
+import ModalConfirm from "../../components/User/ModalComfirm";
+import UserProfile from "../../components/User/UserProfile";
 import {
     fetchUsersRequest,
     addUserRequest,
@@ -65,10 +68,8 @@ class Users extends Component {
                     <UserItem
                         key={index}
                         user={user}
+                        onEditUser={this.onEditUser}
                         onDeleteUser={this.onDeleteUser}
-                        onSubmitUser={this.onSubmitUser}
-                        onUpdatePassword={this.onUpdatePassword}
-                        onResetPassword={this.onResetPassword}
                     />
                 );
             });
@@ -82,11 +83,26 @@ class Users extends Component {
                     >
                         <UserItems />
                     </UserList>
-                    {/* show modal form  */}
+
                     <UserForm
                         onSubmitUser={this.onSubmitUser}
                         onCloseForm={this.onCloseForm}
                         isOpen={this.state.isFormOpen}
+                    />
+                    <ChangePassword
+                        user={this.state.selectedUser}
+                        onUpdatePassword={this.props.onUpdatePassword}
+                        onResetPassword={this.props.onResetPassword}
+                    />
+                    <ModalConfirm
+                        user={this.state.selectedUser}
+                        onConfirm={this.onDeleteUser}
+                    />
+                    <UserProfile
+                        user={this.state.selectedUser}
+                        onSubmitUser={this.onSubmitUser}
+                        isOpen={this.state.isFormOpen}
+                        onClearSelectedUser={this.onClearSelectedUser}
                     />
                 </div>
             </div>

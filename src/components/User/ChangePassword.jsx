@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Styles } from "../../constants/Styles";
+import { modalChangePasswordId } from "../../constants/ModalId";
 
 class ChangePassword extends Component {
     constructor(props) {
@@ -66,9 +67,8 @@ class ChangePassword extends Component {
     };
 
     render() {
-        const { modalId } = this.props;
         return (
-            <div className="modal fade" id={modalId}>
+            <div className="modal fade" id={modalChangePasswordId}>
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div

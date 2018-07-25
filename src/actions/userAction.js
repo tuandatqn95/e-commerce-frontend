@@ -3,63 +3,55 @@ import callApi from "../utils/ApiCaller";
 
 export const fetchUsersRequest = () => {
     return dispatch => {
-        return callApi("users", "GET", null)
-            .then(res => {
-                if (res.status === 200)
-                    dispatch(
-                        fetchUsers(
-                            res.data.map(user => {
-                                return {
-                                    id: user._id,
-                                    email: user.email,
-                                    name: user.name,
-                                    phone: user.phone,
-                                    address: user.address
-                                };
-                            })
-                        )
-                    );
-            })
-            .catch(error => console.log(error));
+        return callApi("users", "GET", null).then(res => {
+            if (res.status === 200)
+                dispatch(
+                    fetchUsers(
+                        res.data.map(user => {
+                            return {
+                                id: user._id,
+                                email: user.email,
+                                name: user.name,
+                                phone: user.phone,
+                                address: user.address
+                            };
+                        })
+                    )
+                );
+        });
     };
 };
 
 export const addUserRequest = user => {
     return dispatch => {
-        return callApi("users", "POST", user)
-            .then(res => {
-                if (res.status === 201)
-                    dispatch(
-                        addUser({
-                            id: res.data._id,
-                            name: res.data.name,
-                            email: res.data.email,
-                            phone: res.data.phone,
-                            address: res.data.address
-                        })
-                    );
-            })
-            .catch(error => console.log(error));
+        return callApi("users", "POST", user).then(res => {
+            if (res.status === 201)
+                dispatch(
+                    addUser({
+                        id: res.data._id,
+                        name: res.data.name,
+                        email: res.data.email,
+                        phone: res.data.phone,
+                        address: res.data.address
+                    })
+                );
+        });
     };
 };
 
 export const deleteUserRequest = id => {
     return dispatch => {
-        return callApi(`users/${id}`, "DELETE", null)
-            .then(res => {
-                if (res.status === 204) dispatch(deleteUser(id));
-            })
-            .catch(error => console.log(error));
+        return callApi(`users/${id}`, "DELETE", null).then(res => {
+            if (res.status === 204) dispatch(deleteUser(id));
+        });
     };
 };
 
 export const updateUserRequest = user => {
     return dispatch => {
-        return callApi(`users/${user.id}`, "PATCH", user)
-            .then(res => {
-                if (res.status === 201) dispatch(updateUser(user));
-            })
-            .catch(error => console.log(error));
+        return callApi(`users/${user.id}`, "PATCH", user).then(res => {
+            if (res.status === 201) dispatch(updateUser(user));
+        });
     };
 };
 
@@ -68,20 +60,16 @@ export const updatePasswordRequest = (id, oldPassword, newPassword) => {
         return callApi(`users/${id}/password`, "PATCH", {
             oldPassword,
             newPassword
-        })
-            .then(res => {
-                if (res.status === 204) console.log(res);
-            })
-            .catch(error => console.log(error));
+        }).then(res => {
+            if (res.status === 204);
+        });
     };
 };
 export const resetPasswordRequest = id => {
     return dispatch => {
-        return callApi(`users/${id}/password`, "PUT", null)
-            .then(res => {
-                if (res.status === 201);
-            })
-            .catch(error => console.log(error));
+        return callApi(`users/${id}/password`, "PUT", null).then(res => {
+            if (res.status === 201);
+        });
     };
 };
 export const fetchUsers = users => {
