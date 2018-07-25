@@ -69,7 +69,7 @@ class ChangePassword extends Component {
     render() {
         return (
             <div className="modal fade" id={modalChangePasswordId}>
-                <div className="modal-dialog">
+                <div className="modal-dialog ">
                     <div className="modal-content">
                         <div
                             className="modal-header "

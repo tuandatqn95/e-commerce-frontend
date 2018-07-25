@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Styles } from "../../constants/Styles";
 import { modalUserFormId } from "../../constants/ModalId";
+
 class UserForm extends Component {
     constructor(props) {
         super(props);
@@ -71,11 +72,11 @@ class UserForm extends Component {
 
     render() {
         return (
-            <div className="modal fade" id={modalUserFormId}>
+            <div className="modal fade " id={modalUserFormId}>
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div
-                            className="modal-header "
+                            className="modal-header card-header-primary"
                             style={Styles.backgroundModalHeader}
                         >
                             <h4
@@ -95,13 +96,19 @@ class UserForm extends Component {
                         </div>
                         <div className="modal-body">
                             <form
+                                className="form"
                                 onSubmit={this.onSubmit}
                                 onReset={this.onReset}
                             >
-                                <div className="row">
-                                    <div className="col-md-12">
+                                <div className="card-body">
+                                    <div className="input-group">
+                                        <span className="input-group-text">
+                                            <i className="material-icons">
+                                                face
+                                            </i>
+                                        </span>
                                         <div
-                                            className={`form-group bmd-form-group ${this
+                                            className={`col-md-10 form-group bmd-form-group ${this
                                                 .state.name &&
                                                 "is-filled"} ${this.state
                                                 .isFocusing === "name" &&
@@ -121,9 +128,14 @@ class UserForm extends Component {
                                             />
                                         </div>
                                     </div>
-                                    <div className="col-md-12">
+                                    <div className="input-group">
+                                        <span className="input-group-text">
+                                            <i className="material-icons">
+                                                mail
+                                            </i>
+                                        </span>
                                         <div
-                                            className={`form-group bmd-form-group ${this
+                                            className={`col-md-10 form-group bmd-form-group ${this
                                                 .state.email &&
                                                 "is-filled"} ${this.state
                                                 .isFocusing === "email" &&
@@ -143,9 +155,14 @@ class UserForm extends Component {
                                             />
                                         </div>
                                     </div>
-                                    <div className="col-md-12">
+                                    <div className="input-group">
+                                        <span className="input-group-text">
+                                            <i className="material-icons">
+                                                lock_outline
+                                            </i>
+                                        </span>
                                         <div
-                                            className={`form-group bmd-form-group ${this
+                                            className={`col-md-10 form-group bmd-form-group ${this
                                                 .state.password &&
                                                 "is-filled"} ${this.state
                                                 .isFocusing === "password" &&
@@ -165,9 +182,14 @@ class UserForm extends Component {
                                             />
                                         </div>
                                     </div>
-                                    <div className="col-md-12">
+                                    <div className="input-group">
+                                        <span className="input-group-text">
+                                            <i className="material-icons">
+                                                phone
+                                            </i>
+                                        </span>
                                         <div
-                                            className={`form-group bmd-form-group ${this
+                                            className={`col-md-10 form-group bmd-form-group ${this
                                                 .state.phone &&
                                                 "is-filled"} ${this.state
                                                 .isFocusing === "phone" &&
@@ -186,27 +208,34 @@ class UserForm extends Component {
                                                 onBlur={this.onBlurHandle}
                                             />
                                         </div>
-                                    </div>
-                                    <div className="col-md-12">
-                                        <div
-                                            className={`form-group bmd-form-group ${this
-                                                .state.address &&
-                                                "is-filled"} ${this.state
-                                                .isFocusing === "address" &&
-                                                "is-focused"}`}
-                                        >
-                                            <label className="bmd-label-floating">
-                                                Address
-                                            </label>
-                                            <input
-                                                name="address"
-                                                className="form-control"
-                                                type="text"
-                                                value={this.state.address}
-                                                onChange={this.onHandleChange}
-                                                onFocus={this.onHandleFocus}
-                                                onBlur={this.onBlurHandle}
-                                            />
+                                        <div className="input-group">
+                                            <span className="input-group-text">
+                                                <i className="material-icons">
+                                                    home
+                                                </i>
+                                            </span>
+                                            <div
+                                                className={`col-md-10 form-group bmd-form-group ${this
+                                                    .state.address &&
+                                                    "is-filled"} ${this.state
+                                                    .isFocusing === "address" &&
+                                                    "is-focused"}`}
+                                            >
+                                                <label className="bmd-label-floating">
+                                                    Address
+                                                </label>
+                                                <input
+                                                    name="address"
+                                                    className="form-control"
+                                                    type="text"
+                                                    value={this.state.address}
+                                                    onChange={
+                                                        this.onHandleChange
+                                                    }
+                                                    onFocus={this.onHandleFocus}
+                                                    onBlur={this.onBlurHandle}
+                                                />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
