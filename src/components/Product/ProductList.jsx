@@ -1,30 +1,31 @@
 import React, { Component } from "react";
-import productForm from "./ProductForm";
-import ProductForm from "./ProductForm";
 
 class ProductList extends Component {
-    render() {
-        const { isFormOpen, size = 12 } = this.props;
 
+
+    render() {
+        const { isFormOpen } = this.props;
         return (
-            <div className={`col-md-${size}`}>
-                 
+            <div className={`col-md-12`}>
                 <div className="card">
-                  
                     <div className="card-header card-header-primary">
                         <div className="pull-left">
                             <h4 className="card-title ">ProductList</h4>
                             <p className="card-category" />
                         </div>
-
                         <div className="nav nav-tabs pull-right">
                             <div className="nav-item">
-                                    <button className="btn btn-block btn-info" data-toggle="modal" data-target="#myModal">
-                                        <i className="material-icons">library_books</i>
-                                        Classic
+                                    <a
+                                        href="#"
+                                        style={{ paddingTop: 2, paddingBottom: 2 }}
+                                        className={`nav-link ${isFormOpen &&
+                                            "active"}`}
+                                        onClick={this.props.onShowForm}
+                                    >
+                                        <i className="material-icons">add_circle</i>
+                                        New Product
                                         <div className="ripple-container"></div>
-                                    </button>
-
+                                    </a>
                             </div>
                         </div>
                     </div>
@@ -42,7 +43,7 @@ class ProductList extends Component {
                                         <th />
                                     </tr>
                                 </thead>
-                                <tbody>{this.props.children}</tbody>
+                                    <tbody>{this.props.children}</tbody> 
                             </table>
                         </div>
                     </div>
