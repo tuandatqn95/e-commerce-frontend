@@ -65,21 +65,21 @@ export const updateUserRequest = user => {
 
 export const updatePasswordRequest = (id, oldPassword, newPassword) => {
     return dispatch => {
-        return callApi(`users/${id}/update-password`, "PATCH", {
+        return callApi(`users/${id}/password`, "PATCH", {
             oldPassword,
             newPassword
         })
             .then(res => {
-                if (res.status === 201) console.log(res);
+                if (res.status === 204) console.log(res);
             })
             .catch(error => console.log(error));
     };
 };
 export const resetPasswordRequest = id => {
     return dispatch => {
-        return callApi(`users/${id}/reset-password`, "PATCH", null)
+        return callApi(`users/${id}/password`, "PUT", null)
             .then(res => {
-                if (res.status === 201) console.log(res);
+                if (res.status === 201);
             })
             .catch(error => console.log(error));
     };

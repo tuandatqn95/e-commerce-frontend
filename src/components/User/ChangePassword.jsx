@@ -62,6 +62,7 @@ class ChangePassword extends Component {
     };
     onResetPassword = () => {
         this.props.onResetPassword(this.props.user.id);
+        this.resetForm();
     };
 
     render() {

@@ -351,18 +351,18 @@
 				{
 					"name": "Reset password",
 					"request": {
-						"method": "PATCH",
+						"method": "PUT",
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "{{server_url}}/users/5b4ee465e563c53a202147ce/reset-password",
+							"raw": "{{server_url}}/users/5b5313f8c86b380014d4f68b/password",
 							"host": [
 								"{{server_url}}"
 							],
 							"path": [
 								"users",
-								"5b4ee465e563c53a202147ce",
-								"reset-password"
+								"5b5313f8c86b380014d4f68b",
+								"password"
 							]
 						}
 					},
@@ -383,14 +383,47 @@
 							"raw": "{\n    \"oldPassword\": \"123456\",\n    \"newPassword\": \"123456\"\n}"
 						},
 						"url": {
-							"raw": "{{server_url}}/users/5b4ee465e563c53a202147ce/update-password",
+							"raw": "{{server_url}}/users/5b5313f8c86b380014d4f68b/password",
 							"host": [
 								"{{server_url}}"
 							],
 							"path": [
 								"users",
-								"5b4ee465e563c53a202147ce",
-								"update-password"
+								"5b5313f8c86b380014d4f68b",
+								"password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"description": "",
+			"item": [
+				{
+					"name": "Admin login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\":\"tuandatqn95@gmail.com\",\n  \"password\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{server_url_not_api}}/admin/login",
+							"host": [
+								"{{server_url_not_api}}"
+							],
+							"path": [
+								"admin",
+								"login"
 							]
 						}
 					},
