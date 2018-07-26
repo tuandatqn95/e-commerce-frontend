@@ -6,6 +6,7 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import appRoutes from "./routes/app";
 import LoginPage from "./views/LoginPage/LoginPage";
 import { connect } from "react-redux";
+import { authRequest } from "./actions/authAction";
 
 const switchRoutes = (
     <Switch>
@@ -31,55 +32,64 @@ const switchRoutes = (
 );
 
 class App extends Component {
+    componentWillMount() {
+        this.props.onAuthRequest();
+    }
+
     render() {
+        let { isLoggedIn } = this.props.auth;
         return (
-            <BrowserRouter>
-                <Switch>
-                    <Route
-                        exact
-                        path="/login"
-                        render={() => {
-                            if (this.props.isAuthentication) {
-                                return <Redirect to="/" />;
-                            } else {
-                                return <LoginPage />;
-                            }
-                        }}
-                    />
-                    <Route
-                        path="/"
-                        render={() => {
-                            if (this.props.isAuthentication) {
-                                return (
-                                    <div className="wrapper ">
-                                        <SideBar routes={appRoutes} />
-                                        <div className="main-panel">
-                                            <Header routes={appRoutes} />
-                                            <div className="content">
-                                                {switchRoutes}
+            isLoggedIn !== undefined && (
+                <BrowserRouter>
+                    <Switch>
+                        <Route
+                            exact
+                            path="/login"
+                            render={() => {
+                                if (isLoggedIn) {
+                                    return <Redirect to="/" />;
+                                } else {
+                                    return <LoginPage />;
+                                }
+                            }}
+                        />
+                        <Route
+                            path="/"
+                            render={() => {
+                                if (isLoggedIn) {
+                                    return (
+                                        <div className="wrapper ">
+                                            <SideBar routes={appRoutes} />
+                                            <div className="main-panel">
+                                                <Header routes={appRoutes} />
+                                                <div className="content">
+                                                    {switchRoutes}
+                                                </div>
+                                                <Footer />
                                             </div>
-                                            <Footer />
                                         </div>
-                                    </div>
-                                );
-                            } else {
-                                return <Redirect to="/login" />;
-                            }
-                        }}
-                    />
-                </Switch>
-            </BrowserRouter>
+                                    );
+                                } else {
+                                    return <Redirect to="/login" />;
+                                }
+                            }}
+                        />
+                    </Switch>
+                </BrowserRouter>
+            )
         );
     }
 }
 function mapStateToProps(state) {
     return {
-        isAuthentication: state.isAuthentication
+        auth: state.auth
     };
 }
 
 function mapDispatchToProps(dispatch) {
-    return {};
+    return {
+        onAuthRequest: () => dispatch(authRequest())
+    };
 }
 
 export default connect(

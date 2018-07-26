@@ -8,7 +8,8 @@ export default function callApi(endPoint, method = "GET", body) {
         data: body,
         headers: {
             Accept: "application/json",
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`
         }
     }).catch(err => {
         console.log(err);
