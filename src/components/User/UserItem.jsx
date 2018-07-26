@@ -12,13 +12,13 @@ class UserItem extends Component {
         this.props.onEditUser(this.props.user);
     };
     render() {
-        const { id, name, email, phone } = this.props.user;
+        const { name, email, phone, address } = this.props.user;
         return (
             <tr>
-                <td>{id}</td>
                 <td>{name}</td>
                 <td>{email}</td>
                 <td>{phone}</td>
+                <td>{address}</td>
                 <td>
                     <button
                         type="button"
@@ -53,15 +53,11 @@ class UserItem extends Component {
                             paddingLeft: 15,
                             paddingRight: 15
                         }}
+                        data-toggle="modal"
+                        href={`#${modalConfirmId}`}
+                        onClick={this.onEditUser}
                     >
-                        <i
-                            className="material-icons"
-                            data-toggle="modal"
-                            href={`#${modalConfirmId}`}
-                            onClick={this.onEditUser}
-                        >
-                            delete
-                        </i>
+                        <i className="material-icons">delete</i>
                     </button>
                 </td>
             </tr>

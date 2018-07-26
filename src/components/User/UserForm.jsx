@@ -69,7 +69,6 @@ class UserForm extends Component {
         this.resetForm();
         this.props.onCloseForm();
     };
-
     render() {
         return (
             <div className="modal fade " id={modalUserFormId}>

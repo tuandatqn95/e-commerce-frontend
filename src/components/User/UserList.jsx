@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { modalUserFormId } from "../../constants/ModalId";
 
 class UserList extends Component {
+    onToggleForm = () => {
+        this.props.onToggleForm();
+    };
     render() {
         const { isFormOpen } = this.props;
         return (
@@ -21,7 +24,7 @@ class UserList extends Component {
                                         "active"}`}
                                     data-toggle="modal"
                                     href={`#${modalUserFormId}`}
-                                    onClick={() => this.props.onToggleForm()}
+                                    onClick={this.onToggleForm}
                                 >
                                     <i className="material-icons">
                                         {isFormOpen ? "cancel" : "add_circle"}
@@ -36,10 +39,12 @@ class UserList extends Component {
                             <table className="table">
                                 <thead className=" text-primary">
                                     <tr>
-                                        <th>ID</th>
-                                        <th style={{ width: "35%" }}>Name</th>
-                                        <th style={{ width: "35%" }}>Email</th>
-                                        <th className="text-center">Phone</th>
+                                        <th style={{ width: "25%" }}>Name</th>
+                                        <th style={{ width: "25%" }}>Email</th>
+                                        <th style={{ width: "25%" }}>Phone</th>
+                                        <th style={{ width: "25%" }}>
+                                            Address
+                                        </th>
                                         <th />
                                     </tr>
                                 </thead>
