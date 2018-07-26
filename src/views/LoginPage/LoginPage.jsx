@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import LoginForm from "../../components/Login/LoginForm";
-
-function mapStateToProps(state) {
-    return {};
-}
+import { loginRequest } from "../../actions/authAction";
 
 class LoginPage extends Component {
+    onLogin = user => {
+        this.props.onLogin(user);
+    };
+
     render() {
         return (
             <div className="login-page">
@@ -29,7 +30,7 @@ class LoginPage extends Component {
                                     className="card card-login"
                                     style={{ marginTop: 100 }}
                                 >
-                                    <LoginForm />
+                                    <LoginForm onLogin={this.onLogin} />
                                 </div>
                             </div>
                         </div>
@@ -39,5 +40,15 @@ class LoginPage extends Component {
         );
     }
 }
-
-export default connect(mapStateToProps)(LoginPage);
+function mapStateToProps(state) {
+    return {};
+}
+function mapDispatchToProps(dispatch) {
+    return {
+        onLogin: user => dispatch(loginRequest(user))
+    };
+}
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(LoginPage);

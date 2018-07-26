@@ -5,6 +5,7 @@ import Footer from "./components/Footer/Footer";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import appRoutes from "./routes/app";
 import LoginPage from "./views/LoginPage/LoginPage";
+import { connect } from "react-redux";
 
 const switchRoutes = (
     <Switch>
@@ -34,22 +35,36 @@ class App extends Component {
         return (
             <BrowserRouter>
                 <Switch>
-                    <Route exact path="/login" component={LoginPage} />
+                    <Route
+                        exact
+                        path="/login"
+                        render={() => {
+                            if (this.props.isAuthentication) {
+                                return <Redirect to="/" />;
+                            } else {
+                                return <LoginPage />;
+                            }
+                        }}
+                    />
                     <Route
                         path="/"
                         render={() => {
-                            return (
-                                <div className="wrapper ">
-                                    <SideBar routes={appRoutes} />
-                                    <div className="main-panel">
-                                        <Header routes={appRoutes} />
-                                        <div className="content">
-                                            {switchRoutes}
+                            if (this.props.isAuthentication) {
+                                return (
+                                    <div className="wrapper ">
+                                        <SideBar routes={appRoutes} />
+                                        <div className="main-panel">
+                                            <Header routes={appRoutes} />
+                                            <div className="content">
+                                                {switchRoutes}
+                                            </div>
+                                            <Footer />
                                         </div>
-                                        <Footer />
                                     </div>
-                                </div>
-                            );
+                                );
+                            } else {
+                                return <Redirect to="/login" />;
+                            }
                         }}
                     />
                 </Switch>
@@ -57,5 +72,17 @@ class App extends Component {
         );
     }
 }
+function mapStateToProps(state) {
+    return {
+        isAuthentication: state.isAuthentication
+    };
+}
 
-export default App;
+function mapDispatchToProps(dispatch) {
+    return {};
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(App);

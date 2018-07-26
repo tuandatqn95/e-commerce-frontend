@@ -3,7 +3,7 @@ import callApi from "../utils/ApiCaller";
 
 export const fetchCategoriesRequest = () => {
     return dispatch => {
-        return callApi("categories", "GET", null).then(res => {
+        return callApi("/api/categories", "GET", null).then(res => {
             if (res.status === 200)
                 dispatch(
                     fetchCategories(
@@ -23,7 +23,7 @@ export const fetchCategoriesRequest = () => {
 
 export const addCategoryRequest = category => {
     return dispatch => {
-        return callApi("categories", "POST", category).then(res => {
+        return callApi("/api/categories", "POST", category).then(res => {
             if (res.status === 201)
                 dispatch(
                     addCategory({
@@ -39,19 +39,21 @@ export const addCategoryRequest = category => {
 
 export const updateCategoryRequest = category => {
     return dispatch => {
-        return callApi(`categories/${category.id}`, "PATCH", category).then(
-            res => {
-                if (res.status === 201)
-                    dispatch(
-                        updateCategory({
-                            id: res.data._id,
-                            name: res.data.name,
-                            image: res.data.image,
-                            description: res.data.description
-                        })
-                    );
-            }
-        );
+        return callApi(
+            `/api/categories/${category.id}`,
+            "PATCH",
+            category
+        ).then(res => {
+            if (res.status === 201)
+                dispatch(
+                    updateCategory({
+                        id: res.data._id,
+                        name: res.data.name,
+                        image: res.data.image,
+                        description: res.data.description
+                    })
+                );
+        });
     };
 };
 
@@ -59,7 +61,7 @@ export const deleteCategoryRequest = id => {
     console.log(id);
 
     return dispatch => {
-        return callApi(`categories/${id}`, "DELETE", null).then(res => {
+        return callApi(`/api/categories/${id}`, "DELETE", null).then(res => {
             if (res.status === 204) dispatch(deleteCategory(id));
         });
     };
