@@ -9,13 +9,15 @@ import {
     updateCategoryRequest,
     deleteCategoryRequest
 } from "../../actions/categoryAction";
+import DeleteConfirmModal from "../../components/Modal/DeleteConfirmModal";
 
 class Categories extends Component {
     constructor(props) {
         super(props);
         this.state = {
             isFormOpen: false,
-            selectedCategory: undefined
+            selectedCategory: undefined,
+            deleteCategory: undefined
         };
     }
 
@@ -50,8 +52,12 @@ class Categories extends Component {
     };
 
     onDeleteCategory = category => {
-        if (window.confirm(`Are you sure to delete '${category.name}'?`))
-            this.props.onDeleteCategory(category.id);
+        this.setState({ deleteCategory: category });
+    };
+
+    onConfirmDelete = category => {
+        if (category) this.props.onDeleteCategory(category.id);
+        this.setState({ deleteCategory: undefined });
         this.onCloseForm();
     };
 
@@ -100,6 +106,10 @@ class Categories extends Component {
                         onClearSelectedCategory={this.onClearSelectedCategory}
                     />
                 </div>
+                <DeleteConfirmModal
+                    deleteObject={this.state.deleteCategory}
+                    onConfirmDelete={this.onConfirmDelete}
+                />
             </div>
         );
     }
