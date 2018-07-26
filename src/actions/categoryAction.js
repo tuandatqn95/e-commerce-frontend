@@ -3,7 +3,7 @@ import callApi from "../utils/ApiCaller";
 
 export const fetchCategoriesRequest = () => {
     return dispatch => {
-        return callApi("api/categories", "GET", null).then(res => {
+        return callApi("api/categories").then(res => {
             if (res.status === 200)
                 dispatch(
                     fetchCategories(

@@ -4,17 +4,32 @@ import LoginForm from "../../components/Login/LoginForm";
 import { loginRequest } from "../../actions/authAction";
 
 class LoginPage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            error: "",
+            isLoading: false
+        };
+    }
+
     onLogin = user => {
-        this.props.onLogin(user);
+        this.setState({
+            error: "",
+            isLoading: true
+        });
+        this.props.onLogin(user, err => {
+            this.setState({
+                error: err
+                    ? err.data.message
+                    : "Cannot login due to system error.",
+                isLoading: false
+            });
+        });
     };
 
     render() {
         return (
             <div className="login-page">
-                <link
-                    href="../assets/css/material-kit.css?v=2.0.4"
-                    rel="stylesheet"
-                />
                 <div
                     className="page-header header-filter"
                     style={{
@@ -30,7 +45,11 @@ class LoginPage extends Component {
                                     className="card card-login"
                                     style={{ marginTop: 100 }}
                                 >
-                                    <LoginForm onLogin={this.onLogin} />
+                                    <LoginForm
+                                        onLogin={this.onLogin}
+                                        error={this.state.error}
+                                        isLoading={this.state.isLoading}
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -45,7 +64,7 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
     return {
-        onLogin: user => dispatch(loginRequest(user))
+        onLogin: (user, cb) => dispatch(loginRequest(user, cb))
     };
 }
 export default connect(

@@ -3,30 +3,21 @@ import React, { Component } from "react";
 const descriptionLength = 70;
 
 class CategoryItem extends Component {
-    onEditCategory = () => {
-        this.props.onEditCategory(this.props.category);
-    };
-
-    onDeleteCategory = () => {
-        this.props.onDeleteCategory(this.props.category);
-    };
-
-    onShowProduct = () => {
-        // this.props.onShowProduct(id);
-    };
     render() {
-        const { id, name, description, image } = this.props.category;
+        const { name, description, image } = this.props.category;
 
-        // Get short description
-        let shortDescription = description.substring(0, descriptionLength);
+        const Description =
+            description.substring(
+                0,
+                description.indexOf(" ", descriptionLength)
+            ) + (description.length > descriptionLength ? "..." : "");
 
         const Image = <img alt={name} style={{ maxHeight: 150 }} src={image} />;
 
         return (
             <tr>
-                <td>{id}</td>
                 <td>{name}</td>
-                <td>{shortDescription}</td>
+                <td>{Description}</td>
                 <td>{Image}</td>
                 <td>
                     <button
@@ -36,7 +27,6 @@ class CategoryItem extends Component {
                             paddingLeft: 15,
                             paddingRight: 15
                         }}
-                        onClick={this.onShowProduct}
                     >
                         <i className="material-icons">library_books</i>
                     </button>{" "}
@@ -47,7 +37,9 @@ class CategoryItem extends Component {
                             paddingLeft: 15,
                             paddingRight: 15
                         }}
-                        onClick={this.onEditCategory}
+                        onClick={() =>
+                            this.props.onEditCategory(this.props.category)
+                        }
                     >
                         <i className="material-icons">edit</i>
                     </button>{" "}
@@ -58,7 +50,9 @@ class CategoryItem extends Component {
                             paddingLeft: 15,
                             paddingRight: 15
                         }}
-                        onClick={this.onDeleteCategory}
+                        onClick={() =>
+                            this.props.onDeleteCategory(this.props.category)
+                        }
                     >
                         <i className="material-icons">delete</i>
                     </button>

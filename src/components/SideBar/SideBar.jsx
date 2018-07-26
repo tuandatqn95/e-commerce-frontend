@@ -39,7 +39,7 @@ class SideBar extends Component {
         return (
             <div
                 className="sidebar"
-                data-color="azure"
+                data-color="green"
                 data-background-color="white"
                 data-image="../assets/img/sidebar-1.jpg"
             >
@@ -49,7 +49,10 @@ class SideBar extends Component {
           Tip 2: you can also add an image using data-image tag
       */}
                 <div className="logo">
-                    <Link to="/" className="simple-text logo-normal">
+                    <Link
+                        to="/"
+                        className="simple-text logo-normal text-center"
+                    >
                         AdminCP
                     </Link>
                 </div>

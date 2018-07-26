@@ -20,6 +20,7 @@ class LoginForm extends Component {
 
     onSubmitForm = event => {
         event.preventDefault();
+
         const { email, password } = this.state;
         this.props.onLogin({
             email,
@@ -33,7 +34,7 @@ class LoginForm extends Component {
                 <div className="card-header card-header-primary text-center">
                     <h4 className="card-title">Login</h4>
                 </div>
-                <p className="description text-center">Or Be classNameical</p>
+                <p className="text-danger text-center">{this.props.error}</p>
                 <div className="card-body">
                     <div className="input-group">
                         <div className="input-group-prepend">
@@ -71,6 +72,7 @@ class LoginForm extends Component {
                     style={{ display: "block" }}
                 >
                     <input
+                        disabled={this.props.isLoading}
                         type="submit"
                         className="btn btn-primary btn-link btn-wd btn-lg"
                         value="Login"

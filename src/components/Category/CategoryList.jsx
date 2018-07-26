@@ -9,14 +9,13 @@ class CategoryList extends Component {
                 <div className="card">
                     <div className="card-header card-header-primary">
                         <div className="pull-left">
-                            <h4 className="card-title ">CategoryList</h4>
+                            <h4 className="card-title ">Categories</h4>
                             <p className="card-category" />
                         </div>
 
                         <div className="nav nav-tabs pull-right">
                             <div className="nav-item">
                                 <a
-                                    href="#"
                                     style={{ paddingTop: 2, paddingBottom: 2 }}
                                     className={`nav-link ${isFormOpen &&
                                         "active"}`}
@@ -35,7 +34,6 @@ class CategoryList extends Component {
                             <table className="table">
                                 <thead className=" text-primary">
                                     <tr>
-                                        <th>ID</th>
                                         <th style={{ width: "66%" }}>Name</th>
                                         <th style={{ width: "34%" }}>
                                             Description

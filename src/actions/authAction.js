@@ -3,26 +3,30 @@ import callApi from "../utils/ApiCaller";
 
 export const authRequest = () => {
     return dispatch => {
-        return callApi("admin/auth", "GET", null)
+        return callApi("admin/auth")
             .then(res => {
                 if (res.status === 200) {
                     dispatch(login(res.data.payload));
                 }
             })
-            .catch(() => {
+            .catch(err => {
                 dispatch(logout());
             });
     };
 };
 
-export const loginRequest = user => {
+export const loginRequest = (user, cb) => {
     return dispatch => {
-        return callApi("admin/login", "POST", user).then(res => {
-            if (res.status === 200) {
-                localStorage.setItem("token", res.data.token);
-                dispatch(login(res.data.payload));
-            }
-        });
+        return callApi("admin/login", "POST", user)
+            .then(res => {
+                if (res.status === 200) {
+                    localStorage.setItem("token", res.data.token);
+                    return dispatch(login(res.data.payload));
+                }
+            })
+            .catch(err => {
+                cb(err.response);
+            });
     };
 };
 

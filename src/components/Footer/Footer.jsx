@@ -28,12 +28,7 @@ class Footer extends Component {
                         </ul>
                     </nav>
                     <div className="copyright float-right">
-                        © , made with <i className="material-icons">favorite</i>{" "}
-                        by
-                        <a href="https://www.creative-tim.com">
-                            Creative Tim
-                        </a>{" "}
-                        for a better web.
+                        Copyright © 2018
                     </div>
                 </div>
             </footer>

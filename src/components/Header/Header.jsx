@@ -2,27 +2,25 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 
 class Header extends Component {
-    navbarName() {
-        return (
-            <Switch>
-                {this.props.routes.map((route, index) => (
-                    <Route
-                        key={index}
-                        path={route.path}
-                        render={props => (
-                            <a className="navbar-brand">{route.navbarName}</a>
-                        )}
-                    />
-                ))}
-            </Switch>
-        );
-    }
+    NavbarName = () => (
+        <Switch>
+            {this.props.routes.map((route, index) => (
+                <Route
+                    key={index}
+                    path={route.path}
+                    render={() => (
+                        <a className="navbar-brand">{route.navbarName}</a>
+                    )}
+                />
+            ))}
+        </Switch>
+    );
 
     render() {
         return (
             <nav className="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
                 <div className="container-fluid">
-                    <div className="navbar-wrapper">{this.navbarName()}</div>
+                    <div className="navbar-wrapper">{this.NavbarName()}</div>
                     <button
                         className="navbar-toggler"
                         type="button"
@@ -72,42 +70,27 @@ class Header extends Component {
                                     aria-haspopup="true"
                                     aria-expanded="false"
                                 >
-                                    <i className="material-icons">
-                                        notifications
-                                    </i>
-                                    <span className="notification">5</span>
+                                    <i className="material-icons">person</i>
+
                                     <p className="d-lg-none d-md-block">
-                                        Some Actions
+                                        Account
                                     </p>
                                 </a>
                                 <div
                                     className="dropdown-menu dropdown-menu-right"
                                     aria-labelledby="navbarDropdownMenuLink"
                                 >
-                                    <a className="dropdown-item" href="">
-                                        Mike John responded to your email
+                                    <a className="dropdown-item">Profile</a>
+                                    <a className="dropdown-item">
+                                        Change Password
                                     </a>
-                                    <a className="dropdown-item" href="">
-                                        You have 5 new tasks
-                                    </a>
-                                    <a className="dropdown-item" href="">
-                                        You're now friend with Andrew
-                                    </a>
-                                    <a className="dropdown-item" href="">
-                                        Another Notification
-                                    </a>
-                                    <a className="dropdown-item" href="">
-                                        Another One
+                                    <a
+                                        className="dropdown-item"
+                                        onClick={this.props.onLogout}
+                                    >
+                                        Logout
                                     </a>
                                 </div>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#pablo">
-                                    <i className="material-icons">person</i>
-                                    <p className="d-lg-none d-md-block">
-                                        Account
-                                    </p>
-                                </a>
                             </li>
                         </ul>
                     </div>

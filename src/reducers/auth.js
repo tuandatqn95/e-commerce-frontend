@@ -6,8 +6,6 @@ const initialState = {
 };
 
 let reducer = (state = initialState, action) => {
-    console.log("isAuthentication:", action);
-
     switch (action.type) {
         case Types.LOGIN:
             return {
