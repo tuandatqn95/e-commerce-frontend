@@ -35,19 +35,21 @@ class Users extends Component {
             isModalConfirmOpen: !this.state.isModalConfirmOpen
         });
     };
-    onCloseModalConfirm = () => {
-        this.setState({
-            isModalConfirmOpen: false
-        });
-    };
     onToggleUserProfile = () => {
         this.setState({
             isUserProfileOpen: !this.state.isUserProfilemOpen
         });
     };
+    onCloseModalConfirm = () => {
+        this.setState({
+            isModalConfirmOpen: false,
+            selectedUser: undefined
+        });
+    };
     onCloseUserProfile = () => {
         this.setState({
-            isUserProfileOpen: false
+            isUserProfileOpen: false,
+            selectedUser: undefined
         });
     };
     onCloseUserForm = () => {
