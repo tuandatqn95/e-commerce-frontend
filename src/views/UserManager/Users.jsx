@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import UserItem from "../../components/User/UserItem";
 import UserList from "../../components/User/UserList";
 import UserForm from "../../components/User/UserForm";
-import ModalConfirm from "../../components/User/ModalComfirm";
 import UserProfile from "../../components/User/UserProfile";
+import DeleteConfirmModal from "../../components/Modal/DeleteConfirmModal";
 import {
     fetchUsersRequest,
     addUserRequest,
@@ -66,7 +66,8 @@ class Users extends Component {
         }
     };
     onDeleteUser = user => {
-        this.props.onDeleteUser(user.id);
+        if (user) this.props.onDeleteUser(user.id);
+        this.setState({ selectedUser: undefined });
     };
     onEditUser = user => {
         this.setState({ selectedUser: user });
@@ -115,18 +116,16 @@ class Users extends Component {
                         onCloseUserForm={this.onCloseUserForm}
                         isUserFormOpen={this.state.isUserFormOpen}
                     />
-                    <ModalConfirm
-                        isModalConfirmOpen={this.state.isModalConfirmOpen}
-                        onCloseModalConfirm={this.onCloseModalConfirm}
-                        user={this.state.selectedUser}
-                        onConfirm={this.onDeleteUser}
-                    />
                     <UserProfile
                         isUserProfileOpen={this.state.isUserProfileOpen}
                         onCloseUserProfile={this.onCloseUserProfile}
                         user={this.state.selectedUser}
                         onSubmitUser={this.onSubmitUser}
                         onClearSelectedUser={this.onClearSelectedUser}
+                    />
+                    <DeleteConfirmModal
+                        deleteObject={this.state.selectedUser}
+                        onConfirmDelete={this.onDeleteUser}
                     />
                 </div>
             </div>
