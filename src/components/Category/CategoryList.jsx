@@ -34,8 +34,8 @@ class CategoryList extends Component {
                             <table className="table">
                                 <thead className=" text-primary">
                                     <tr>
-                                        <th style={{ width: "66%" }}>Name</th>
-                                        <th style={{ width: "34%" }}>
+                                        <th style={{ width: "50%" }}>Name</th>
+                                        <th style={{ width: "50%" }}>
                                             Description
                                         </th>
                                         <th className="text-center">Image</th>
