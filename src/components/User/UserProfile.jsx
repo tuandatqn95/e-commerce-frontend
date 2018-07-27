@@ -1,6 +1,6 @@
 import React, { Component } from "react";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { Styles } from "../../constants/Styles";
-import { modalUserProfileId } from "../../constants/ModalId";
 
 class UserProfile extends Component {
     constructor(props) {
@@ -76,6 +76,7 @@ class UserProfile extends Component {
     onReset = () => {
         this.resetForm();
         this.changeEditing();
+        this.props.onCloseUserProfile();
     };
     componentWillReceiveProps = nextProps => {
         if (nextProps.user) {
@@ -90,6 +91,7 @@ class UserProfile extends Component {
         }
     };
     render() {
+        const { isUserProfileOpen, onCloseUserProfile } = this.props;
         const { name, email, phone, address, isEditing } = this.state;
         const Image = (
             <img
@@ -100,136 +102,96 @@ class UserProfile extends Component {
             />
         );
         return (
-            <div className="modal fade" id={modalUserProfileId}>
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div
-                            className="modal-header "
-                            style={Styles.backgroundModalHeader}
-                        >
-                            <h4
-                                className="modal-title"
-                                style={Styles.colorModalHeader}
-                            >
-                                Profile Information
-                            </h4>
-                            <button
-                                type="button"
-                                className="close"
-                                data-dismiss="modal"
-                            >
-                                &times;
-                            </button>
-                        </div>
-                        <form onSubmit={this.onSubmit} onReset={this.onReset}>
-                            <div className="modal-body">
-                                <div className="container text-center">
-                                    <div className="avatar">{Image}</div>
-                                    <h3>
-                                        <b>{name}</b>
-                                    </h3>
-                                </div>
-                                <table className="table">
-                                    <tbody>
-                                        <tr hidden={isEditing ? false : true}>
-                                            <td>Name: </td>
-                                            <td>
-                                                <input
-                                                    name="name"
-                                                    className="form-control"
-                                                    type="text"
-                                                    value={name}
-                                                    onChange={
-                                                        this.onHandleChange
-                                                    }
-                                                />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Email: </td>
-                                            <td>
-                                                <input
-                                                    name="email"
-                                                    className="form-control"
-                                                    type="email"
-                                                    disabled={
-                                                        isEditing ? false : true
-                                                    }
-                                                    value={email}
-                                                    onChange={
-                                                        this.onHandleChange
-                                                    }
-                                                    onFocus={this.onHandleFocus}
-                                                    onBlur={this.onBlurHandle}
-                                                />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Phone: </td>
-                                            <td>
-                                                <input
-                                                    name="phone"
-                                                    className="form-control"
-                                                    type="text"
-                                                    disabled={
-                                                        isEditing ? false : true
-                                                    }
-                                                    value={phone}
-                                                    onChange={
-                                                        this.onHandleChange
-                                                    }
-                                                />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Address: </td>
-                                            <td>
-                                                <input
-                                                    name="address"
-                                                    className="form-control"
-                                                    type="text"
-                                                    disabled={
-                                                        isEditing ? false : true
-                                                    }
-                                                    value={address}
-                                                    onChange={
-                                                        this.onHandleChange
-                                                    }
-                                                />
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </form>
-                        <div className="modal-footer">
-                            <button
-                                type="submit"
-                                className="btn btn-primary pull-right"
-                                data-dismiss="modal"
-                                hidden={isEditing ? false : true}
-                                onClick={this.onSubmit}
-                            >
-                                Update
-                            </button>
-                            <button
-                                className="btn btn-success pull-right"
-                                onClick={this.changeEditing}
-                            >
-                                {isEditing ? "Cancel" : "Edit"}
-                            </button>
-                            <button
-                                type="reset"
-                                className="btn btn-default pull-right"
-                                data-dismiss="modal"
-                            >
-                                Close
-                            </button>
-                            <div className="clearfix" />
-                        </div>
+            <Modal isOpen={isUserProfileOpen} className={this.props.className}>
+                <ModalHeader
+                    toggle={onCloseUserProfile}
+                    style={Styles.backgroundModalHeader}
+                >
+                    <div style={Styles.colorModalHeader}>
+                        Profile Information
                     </div>
-                </div>
-            </div>
+                </ModalHeader>
+                <ModalBody>
+                    <div className="container text-center">
+                        <div className="avatar">{Image}</div>
+                        <h3>
+                            <b>{name}</b>
+                        </h3>
+                    </div>
+                    <table className="table">
+                        <tbody>
+                            <tr hidden={isEditing ? false : true}>
+                                <td>Name: </td>
+                                <td>
+                                    <input
+                                        name="name"
+                                        className="form-control"
+                                        type="text"
+                                        value={name}
+                                        onChange={this.onHandleChange}
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Email: </td>
+                                <td>
+                                    <input
+                                        name="email"
+                                        className="form-control"
+                                        type="email"
+                                        disabled={isEditing ? false : true}
+                                        value={email}
+                                        onChange={this.onHandleChange}
+                                        onFocus={this.onHandleFocus}
+                                        onBlur={this.onBlurHandle}
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Phone: </td>
+                                <td>
+                                    <input
+                                        name="phone"
+                                        className="form-control"
+                                        type="text"
+                                        disabled={isEditing ? false : true}
+                                        value={phone}
+                                        onChange={this.onHandleChange}
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Address: </td>
+                                <td>
+                                    <input
+                                        name="address"
+                                        className="form-control"
+                                        type="text"
+                                        disabled={isEditing ? false : true}
+                                        value={address}
+                                        onChange={this.onHandleChange}
+                                    />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ModalBody>
+                <ModalFooter>
+                    <Button
+                        color="primary"
+                        hidden={isEditing ? false : true}
+                        onClick={this.onSubmit}
+                    >
+                        Update
+                    </Button>
+                    <Button color="success" onClick={this.changeEditing}>
+                        {isEditing ? "Cancel" : "Edit"}
+                    </Button>
+                    <Button color="default" onClick={onCloseUserProfile}>
+                        Close
+                    </Button>
+                </ModalFooter>
+            </Modal>
         );
     }
 }

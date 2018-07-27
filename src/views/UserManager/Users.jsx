@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import UserItem from "../../components/User/UserItem";
 import UserList from "../../components/User/UserList";
 import UserForm from "../../components/User/UserForm";
-import ChangePassword from "../../components/User/ChangePassword";
 import ModalConfirm from "../../components/User/ModalComfirm";
 import UserProfile from "../../components/User/UserProfile";
 import {
@@ -19,18 +18,41 @@ class Users extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isFormOpen: false,
+            isUserFormOpen: false,
+            isModalConfirmOpen: false,
+            isUserProfileOpen: false,
             selectedUser: undefined
         };
     }
-    onToggleForm = () => {
+
+    onToggleUserForm = () => {
         this.setState({
-            isFormOpen: !this.state.isFormOpen
+            isUserFormOpen: !this.state.isUserFormOpen
         });
     };
-    onCloseForm = () => {
+    onToggleModalConfirm = () => {
         this.setState({
-            isFormOpen: false,
+            isModalConfirmOpen: !this.state.isModalConfirmOpen
+        });
+    };
+    onCloseModalConfirm = () => {
+        this.setState({
+            isModalConfirmOpen: false
+        });
+    };
+    onToggleUserProfile = () => {
+        this.setState({
+            isUserProfileOpen: !this.state.isUserProfilemOpen
+        });
+    };
+    onCloseUserProfile = () => {
+        this.setState({
+            isUserProfileOpen: false
+        });
+    };
+    onCloseUserForm = () => {
+        this.setState({
+            isUserFormOpen: false,
             selectedUser: undefined
         });
     };
@@ -68,6 +90,8 @@ class Users extends Component {
                     <UserItem
                         key={index}
                         user={user}
+                        onToggleModalConfirm={this.onToggleModalConfirm}
+                        onToggleUserProfile={this.onToggleUserProfile}
                         onEditUser={this.onEditUser}
                         onDeleteUser={this.onDeleteUser}
                     />
@@ -78,7 +102,7 @@ class Users extends Component {
             <div className="container-fluid">
                 <div className="row">
                     <UserList
-                        onToggleForm={this.onToggleForm}
+                        onToggleUserForm={this.onToggleUserForm}
                         isFormOpen={this.state.isFormOpen}
                     >
                         <UserItems />
@@ -86,22 +110,20 @@ class Users extends Component {
 
                     <UserForm
                         onSubmitUser={this.onSubmitUser}
-                        onCloseForm={this.onCloseForm}
-                        isOpen={this.state.isFormOpen}
-                    />
-                    <ChangePassword
-                        user={this.state.selectedUser}
-                        onUpdatePassword={this.props.onUpdatePassword}
-                        onResetPassword={this.props.onResetPassword}
+                        onCloseUserForm={this.onCloseUserForm}
+                        isUserFormOpen={this.state.isUserFormOpen}
                     />
                     <ModalConfirm
+                        isModalConfirmOpen={this.state.isModalConfirmOpen}
+                        onCloseModalConfirm={this.onCloseModalConfirm}
                         user={this.state.selectedUser}
                         onConfirm={this.onDeleteUser}
                     />
                     <UserProfile
+                        isUserProfileOpen={this.state.isUserProfileOpen}
+                        onCloseUserProfile={this.onCloseUserProfile}
                         user={this.state.selectedUser}
                         onSubmitUser={this.onSubmitUser}
-                        isOpen={this.state.isFormOpen}
                         onClearSelectedUser={this.onClearSelectedUser}
                     />
                 </div>

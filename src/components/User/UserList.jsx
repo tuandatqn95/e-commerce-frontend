@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { modalUserFormId } from "../../constants/ModalId";
 
 class UserList extends Component {
-    onToggleForm = () => {
-        this.props.onToggleForm();
+    onToggleUserForm = () => {
+        this.props.onToggleUserForm();
     };
     render() {
         const { isFormOpen } = this.props;
@@ -22,9 +21,7 @@ class UserList extends Component {
                                     style={{ paddingTop: 2, paddingBottom: 2 }}
                                     className={`nav-link ${isFormOpen &&
                                         "active"}`}
-                                    data-toggle="modal"
-                                    href={`#${modalUserFormId}`}
-                                    onClick={this.onToggleForm}
+                                    onClick={this.onToggleUserForm}
                                 >
                                     <i className="material-icons">
                                         {isFormOpen ? "cancel" : "add_circle"}

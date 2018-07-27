@@ -1,15 +1,16 @@
 import React, { Component } from "react";
-import {
-    modalChangePasswordId,
-    modalConfirmId,
-    modalUserProfileId
-} from "../../constants/ModalId";
+
 class UserItem extends Component {
     onDeleteUser = () => {
         this.props.onDeleteUser(this.props.user);
     };
-    onEditUser = () => {
+    onToggleModalConfirm = () => {
         this.props.onEditUser(this.props.user);
+        this.props.onToggleModalConfirm();
+    };
+    onToggleUserProfile = () => {
+        this.props.onEditUser(this.props.user);
+        this.props.onToggleUserProfile();
     };
     render() {
         const { name, email, phone, address } = this.props.user;
@@ -27,9 +28,7 @@ class UserItem extends Component {
                             paddingLeft: 15,
                             paddingRight: 15
                         }}
-                        data-toggle="modal"
-                        href={`#${modalUserProfileId}`}
-                        onClick={this.onEditUser}
+                        onClick={this.onToggleUserProfile}
                     >
                         <i className="material-icons">library_books</i>
                     </button>{" "}
@@ -40,9 +39,6 @@ class UserItem extends Component {
                             paddingLeft: 15,
                             paddingRight: 15
                         }}
-                        data-toggle="modal"
-                        href={`#${modalChangePasswordId}`}
-                        onClick={this.onEditUser}
                     >
                         <i className="material-icons">edit</i>
                     </button>{" "}
@@ -53,9 +49,7 @@ class UserItem extends Component {
                             paddingLeft: 15,
                             paddingRight: 15
                         }}
-                        data-toggle="modal"
-                        href={`#${modalConfirmId}`}
-                        onClick={this.onEditUser}
+                        onClick={this.onToggleModalConfirm}
                     >
                         <i className="material-icons">delete</i>
                     </button>
