@@ -12,3 +12,11 @@ export const ADD_PRODUCT = "ADD_PRODUCT";
 export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
 export const SELECT_EDIT_PRODUCT = "SELECT_EDIT_PRODUCT";
+
+export const FETCH_USER = "FETCH_USER";
+export const ADD_USER = "ADD_USER";
+export const DELETE_USER = "DELETE_USER";
+export const UPDATE_USER = "UPDATE_USER";
+export const SELECT_EDIT_USER = "SELECT_EDIT_USER";
+export const RESET_PASSWORD = "RESET_PASSWORD";
+export const UPDATE_PASSWORD = "UPDATE_PASSWORD";
