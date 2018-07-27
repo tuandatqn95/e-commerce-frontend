@@ -75,8 +75,8 @@ class UserProfile extends Component {
 
     onReset = () => {
         this.resetForm();
-        this.changeEditing();
         this.props.onCloseUserProfile();
+        this.setState({ isEditing: false });
     };
     componentWillReceiveProps = nextProps => {
         if (nextProps.user) {
@@ -91,20 +91,20 @@ class UserProfile extends Component {
         }
     };
     render() {
-        const { isUserProfileOpen, onCloseUserProfile } = this.props;
+        const { isUserProfileOpen } = this.props;
         const { name, email, phone, address, isEditing } = this.state;
         const Image = (
             <img
                 className="img-raised rounded-circle img-fluid"
                 alt=""
                 style={Styles.circleImage}
-                src="http://www.tombakintan.com/frontend/assets/round-account-button-with-user-inside.png"
+                src="../assets/img/faces/marc.jpg"
             />
         );
         return (
             <Modal isOpen={isUserProfileOpen}>
                 <ModalHeader
-                    toggle={onCloseUserProfile}
+                    toggle={this.onReset}
                     style={Styles.backgroundModalHeader}
                 >
                     <div style={Styles.colorModalHeader}>
@@ -182,12 +182,12 @@ class UserProfile extends Component {
                         hidden={isEditing ? false : true}
                         onClick={this.onSubmit}
                     >
-                        Update
+                        Update Profile
                     </Button>
                     <Button color="success" onClick={this.changeEditing}>
                         {isEditing ? "Cancel" : "Edit"}
                     </Button>
-                    <Button color="default" onClick={onCloseUserProfile}>
+                    <Button color="default" onClick={this.onReset}>
                         Close
                     </Button>
                 </ModalFooter>
