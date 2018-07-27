@@ -11,13 +11,9 @@ class DeleteConfirmModal extends Component {
     };
 
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps);
-
         if (nextProps.deleteObject) {
-            console.log(true);
             this.setState({ isShow: true });
         } else {
-            console.log(false);
             this.setState({ isShow: false });
         }
     }
