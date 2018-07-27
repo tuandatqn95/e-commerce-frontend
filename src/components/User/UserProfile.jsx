@@ -102,7 +102,7 @@ class UserProfile extends Component {
             />
         );
         return (
-            <Modal isOpen={isUserProfileOpen} className={this.props.className}>
+            <Modal isOpen={isUserProfileOpen}>
                 <ModalHeader
                     toggle={onCloseUserProfile}
                     style={Styles.backgroundModalHeader}

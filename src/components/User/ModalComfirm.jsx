@@ -9,7 +9,7 @@ class ModalConfirm extends Component {
     render() {
         const { user, isModalConfirmOpen, onCloseModalConfirm } = this.props;
         return (
-            <Modal isOpen={isModalConfirmOpen} className={this.props.className}>
+            <Modal isOpen={isModalConfirmOpen}>
                 <ModalHeader toggle={onCloseModalConfirm}>Confirm</ModalHeader>
                 <ModalBody>
                     <h5>

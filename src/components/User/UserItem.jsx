@@ -32,16 +32,8 @@ class UserItem extends Component {
                     >
                         <i className="material-icons">library_books</i>
                     </button>{" "}
-                    <button
-                        type="button"
-                        className="btn btn-warning"
-                        style={{
-                            paddingLeft: 15,
-                            paddingRight: 15
-                        }}
-                    >
-                        <i className="material-icons">edit</i>
-                    </button>{" "}
+                </td>
+                <td>
                     <button
                         type="button"
                         className="btn btn-danger"

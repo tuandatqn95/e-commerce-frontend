@@ -70,11 +70,11 @@ class UserForm extends Component {
         this.props.onCloseUserForm();
     };
     render() {
-        const { isUserFormOpen, onCloseUserForm } = this.props;
+        const { isUserFormOpen } = this.props;
         return (
-            <Modal isOpen={isUserFormOpen} className={this.props.className}>
+            <Modal isOpen={isUserFormOpen}>
                 <ModalHeader
-                    toggle={onCloseUserForm}
+                    toggle={this.onReset}
                     style={Styles.backgroundModalHeader}
                 >
                     <div style={Styles.colorModalHeader}>Add User</div>
@@ -91,7 +91,8 @@ class UserForm extends Component {
                                     <i className="material-icons">face</i>
                                 </span>
                                 <div
-                                    className={`col-md-10 form-group bmd-form-group ${this
+                                    style={{ width: "80%" }}
+                                    className={`form-group bmd-form-group ${this
                                         .state.name && "is-filled"} ${this.state
                                         .isFocusing === "name" &&
                                         "is-focused"}`}
@@ -115,7 +116,8 @@ class UserForm extends Component {
                                     <i className="material-icons">mail</i>
                                 </span>
                                 <div
-                                    className={`col-md-10 form-group bmd-form-group ${this
+                                    style={{ width: "80%" }}
+                                    className={`form-group bmd-form-group ${this
                                         .state.email && "is-filled"} ${this
                                         .state.isFocusing === "email" &&
                                         "is-focused"}`}
@@ -141,7 +143,8 @@ class UserForm extends Component {
                                     </i>
                                 </span>
                                 <div
-                                    className={`col-md-10 form-group bmd-form-group ${this
+                                    style={{ width: "80%" }}
+                                    className={`form-group bmd-form-group ${this
                                         .state.password && "is-filled"} ${this
                                         .state.isFocusing === "password" &&
                                         "is-focused"}`}
@@ -165,7 +168,8 @@ class UserForm extends Component {
                                     <i className="material-icons">phone</i>
                                 </span>
                                 <div
-                                    className={`col-md-10 form-group bmd-form-group ${this
+                                    style={{ width: "80%" }}
+                                    className={`form-group bmd-form-group ${this
                                         .state.phone && "is-filled"} ${this
                                         .state.isFocusing === "phone" &&
                                         "is-focused"}`}
@@ -188,7 +192,8 @@ class UserForm extends Component {
                                         <i className="material-icons">home</i>
                                     </span>
                                     <div
-                                        className={`col-md-10 form-group bmd-form-group ${this
+                                        style={{ width: "80%" }}
+                                        className={`form-group bmd-form-group ${this
                                             .state.address &&
                                             "is-filled"} ${this.state
                                             .isFocusing === "address" &&
