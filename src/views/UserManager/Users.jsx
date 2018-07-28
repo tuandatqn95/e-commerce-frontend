@@ -19,9 +19,8 @@ class Users extends Component {
         super(props);
         this.state = {
             isUserFormOpen: false,
-            isModalConfirmOpen: false,
-            isUserProfileOpen: false,
-            selectedUser: undefined
+            selectedUser: undefined,
+            deletedUser: undefined
         };
     }
 
@@ -30,62 +29,53 @@ class Users extends Component {
             isUserFormOpen: !this.state.isUserFormOpen
         });
     };
-    onToggleModalConfirm = () => {
-        this.setState({
-            isModalConfirmOpen: !this.state.isModalConfirmOpen
-        });
-    };
-    onToggleUserProfile = () => {
-        this.setState({
-            isUserProfileOpen: !this.state.isUserProfilemOpen
-        });
-    };
-    onCloseModalConfirm = () => {
-        this.setState({
-            isModalConfirmOpen: false,
-            selectedUser: undefined
-        });
-    };
-    onCloseUserProfile = () => {
-        this.setState({
-            isUserProfileOpen: false,
-            selectedUser: undefined
-        });
-    };
-    onCloseUserForm = () => {
-        this.setState({
-            isUserFormOpen: false,
-            selectedUser: undefined
-        });
-    };
+
     onSubmitUser = user => {
         if (user.id) {
             this.props.onUpdateUser(user);
         } else {
             this.props.onAddUser(user);
         }
+        this.onClearSelectedUser();
     };
-    onDeleteUser = user => {
+
+    onConfirmDeleteUser = user => {
         if (user) this.props.onDeleteUser(user.id);
-        this.setState({ selectedUser: undefined });
+        this.onClearDeletedUser();
     };
+
+    onDeleteUser = user => {
+        this.setState({ deletedUser: user });
+    };
+
     onEditUser = user => {
         this.setState({ selectedUser: user });
     };
-    onUpdatePassword = (id, oldPassword, newPassword) => {
-        this.props.onUpdatePassword(id, oldPassword, newPassword);
-    };
-    onResetPassword = id => {
-        this.props.onResetPassword(id);
-    };
+
     onClearSelectedUser = () => {
         this.setState({
             selectedUser: undefined
         });
     };
+
+    onClearDeletedUser = () => {
+        this.setState({
+            deletedUser: undefined
+        });
+    };
+
+    onUpdatePassword = (id, oldPassword, newPassword) => {
+        this.props.onUpdatePassword(id, oldPassword, newPassword);
+    };
+
+    onResetPassword = id => {
+        this.props.onResetPassword(id);
+    };
+
     componentDidMount() {
         this.props.onFetchUsers();
     }
+
     render() {
         const UserItems = () =>
             this.props.users.map((user, index) => {
@@ -93,9 +83,7 @@ class Users extends Component {
                     <UserItem
                         key={index}
                         user={user}
-                        onToggleModalConfirm={this.onToggleModalConfirm}
-                        onToggleUserProfile={this.onToggleUserProfile}
-                        onEditUser={this.onEditUser}
+                        onSelectUser={this.onEditUser}
                         onDeleteUser={this.onDeleteUser}
                     />
                 );
@@ -106,26 +94,24 @@ class Users extends Component {
                 <div className="row">
                     <UserList
                         onToggleUserForm={this.onToggleUserForm}
-                        isFormOpen={this.state.isFormOpen}
+                        isFormOpen={this.state.isUserFormOpen}
                     >
                         <UserItems />
                     </UserList>
 
                     <UserForm
                         onSubmitUser={this.onSubmitUser}
-                        onCloseUserForm={this.onCloseUserForm}
-                        isUserFormOpen={this.state.isUserFormOpen}
+                        onToggleUserForm={this.onToggleUserForm}
+                        isShow={this.state.isUserFormOpen}
                     />
                     <UserProfile
-                        isUserProfileOpen={this.state.isUserProfileOpen}
-                        onCloseUserProfile={this.onCloseUserProfile}
-                        user={this.state.selectedUser}
+                        selectedUser={this.state.selectedUser}
                         onSubmitUser={this.onSubmitUser}
                         onClearSelectedUser={this.onClearSelectedUser}
                     />
                     <DeleteConfirmModal
-                        deleteObject={this.state.selectedUser}
-                        onConfirmDelete={this.onDeleteUser}
+                        deleteObject={this.state.deletedUser}
+                        onConfirmDelete={this.onConfirmDeleteUser}
                     />
                 </div>
             </div>
