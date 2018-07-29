@@ -100,7 +100,7 @@ class UserProfile extends Component {
         const Image = (
             <img
                 className="img-raised rounded-circle img-fluid"
-                alt=""
+                alt="avatar"
                 style={Styles.circleImage}
                 src="../assets/img/faces/marc.jpg"
             />
@@ -127,7 +127,36 @@ class UserProfile extends Component {
                     <h3>Profile Information</h3>
                     <div className="swal2-content" style={{ display: "block" }}>
                         <div className="container text-center">
-                            <div className="avatar">{Image}</div>
+                            <div
+                                className="fileinput fileinput-new text-center"
+                                data-provides="fileinput"
+                            >
+                                <div className="fileinput-new">{Image}</div>
+                                <div
+                                    className="fileinput-preview fileinput-exists thumbnail rounded-circle"
+                                    style={Styles.circleImage}
+                                />
+                                <div hidden={!isEditing}>
+                                    <span className="btn btn-primary btn-round btn-sm btn-file">
+                                        <span className="fileinput-new">
+                                            Add Photo
+                                        </span>
+                                        <span className="fileinput-exists">
+                                            Change
+                                        </span>
+                                        <input type="hidden" />
+                                        <input name="avatar" type="file" />
+                                        <div className="ripple-container" />
+                                    </span>
+                                    <button
+                                        href=""
+                                        className="btn btn-danger btn-round btn-sm fileinput-exists"
+                                        data-dismiss="fileinput"
+                                    >
+                                        <i className="fa fa-times" /> Remove
+                                    </button>
+                                </div>
+                            </div>
                             <h3>
                                 <b>{name}</b>
                             </h3>
