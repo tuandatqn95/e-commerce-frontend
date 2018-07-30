@@ -29,7 +29,7 @@ class UserProfile extends Component {
         });
         if (target.files)
             this.setState({
-                avatarURL: URL.createObjectURL(event.target.files[0])
+                avatarURL: URL.createObjectURL(target.files[0])
             });
     };
     onHandleFocus = event => {
@@ -51,24 +51,25 @@ class UserProfile extends Component {
     }
 
     resetForm = () => {
-        const { user } = this.state;
+        const { name, email, phone, address } = this.state.user;
         this.setState({
-            name: user.name,
-            email: user.email,
-            phone: user.phone,
-            address: user.address
+            name,
+            email,
+            phone,
+            address
         });
     };
 
     onSubmit = event => {
         event.preventDefault();
         if (this.validateInput()) {
+            const { id, name, email, phone, address } = this.state;
             this.props.onSubmitUser({
-                id: this.state.id,
-                name: this.state.name,
-                email: this.state.email,
-                phone: this.state.phone,
-                address: this.state.address
+                id,
+                name,
+                email,
+                phone,
+                address
             });
             this.onReset();
         }
@@ -118,7 +119,7 @@ class UserProfile extends Component {
                 className="img-raised rounded-circle img-fluid"
                 alt="avatar"
                 style={Styles.circleImage}
-                src={this.state.avatarURL}
+                src={avatarURL}
             />
         );
         return (
