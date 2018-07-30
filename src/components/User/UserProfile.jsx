@@ -13,9 +13,13 @@ class UserProfile extends Component {
             name: "",
             email: "",
             phone: "",
-            address: ""
+            address: "",
+            avatarURL: undefined
         };
     }
+    onRemoveAvatar = () => {
+        this.setState({ avatarURL: undefined });
+    };
     onHandleChange = event => {
         let target = event.target;
         let name = target.name;
@@ -23,6 +27,10 @@ class UserProfile extends Component {
         this.setState({
             [name]: value
         });
+        if (target.files)
+            this.setState({
+                avatarURL: URL.createObjectURL(event.target.files[0])
+            });
     };
     onHandleFocus = event => {
         let target = event.target;
@@ -96,13 +104,21 @@ class UserProfile extends Component {
     };
 
     render() {
-        const { name, email, phone, address, isEditing, isShow } = this.state;
+        const {
+            name,
+            email,
+            phone,
+            address,
+            isEditing,
+            isShow,
+            avatarURL
+        } = this.state;
         const Image = (
             <img
                 className="img-raised rounded-circle img-fluid"
                 alt="avatar"
                 style={Styles.circleImage}
-                src="../assets/img/faces/marc.jpg"
+                src={this.state.avatarURL}
             />
         );
         return (
@@ -127,31 +143,28 @@ class UserProfile extends Component {
                     <h3>Profile Information</h3>
                     <div className="swal2-content" style={{ display: "block" }}>
                         <div className="container text-center">
-                            <div
-                                className="fileinput fileinput-new text-center"
-                                data-provides="fileinput"
-                            >
-                                <div className="fileinput-new">{Image}</div>
-                                <div
-                                    className="fileinput-preview fileinput-exists thumbnail rounded-circle"
-                                    style={Styles.circleImage}
-                                />
+                            <div className="text-center">
+                                {Image}
                                 <div hidden={!isEditing}>
                                     <span className="btn btn-primary btn-round btn-sm btn-file">
-                                        <span className="fileinput-new">
-                                            Add Photo
-                                        </span>
-                                        <span className="fileinput-exists">
-                                            Change
-                                        </span>
-                                        <input type="hidden" />
-                                        <input name="avatar" type="file" />
+                                        {avatarURL ? (
+                                            <span>Change</span>
+                                        ) : (
+                                            <span hidden={avatarURL}>
+                                                Add Photo
+                                            </span>
+                                        )}
+
+                                        <input
+                                            type="file"
+                                            onChange={this.onHandleChange}
+                                        />
                                         <div className="ripple-container" />
                                     </span>
                                     <button
-                                        href=""
-                                        className="btn btn-danger btn-round btn-sm fileinput-exists"
-                                        data-dismiss="fileinput"
+                                        hidden={!avatarURL}
+                                        className="btn btn-danger btn-round btn-sm"
+                                        onClick={this.onRemoveAvatar}
                                     >
                                         <i className="fa fa-times" /> Remove
                                     </button>
