@@ -8,7 +8,6 @@ class UserProfile extends Component {
             isFocusing: "",
             isEditing: false,
             isShow: false,
-            user: undefined,
             id: "",
             name: "",
             email: "",
@@ -51,7 +50,7 @@ class UserProfile extends Component {
     }
 
     resetForm = () => {
-        const { name, email, phone, address } = this.state.user;
+        const { name, email, phone, address } = this.props.selectedUser;
         this.setState({
             name,
             email,
@@ -92,7 +91,6 @@ class UserProfile extends Component {
         if (nextProps.selectedUser) {
             this.setState({
                 isShow: true,
-                user: nextProps.selectedUser,
                 id: nextProps.selectedUser.id,
                 name: nextProps.selectedUser.name,
                 email: nextProps.selectedUser.email,
@@ -196,7 +194,8 @@ class UserProfile extends Component {
                                             name="email"
                                             className="form-control"
                                             type="email"
-                                            disabled={isEditing ? false : true}
+                                            readOnly={!isEditing}
+                                            style={Styles.bgReadOnlyText}
                                             value={email}
                                             onChange={this.onHandleChange}
                                             onFocus={this.onHandleFocus}
@@ -211,7 +210,8 @@ class UserProfile extends Component {
                                             name="phone"
                                             className="form-control"
                                             type="text"
-                                            disabled={isEditing ? false : true}
+                                            readOnly={!isEditing}
+                                            style={Styles.bgReadOnlyText}
                                             value={phone}
                                             onChange={this.onHandleChange}
                                         />
@@ -224,7 +224,8 @@ class UserProfile extends Component {
                                             name="address"
                                             className="form-control"
                                             type="text"
-                                            disabled={isEditing ? false : true}
+                                            readOnly={!isEditing}
+                                            style={Styles.bgReadOnlyText}
                                             value={address}
                                             onChange={this.onHandleChange}
                                         />
