@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { Styles } from "../../constants/Styles";
 
 class UserProfile extends Component {
@@ -8,14 +7,18 @@ class UserProfile extends Component {
         this.state = {
             isFocusing: "",
             isEditing: false,
-            user: undefined,
+            isShow: false,
             id: "",
             name: "",
             email: "",
             phone: "",
-            address: ""
+            address: "",
+            avatarURL: undefined
         };
     }
+    onRemoveAvatar = () => {
+        this.setState({ avatarURL: undefined });
+    };
     onHandleChange = event => {
         let target = event.target;
         let name = target.name;
@@ -23,6 +26,10 @@ class UserProfile extends Component {
         this.setState({
             [name]: value
         });
+        if (target.files)
+            this.setState({
+                avatarURL: URL.createObjectURL(target.files[0])
+            });
     };
     onHandleFocus = event => {
         let target = event.target;
@@ -43,24 +50,25 @@ class UserProfile extends Component {
     }
 
     resetForm = () => {
-        const { user } = this.state;
+        const { name, email, phone, address } = this.props.selectedUser;
         this.setState({
-            name: user.name,
-            email: user.email,
-            phone: user.phone,
-            address: user.address
+            name,
+            email,
+            phone,
+            address
         });
     };
 
     onSubmit = event => {
         event.preventDefault();
         if (this.validateInput()) {
+            const { id, name, email, phone, address } = this.state;
             this.props.onSubmitUser({
-                id: this.state.id,
-                name: this.state.name,
-                email: this.state.email,
-                phone: this.state.phone,
-                address: this.state.address
+                id,
+                name,
+                email,
+                phone,
+                address
             });
             this.onReset();
         }
@@ -75,123 +83,179 @@ class UserProfile extends Component {
 
     onReset = () => {
         this.resetForm();
-        this.props.onCloseUserProfile();
-        this.setState({ isEditing: false });
+        this.setState({ isEditing: false, isShow: false });
+        this.props.onClearSelectedUser();
     };
+
     componentWillReceiveProps = nextProps => {
-        if (nextProps.user) {
+        if (nextProps.selectedUser) {
             this.setState({
-                user: nextProps.user,
-                id: nextProps.user.id,
-                name: nextProps.user.name,
-                email: nextProps.user.email,
-                phone: nextProps.user.phone,
-                address: nextProps.user.address
+                isShow: true,
+                id: nextProps.selectedUser.id,
+                name: nextProps.selectedUser.name,
+                email: nextProps.selectedUser.email,
+                phone: nextProps.selectedUser.phone,
+                address: nextProps.selectedUser.address
             });
+        } else {
+            this.setState({ isShow: false });
         }
     };
+
     render() {
-        const { isUserProfileOpen } = this.props;
-        const { name, email, phone, address, isEditing } = this.state;
+        const {
+            name,
+            email,
+            phone,
+            address,
+            isEditing,
+            isShow,
+            avatarURL
+        } = this.state;
         const Image = (
             <img
                 className="img-raised rounded-circle img-fluid"
-                alt=""
+                alt="avatar"
                 style={Styles.circleImage}
-                src="../assets/img/faces/marc.jpg"
+                src={avatarURL}
             />
         );
         return (
-            <Modal isOpen={isUserProfileOpen}>
-                <ModalHeader
-                    toggle={this.onReset}
-                    style={Styles.backgroundModalHeader}
+            <div
+                className={`swal2-container swal2-fade ${
+                    isShow ? "swal2-in" : ""
+                }`}
+                style={{ overflowY: "auto" }}
+            >
+                <div
+                    className="swal2-modal swal2-show"
+                    style={{
+                        display: isShow ? "block" : "none",
+                        width: 500,
+                        padding: 20,
+                        background:
+                            "rgb(255, 255, 255) none repeat scroll 0% 0%",
+                        minHeight: "332"
+                    }}
+                    tabIndex="-1"
                 >
-                    <div style={Styles.colorModalHeader}>
-                        Profile Information
+                    <h3>Profile Information</h3>
+                    <div className="swal2-content" style={{ display: "block" }}>
+                        <div className="container text-center">
+                            <div className="text-center">
+                                {Image}
+                                <div hidden={!isEditing}>
+                                    <span className="btn btn-primary btn-round btn-sm btn-file">
+                                        {avatarURL ? (
+                                            <span>Change</span>
+                                        ) : (
+                                            <span hidden={avatarURL}>
+                                                Add Photo
+                                            </span>
+                                        )}
+
+                                        <input
+                                            type="file"
+                                            onChange={this.onHandleChange}
+                                        />
+                                        <div className="ripple-container" />
+                                    </span>
+                                    <button
+                                        hidden={!avatarURL}
+                                        className="btn btn-danger btn-round btn-sm"
+                                        onClick={this.onRemoveAvatar}
+                                    >
+                                        <i className="fa fa-times" /> Remove
+                                    </button>
+                                </div>
+                            </div>
+                            <h3>
+                                <b>{name}</b>
+                            </h3>
+                        </div>
+                        <table className="table">
+                            <tbody>
+                                <tr hidden={isEditing ? false : true}>
+                                    <td>Name: </td>
+                                    <td>
+                                        <input
+                                            name="name"
+                                            className="form-control"
+                                            type="text"
+                                            value={name}
+                                            onChange={this.onHandleChange}
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Email: </td>
+                                    <td>
+                                        <input
+                                            name="email"
+                                            className="form-control"
+                                            type="email"
+                                            readOnly={!isEditing}
+                                            style={Styles.bgReadOnlyText}
+                                            value={email}
+                                            onChange={this.onHandleChange}
+                                            onFocus={this.onHandleFocus}
+                                            onBlur={this.onBlurHandle}
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Phone: </td>
+                                    <td>
+                                        <input
+                                            name="phone"
+                                            className="form-control"
+                                            type="text"
+                                            readOnly={!isEditing}
+                                            style={Styles.bgReadOnlyText}
+                                            value={phone}
+                                            onChange={this.onHandleChange}
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Address: </td>
+                                    <td>
+                                        <input
+                                            name="address"
+                                            className="form-control"
+                                            type="text"
+                                            readOnly={!isEditing}
+                                            style={Styles.bgReadOnlyText}
+                                            value={address}
+                                            onChange={this.onHandleChange}
+                                        />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                </ModalHeader>
-                <ModalBody>
-                    <div className="container text-center">
-                        <div className="avatar">{Image}</div>
-                        <h3>
-                            <b>{name}</b>
-                        </h3>
-                    </div>
-                    <table className="table">
-                        <tbody>
-                            <tr hidden={isEditing ? false : true}>
-                                <td>Name: </td>
-                                <td>
-                                    <input
-                                        name="name"
-                                        className="form-control"
-                                        type="text"
-                                        value={name}
-                                        onChange={this.onHandleChange}
-                                    />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Email: </td>
-                                <td>
-                                    <input
-                                        name="email"
-                                        className="form-control"
-                                        type="email"
-                                        disabled={isEditing ? false : true}
-                                        value={email}
-                                        onChange={this.onHandleChange}
-                                        onFocus={this.onHandleFocus}
-                                        onBlur={this.onBlurHandle}
-                                    />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Phone: </td>
-                                <td>
-                                    <input
-                                        name="phone"
-                                        className="form-control"
-                                        type="text"
-                                        disabled={isEditing ? false : true}
-                                        value={phone}
-                                        onChange={this.onHandleChange}
-                                    />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Address: </td>
-                                <td>
-                                    <input
-                                        name="address"
-                                        className="form-control"
-                                        type="text"
-                                        disabled={isEditing ? false : true}
-                                        value={address}
-                                        onChange={this.onHandleChange}
-                                    />
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </ModalBody>
-                <ModalFooter>
-                    <Button
-                        color="primary"
+                    <hr className="swal2-spacer" style={{ display: "block" }} />
+                    <button
+                        className="swal2-confirm btn btn-primary"
                         hidden={isEditing ? false : true}
                         onClick={this.onSubmit}
                     >
                         Update Profile
-                    </Button>
-                    <Button color="success" onClick={this.changeEditing}>
+                    </button>
+                    <button
+                        className="swal2-confirm btn btn-success"
+                        onClick={this.changeEditing}
+                    >
                         {isEditing ? "Cancel" : "Edit"}
-                    </Button>
-                    <Button color="default" onClick={this.onReset}>
+                    </button>
+                    <button
+                        className="swal2-cancel btn btn-danger"
+                        onClick={this.onReset}
+                    >
                         Close
-                    </Button>
-                </ModalFooter>
-            </Modal>
+                    </button>
+                </div>
+            </div>
         );
     }
 }

@@ -1,7 +1,4 @@
 export const Styles = {
-    backgroundModalHeader: {
-        backgroundColor: "#9C27B0"
-    },
     circleImage: {
         maxWidth: 150,
         maxHeight: 150,
@@ -9,5 +6,8 @@ export const Styles = {
     },
     colorModalHeader: {
         color: "#fff"
+    },
+    bgReadOnlyText: {
+        backgroundColor: "#fff"
     }
 };

@@ -4,13 +4,8 @@ class UserItem extends Component {
     onDeleteUser = () => {
         this.props.onDeleteUser(this.props.user);
     };
-    onToggleModalConfirm = () => {
-        this.props.onEditUser(this.props.user);
-        this.props.onToggleModalConfirm();
-    };
-    onToggleUserProfile = () => {
-        this.props.onEditUser(this.props.user);
-        this.props.onToggleUserProfile();
+    onSelectUser = () => {
+        this.props.onSelectUser(this.props.user);
     };
     render() {
         const { name, email, phone, address } = this.props.user;
@@ -28,7 +23,7 @@ class UserItem extends Component {
                             paddingLeft: 15,
                             paddingRight: 15
                         }}
-                        onClick={this.onToggleUserProfile}
+                        onClick={this.onSelectUser}
                     >
                         <i className="material-icons">library_books</i>
                     </button>{" "}
@@ -41,7 +36,7 @@ class UserItem extends Component {
                             paddingLeft: 15,
                             paddingRight: 15
                         }}
-                        onClick={this.onToggleModalConfirm}
+                        onClick={this.onDeleteUser}
                     >
                         <i className="material-icons">delete</i>
                     </button>
