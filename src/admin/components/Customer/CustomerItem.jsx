@@ -2,12 +2,13 @@ import React, { Component } from "react";
 
 class CustomerItem extends Component {
     render() {
+        const { name, email, phone, address } = this.props.customer;
         return (
             <tr>
-                <td>name</td>
-                <td>email</td>
-                <td>phone</td>
-                <td>address</td>
+                <td>{name}</td>
+                <td>{email}</td>
+                <td>{phone}</td>
+                <td>{address}</td>
                 <td>
                     <button
                         type="button"
