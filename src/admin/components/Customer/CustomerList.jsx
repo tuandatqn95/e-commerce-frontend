@@ -1,34 +1,14 @@
 import React, { Component } from "react";
 
-class UserList extends Component {
-    onToggleUserForm = () => {
-        this.props.onToggleUserForm();
-    };
+class CustomerList extends Component {
     render() {
-        const { isFormOpen } = this.props;
         return (
             <div className="col-md-12">
                 <div className="card">
                     <div className="card-header card-header-primary">
                         <div className="pull-left">
-                            <h4 className="card-title ">Users</h4>
+                            <h4 className="card-title ">Customers</h4>
                             <p className="card-category" />
-                        </div>
-
-                        <div className="nav nav-tabs pull-right">
-                            <div className="nav-item">
-                                <a
-                                    style={{ paddingTop: 2, paddingBottom: 2 }}
-                                    className={`nav-link ${isFormOpen &&
-                                        "active"}`}
-                                    onClick={this.onToggleUserForm}
-                                >
-                                    <i className="material-icons">
-                                        {isFormOpen ? "cancel" : "add_circle"}
-                                    </i>{" "}
-                                    {isFormOpen ? "Close Form" : "Add User"}
-                                </a>
-                            </div>
                         </div>
                     </div>
                     <div className="card-body">
@@ -55,4 +35,4 @@ class UserList extends Component {
     }
 }
 
-export default UserList;
+export default CustomerList;

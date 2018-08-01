@@ -1,8 +1,18 @@
 import React, { Component } from "react";
+import CustomerList from "../../components/Customer/CustomerList";
+import CustomerItem from "../../components/Customer/CustomerItem";
 
 class Customers extends Component {
     render() {
-        return <div />;
+        return (
+            <div className="container-fluid">
+                <div className="row">
+                    <CustomerList>
+                        <CustomerItem />
+                    </CustomerList>
+                </div>
+            </div>
+        );
     }
 }
 
