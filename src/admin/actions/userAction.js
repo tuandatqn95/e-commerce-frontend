@@ -100,13 +100,6 @@ export const updateUser = user => {
     };
 };
 
-export const selectedEditUser = user => {
-    return {
-        type: Types.SELECT_EDIT_USER,
-        user
-    };
-};
-
 export const updatePassword = (id, oldPassword, newPassword) => {
     return {
         type: Types.UPDATE_PASSWORD,

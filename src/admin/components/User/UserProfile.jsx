@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Styles } from "../../constants/Styles";
+const defaultAvatar = "../admin/img/faces/default-avatar.png";
 
 class UserProfile extends Component {
     constructor(props) {
@@ -13,11 +14,11 @@ class UserProfile extends Component {
             email: "",
             phone: "",
             address: "",
-            avatarURL: undefined
+            avatarURL: defaultAvatar
         };
     }
     onRemoveAvatar = () => {
-        this.setState({ avatarURL: undefined });
+        this.setState({ avatarURL: defaultAvatar });
     };
     onHandleChange = event => {
         let target = event.target;
@@ -55,7 +56,8 @@ class UserProfile extends Component {
             name,
             email,
             phone,
-            address
+            address,
+            avatarURL: defaultAvatar
         });
     };
 
@@ -146,12 +148,10 @@ class UserProfile extends Component {
                                 {Image}
                                 <div hidden={!isEditing}>
                                     <span className="btn btn-primary btn-round btn-sm btn-file">
-                                        {avatarURL ? (
+                                        {avatarURL !== defaultAvatar ? (
                                             <span>Change</span>
                                         ) : (
-                                            <span hidden={avatarURL}>
-                                                Add Photo
-                                            </span>
+                                            <span>Add Photo</span>
                                         )}
 
                                         <input
@@ -161,7 +161,7 @@ class UserProfile extends Component {
                                         <div className="ripple-container" />
                                     </span>
                                     <button
-                                        hidden={!avatarURL}
+                                        hidden={avatarURL === defaultAvatar}
                                         className="btn btn-danger btn-round btn-sm"
                                         onClick={this.onRemoveAvatar}
                                     >
@@ -184,52 +184,74 @@ class UserProfile extends Component {
                                             type="text"
                                             value={name}
                                             onChange={this.onHandleChange}
-                                        />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Email: </td>
-                                    <td>
-                                        <input
-                                            name="email"
-                                            className="form-control"
-                                            type="email"
-                                            readOnly={!isEditing}
-                                            style={Styles.bgReadOnlyText}
-                                            value={email}
-                                            onChange={this.onHandleChange}
                                             onFocus={this.onHandleFocus}
                                             onBlur={this.onBlurHandle}
                                         />
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td>Email: </td>
+                                    <td>
+                                        {isEditing ? (
+                                            <input
+                                                name="email"
+                                                className="form-control"
+                                                type="email"
+                                                value={email}
+                                                onChange={this.onHandleChange}
+                                                onFocus={this.onHandleFocus}
+                                                onBlur={this.onBlurHandle}
+                                            />
+                                        ) : (
+                                            <div className="float-left">
+                                                {email}
+                                            </div>
+                                        )}
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td>Phone: </td>
                                     <td>
-                                        <input
-                                            name="phone"
-                                            className="form-control"
-                                            type="text"
-                                            readOnly={!isEditing}
-                                            style={Styles.bgReadOnlyText}
-                                            value={phone}
-                                            onChange={this.onHandleChange}
-                                        />
+                                        {isEditing ? (
+                                            <input
+                                                name="phone"
+                                                className="form-control"
+                                                type="text"
+                                                value={phone}
+                                                onChange={this.onHandleChange}
+                                                onFocus={this.onHandleFocus}
+                                                onBlur={this.onBlurHandle}
+                                            />
+                                        ) : (
+                                            <div className="float-left">
+                                                {phone}
+                                            </div>
+                                        )}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Address: </td>
                                     <td>
-                                        <input
-                                            name="address"
-                                            className="form-control"
-                                            type="text"
-                                            readOnly={!isEditing}
-                                            style={Styles.bgReadOnlyText}
-                                            value={address}
-                                            onChange={this.onHandleChange}
-                                        />
+                                        {isEditing ? (
+                                            <input
+                                                name="address"
+                                                className="form-control"
+                                                type="text"
+                                                value={address}
+                                                onChange={this.onHandleChange}
+                                                onFocus={this.onHandleFocus}
+                                                onBlur={this.onBlurHandle}
+                                            />
+                                        ) : (
+                                            <div className="float-left">
+                                                {address}
+                                            </div>
+                                        )}
                                     </td>
+                                </tr>
+                                <tr>
+                                    <td />
+                                    <td />
                                 </tr>
                             </tbody>
                         </table>
