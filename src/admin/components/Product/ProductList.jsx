@@ -33,7 +33,6 @@ class ProductList extends Component {
                             <table className="table">
                                 <thead className=" text-primary">
                                     <tr>
-                                        <th>ID</th>
                                         <th style={{ width: "33%" }}>Name</th>
                                         <th style={{ width: "67%" }}>
                                             Description

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import ProductItem from "../../components/Product/ProductItem";
 import ProductList from "../../components/Product/ProductList";
-import ProductForm from "../../components/Product/ProductForm";
+import ProductDetail from "../../components/Product/ProductDetail";
 import { Route, Switch } from "react-router-dom";
 
 import {
@@ -11,6 +11,7 @@ import {
     updateProductRequest,
     deleteProductRequest
 } from "../../actions/productAction";
+import DeleteConfirmModal from "../../components/Modal/DeleteConfirmModal";
 
 class Products extends Component {
     constructor(props) {
@@ -102,7 +103,7 @@ class Products extends Component {
                             exact
                             path={`${match.path}/add`}
                             render={() => (
-                                <ProductForm
+                                <ProductDetail
                                     isFormOpen={true}
                                     onCloseForm={this.onCloseForm}
                                     onEditProduct={this.onEditProduct}
@@ -116,6 +117,10 @@ class Products extends Component {
                         />
                     </Switch>
                 </div>
+                <DeleteConfirmModal
+                    deleteObject={this.state.deleteCategory}
+                    onConfirmDelete={this.onConfirmDelete}
+                />
             </div>
         );
     }

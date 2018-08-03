@@ -25,7 +25,6 @@ class ProductItem extends Component {
 
         return (
             <tr>
-                <td>{id}</td>
                 <td>{name}</td>
                 <td>{Description}</td>
                 <td>{Image}</td>
