@@ -172,14 +172,14 @@ class UserProfile extends Component {
                                     </button>
                                 </div>
                             </div>
-                            <h3>
-                                <b>{name}</b>
-                            </h3>
+                            <h3>{name}</h3>
                         </div>
                         <table className="table">
                             <tbody>
                                 <tr hidden={isEditing ? false : true}>
-                                    <td>Name: </td>
+                                    <td>
+                                        <h4>Name: </h4>
+                                    </td>
                                     <td>
                                         <input
                                             name="name"
@@ -193,7 +193,9 @@ class UserProfile extends Component {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Email: </td>
+                                    <td>
+                                        <h4>Email: </h4>
+                                    </td>
                                     <td>
                                         {isEditing ? (
                                             <input
@@ -206,14 +208,16 @@ class UserProfile extends Component {
                                                 onBlur={this.onBlurHandle}
                                             />
                                         ) : (
-                                            <div className="float-left">
+                                            <h4 className="float-left">
                                                 {email}
-                                            </div>
+                                            </h4>
                                         )}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Phone: </td>
+                                    <td>
+                                        <h4>Phone: </h4>
+                                    </td>
                                     <td>
                                         {isEditing ? (
                                             <input
@@ -226,14 +230,16 @@ class UserProfile extends Component {
                                                 onBlur={this.onBlurHandle}
                                             />
                                         ) : (
-                                            <div className="float-left">
+                                            <h4 className="float-left">
                                                 {phone}
-                                            </div>
+                                            </h4>
                                         )}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Address: </td>
+                                    <td>
+                                        <h4>Address: </h4>
+                                    </td>
                                     <td>
                                         {isEditing ? (
                                             <input
@@ -246,9 +252,9 @@ class UserProfile extends Component {
                                                 onBlur={this.onBlurHandle}
                                             />
                                         ) : (
-                                            <div className="float-left">
+                                            <h4 className="float-left">
                                                 {address}
-                                            </div>
+                                            </h4>
                                         )}
                                     </td>
                                 </tr>
