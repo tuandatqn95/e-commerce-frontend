@@ -23,6 +23,21 @@ export const fetchCustomersRequest = () => {
     };
 };
 
+export const deleteCustomerRequest = id => {
+    return dispatch => {
+        return callApi(`api/customers/${id}`, "DELETE", null).then(res => {
+            if (res.status === 204) dispatch(deleteCustomer(id));
+        });
+    };
+};
+
+export const deleteCustomer = id => {
+    return {
+        type: Types.DELETE_CUSTOMER,
+        id
+    };
+};
+
 export const fetchCustomers = customers => {
     return {
         type: Types.FETCH_CUSTOMER,

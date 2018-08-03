@@ -23,6 +23,7 @@ class CustomerList extends Component {
                                             Address
                                         </th>
                                         <th />
+                                        <th />
                                     </tr>
                                 </thead>
                                 <tbody>{this.props.children}</tbody>
