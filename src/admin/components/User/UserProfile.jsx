@@ -179,11 +179,11 @@ class UserProfile extends Component {
                                     className="row"
                                     hidden={isEditing ? false : true}
                                 >
-                                    <label className="col-md-3 col-form-label">
+                                    <label className="col-md-4 col-form-label">
                                         Name
                                     </label>
-                                    <div className="col-md-9">
-                                        <div className="form-group has-default">
+                                    <div className="col-md-8">
+                                        <div className="form-group">
                                             <input
                                                 type="text"
                                                 className="form-control"
@@ -197,11 +197,11 @@ class UserProfile extends Component {
                                     </div>
                                 </div>
                                 <div className="row">
-                                    <label className="col-md-3 col-form-label">
+                                    <label className="col-md-4 col-form-label">
                                         Email
                                     </label>
-                                    <div className="col-md-9">
-                                        <div className="form-group has-default">
+                                    <div className="col-md-8">
+                                        <div className="form-group">
                                             {isEditing ? (
                                                 <input
                                                     type="email"
@@ -223,11 +223,11 @@ class UserProfile extends Component {
                                     </div>
                                 </div>
                                 <div className="row">
-                                    <label className="col-md-3 col-form-label">
+                                    <label className="col-md-4 col-form-label">
                                         Phone
                                     </label>
-                                    <div className="col-md-9">
-                                        <div className="form-group has-default">
+                                    <div className="col-md-8">
+                                        <div className="form-group">
                                             {isEditing ? (
                                                 <input
                                                     type="text"
@@ -249,11 +249,11 @@ class UserProfile extends Component {
                                     </div>
                                 </div>
                                 <div className="row">
-                                    <label className="col-md-3 col-form-label">
+                                    <label className="col-md-4 col-form-label">
                                         Address
                                     </label>
-                                    <div className="col-md-9">
-                                        <div className="form-group has-default">
+                                    <div className="col-md-8">
+                                        <div className="form-group">
                                             {isEditing ? (
                                                 <input
                                                     type="text"
