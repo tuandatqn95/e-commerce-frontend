@@ -73,7 +73,9 @@ class Customers extends Component {
                         <Route
                             exact
                             path={`${match.path}/:id`}
-                            component={CustomerDetail}
+                            render={() => (
+                                <CustomerDetail customer={selectedCustomer} />
+                            )}
                         />
                     </Switch>
                     <DeleteConfirmModal
