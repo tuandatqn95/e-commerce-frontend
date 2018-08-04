@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Styles } from "../../constants/Styles";
-import { default_avatar_encode_base64 } from "../../constants/config";
+import { default_avatar_encode_base64 } from "../../constants/encodedImage";
 
 class UserProfile extends Component {
     constructor(props) {
@@ -14,11 +14,11 @@ class UserProfile extends Component {
             email: "",
             phone: "",
             address: "",
-            avatarURL: default_avatar_encode_base64
+            avatarURL: undefined
         };
     }
     onRemoveAvatar = () => {
-        this.setState({ avatarURL: default_avatar_encode_base64 });
+        this.setState({ avatarURL: undefined });
     };
     onHandleChange = event => {
         let target = event.target;
@@ -57,7 +57,7 @@ class UserProfile extends Component {
             email,
             phone,
             address,
-            avatarURL: default_avatar_encode_base64
+            avatarURL: undefined
         });
     };
 
@@ -114,14 +114,16 @@ class UserProfile extends Component {
             isShow,
             avatarURL
         } = this.state;
-        const Image = (
+
+        const Image = ({ avatarURL }) => (
             <img
                 className="img-raised rounded-circle img-fluid"
                 alt="avatar"
                 style={Styles.circleImage}
-                src={avatarURL}
+                src={avatarURL ? avatarURL : default_avatar_encode_base64}
             />
         );
+
         return (
             <div
                 className={`swal2-container swal2-fade ${
@@ -145,11 +147,10 @@ class UserProfile extends Component {
                     <div className="swal2-content" style={{ display: "block" }}>
                         <div className="container text-center">
                             <div className="text-center">
-                                {Image}
+                                {<Image avatarURL={avatarURL} />}
                                 <div hidden={!isEditing}>
                                     <span className="btn btn-primary btn-round btn-sm btn-file">
-                                        {avatarURL !==
-                                        default_avatar_encode_base64 ? (
+                                        {avatarURL ? (
                                             <span>Change</span>
                                         ) : (
                                             <span>Add Photo</span>
@@ -162,10 +163,7 @@ class UserProfile extends Component {
                                         <div className="ripple-container" />
                                     </span>
                                     <button
-                                        hidden={
-                                            avatarURL ===
-                                            default_avatar_encode_base64
-                                        }
+                                        hidden={!avatarURL}
                                         className="btn btn-danger btn-round btn-sm"
                                         onClick={this.onRemoveAvatar}
                                     >
@@ -175,96 +173,109 @@ class UserProfile extends Component {
                             </div>
                             <h3>{name}</h3>
                         </div>
-                        <table className="table">
-                            <tbody>
-                                <tr hidden={isEditing ? false : true}>
-                                    <td>
-                                        <h4>Name: </h4>
-                                    </td>
-                                    <td>
-                                        <input
-                                            name="name"
-                                            className="form-control"
-                                            type="text"
-                                            value={name}
-                                            onChange={this.onHandleChange}
-                                            onFocus={this.onHandleFocus}
-                                            onBlur={this.onBlurHandle}
-                                        />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h4>Email: </h4>
-                                    </td>
-                                    <td>
-                                        {isEditing ? (
+                        <div className="card-body ">
+                            <form className="form-horizontal">
+                                <div
+                                    className="row"
+                                    hidden={isEditing ? false : true}
+                                >
+                                    <label className="col-md-3 col-form-label">
+                                        Name
+                                    </label>
+                                    <div className="col-md-9">
+                                        <div className="form-group has-default">
                                             <input
-                                                name="email"
-                                                className="form-control"
-                                                type="email"
-                                                value={email}
-                                                onChange={this.onHandleChange}
-                                                onFocus={this.onHandleFocus}
-                                                onBlur={this.onBlurHandle}
-                                            />
-                                        ) : (
-                                            <h4 className="float-left">
-                                                {email}
-                                            </h4>
-                                        )}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h4>Phone: </h4>
-                                    </td>
-                                    <td>
-                                        {isEditing ? (
-                                            <input
-                                                name="phone"
-                                                className="form-control"
                                                 type="text"
-                                                value={phone}
-                                                onChange={this.onHandleChange}
-                                                onFocus={this.onHandleFocus}
-                                                onBlur={this.onBlurHandle}
-                                            />
-                                        ) : (
-                                            <h4 className="float-left">
-                                                {phone}
-                                            </h4>
-                                        )}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h4>Address: </h4>
-                                    </td>
-                                    <td>
-                                        {isEditing ? (
-                                            <input
-                                                name="address"
                                                 className="form-control"
-                                                type="text"
-                                                value={address}
+                                                name="name"
+                                                value={name}
                                                 onChange={this.onHandleChange}
                                                 onFocus={this.onHandleFocus}
                                                 onBlur={this.onBlurHandle}
                                             />
-                                        ) : (
-                                            <h4 className="float-left">
-                                                {address}
-                                            </h4>
-                                        )}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td />
-                                    <td />
-                                </tr>
-                            </tbody>
-                        </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <label className="col-md-3 col-form-label">
+                                        Email
+                                    </label>
+                                    <div className="col-md-9">
+                                        <div className="form-group has-default">
+                                            {isEditing ? (
+                                                <input
+                                                    type="email"
+                                                    className="form-control"
+                                                    name="email"
+                                                    value={email}
+                                                    onChange={
+                                                        this.onHandleChange
+                                                    }
+                                                    onFocus={this.onHandleFocus}
+                                                    onBlur={this.onBlurHandle}
+                                                />
+                                            ) : (
+                                                <h4 className="float-left">
+                                                    {email}
+                                                </h4>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <label className="col-md-3 col-form-label">
+                                        Phone
+                                    </label>
+                                    <div className="col-md-9">
+                                        <div className="form-group has-default">
+                                            {isEditing ? (
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    name="phone"
+                                                    value={phone}
+                                                    onChange={
+                                                        this.onHandleChange
+                                                    }
+                                                    onFocus={this.onHandleFocus}
+                                                    onBlur={this.onBlurHandle}
+                                                />
+                                            ) : (
+                                                <h4 className="float-left">
+                                                    {phone}
+                                                </h4>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <label className="col-md-3 col-form-label">
+                                        Address
+                                    </label>
+                                    <div className="col-md-9">
+                                        <div className="form-group has-default">
+                                            {isEditing ? (
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    name="address"
+                                                    value={address}
+                                                    onChange={
+                                                        this.onHandleChange
+                                                    }
+                                                    onFocus={this.onHandleFocus}
+                                                    onBlur={this.onBlurHandle}
+                                                />
+                                            ) : (
+                                                <h4 className="float-left">
+                                                    {address}
+                                                </h4>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                     <hr className="swal2-spacer" style={{ display: "block" }} />
                     <button
