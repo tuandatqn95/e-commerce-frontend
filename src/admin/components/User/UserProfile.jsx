@@ -115,15 +115,6 @@ class UserProfile extends Component {
             avatarURL
         } = this.state;
 
-        const Image = ({ avatarURL }) => (
-            <img
-                className="img-raised rounded-circle img-fluid"
-                alt="avatar"
-                style={Styles.circleImage}
-                src={avatarURL ? avatarURL : default_avatar_encode_base64}
-            />
-        );
-
         return (
             <div
                 className={`swal2-container swal2-fade ${
@@ -304,3 +295,12 @@ class UserProfile extends Component {
 }
 
 export default UserProfile;
+
+const Image = ({ avatarURL }) => (
+    <img
+        className="img-raised rounded-circle img-fluid"
+        alt="avatar"
+        style={Styles.circleImage}
+        src={avatarURL ? avatarURL : default_avatar_encode_base64}
+    />
+);
