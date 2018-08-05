@@ -1,7 +1,19 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
+import ChangePassword from "../User/ChangePassword";
 
 class Header extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isChangePassModalOpen: false
+        };
+    }
+    onToggleChangePassModal = () => {
+        this.setState({
+            isChangePassModalOpen: !this.state.isChangePassModalOpen
+        });
+    };
     NavbarName = () => (
         <Switch>
             {this.props.routes.map((route, index) => (
@@ -81,7 +93,10 @@ class Header extends Component {
                                     aria-labelledby="navbarDropdownMenuLink"
                                 >
                                     <a className="dropdown-item">Profile</a>
-                                    <a className="dropdown-item">
+                                    <a
+                                        className="dropdown-item"
+                                        onClick={this.onToggleChangePassModal}
+                                    >
                                         Change Password
                                     </a>
                                     <a
@@ -94,6 +109,10 @@ class Header extends Component {
                             </li>
                         </ul>
                     </div>
+                    <ChangePassword
+                        isShow={this.state.isChangePassModalOpen}
+                        onToggleModal={this.onToggleChangePassModal}
+                    />
                 </div>
             </nav>
         );
