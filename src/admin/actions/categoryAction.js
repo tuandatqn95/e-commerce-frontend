@@ -1,24 +1,22 @@
 import * as Types from "./../constants/ActionTypes";
 import callApi from "../utils/ApiCaller";
 
-export const fetchCategoriesRequest = () => {
-    return dispatch => {
-        return callApi("api/categories").then(res => {
-            if (res.status === 200)
-                dispatch(
-                    fetchCategories(
-                        res.data.map(category => {
-                            return {
-                                id: category._id,
-                                name: category.name,
-                                image: category.image,
-                                description: category.description
-                            };
-                        })
-                    )
-                );
-        });
-    };
+export const fetchCategoriesRequest = () => dispatch => {
+    return callApi("api/categories").then(res => {
+        if (res.status === 200)
+            dispatch(
+                fetchCategories(
+                    res.data.map(category => {
+                        return {
+                            id: category._id,
+                            name: category.name,
+                            image: category.image,
+                            description: category.description
+                        };
+                    })
+                )
+            );
+    });
 };
 
 export const addCategoryRequest = category => {
