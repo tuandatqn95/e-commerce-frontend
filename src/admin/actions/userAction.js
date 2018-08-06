@@ -55,23 +55,6 @@ export const updateUserRequest = user => {
     };
 };
 
-export const updatePasswordRequest = (id, oldPassword, newPassword) => {
-    return dispatch => {
-        return callApi(`api/users/${id}/password`, "PATCH", {
-            oldPassword,
-            newPassword
-        }).then(res => {
-            if (res.status === 204);
-        });
-    };
-};
-export const resetPasswordRequest = id => {
-    return dispatch => {
-        return callApi(`api/users/${id}/password`, "PUT", null).then(res => {
-            if (res.status === 201);
-        });
-    };
-};
 export const fetchUsers = users => {
     return {
         type: Types.FETCH_USER,
@@ -97,21 +80,5 @@ export const updateUser = user => {
     return {
         type: Types.UPDATE_USER,
         user
-    };
-};
-
-export const updatePassword = (id, oldPassword, newPassword) => {
-    return {
-        type: Types.UPDATE_PASSWORD,
-        id,
-        oldPassword,
-        newPassword
-    };
-};
-
-export const resetPassword = id => {
-    return {
-        type: Types.RESET_PASSWORD,
-        id
     };
 };

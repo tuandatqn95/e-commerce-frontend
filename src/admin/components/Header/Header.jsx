@@ -9,11 +9,13 @@ class Header extends Component {
             isChangePassModalOpen: false
         };
     }
+
     onToggleChangePassModal = () => {
         this.setState({
             isChangePassModalOpen: !this.state.isChangePassModalOpen
         });
     };
+
     NavbarName = () => (
         <Switch>
             {this.props.routes.map((route, index) => (
@@ -112,6 +114,8 @@ class Header extends Component {
                     <ChangePassword
                         isShow={this.state.isChangePassModalOpen}
                         onToggleModal={this.onToggleChangePassModal}
+                        onUpdatePassword={this.props.onUpdatePassword}
+                        onResetPassword={this.props.onResetPassword}
                     />
                 </div>
             </nav>

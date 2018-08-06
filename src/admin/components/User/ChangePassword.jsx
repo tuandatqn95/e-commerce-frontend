@@ -36,15 +36,14 @@ class ChangePassword extends Component {
     onSubmit = event => {
         event.preventDefault();
         if (this.validateInput()) {
-            // this.props.onUpdatePassword(
-            //     this.state.oldPassword,
-            //     this.state.newPassword
-            // );
+            const { oldPassword, newPassword } = this.state;
+            this.props.onUpdatePassword(oldPassword, newPassword);
         }
         this.resetForm();
     };
+
     onResetPassword = () => {
-        //this.props.onResetPassword(this.props.user.id);
+        this.props.onResetPassword();
         this.resetForm();
     };
 
