@@ -9,8 +9,7 @@ import { connect } from "react-redux";
 import {
     authRequest,
     logoutRequest,
-    updatePasswordRequest,
-    resetPasswordRequest
+    updatePasswordRequest
 } from "./actions/authAction";
 import Loading from "./components/Loading/Loading";
 
@@ -18,11 +17,6 @@ class App extends Component {
     onUpdatePassword = (oldPassword, newPassword) => {
         const { id } = this.props.auth.loggedUser;
         this.props.onUpdatePasswordRequest(id, oldPassword, newPassword);
-    };
-
-    onResetPassword = () => {
-        const { id } = this.props.auth.loggedUser;
-        this.props.onResetPasswordRequest(id);
     };
 
     componentWillMount() {
@@ -62,7 +56,6 @@ class App extends Component {
                                         routes={appRoutes}
                                         onLogout={this.props.onLogoutRequest}
                                         onUpdatePassword={this.onUpdatePassword}
-                                        onResetPassword={this.onResetPassword}
                                     />
                                     <div className="content">
                                         <SwitchRoutes routes={appRoutes} />
@@ -89,8 +82,7 @@ function mapDispatchToProps(dispatch) {
         onLogoutRequest: () => dispatch(logoutRequest()),
         onAuthRequest: () => dispatch(authRequest()),
         onUpdatePasswordRequest: (id, oldPassword, newPassword) =>
-            dispatch(updatePasswordRequest(id, oldPassword, newPassword)),
-        onResetPasswordRequest: id => dispatch(resetPasswordRequest(id))
+            dispatch(updatePasswordRequest(id, oldPassword, newPassword))
     };
 }
 

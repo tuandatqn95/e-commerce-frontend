@@ -115,7 +115,6 @@ class Header extends Component {
                         isShow={this.state.isChangePassModalOpen}
                         onToggleModal={this.onToggleChangePassModal}
                         onUpdatePassword={this.props.onUpdatePassword}
-                        onResetPassword={this.props.onResetPassword}
                     />
                 </div>
             </nav>

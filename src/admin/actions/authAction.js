@@ -48,14 +48,6 @@ export const updatePasswordRequest = (id, oldPassword, newPassword) => {
     };
 };
 
-export const resetPasswordRequest = id => {
-    return dispatch => {
-        return callApi(`api/users/${id}/password`, "PUT", null).then(res => {
-            if (res.status === 201);
-        });
-    };
-};
-
 export const login = user => {
     return {
         type: Types.LOGIN,

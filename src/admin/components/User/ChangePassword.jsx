@@ -42,11 +42,6 @@ class ChangePassword extends Component {
         this.resetForm();
     };
 
-    onResetPassword = () => {
-        this.props.onResetPassword();
-        this.resetForm();
-    };
-
     render() {
         const { isShow } = this.props;
         const { oldPassword, newPassword, confPassword } = this.state;
@@ -61,7 +56,7 @@ class ChangePassword extends Component {
                     className="swal2-modal swal2-show"
                     style={{
                         display: isShow ? "block" : "none",
-                        width: 500,
+                        width: 536,
                         padding: 20,
                         background:
                             "rgb(255, 255, 255) none repeat scroll 0% 0%",
@@ -71,13 +66,17 @@ class ChangePassword extends Component {
                 >
                     <h3>Change password</h3>
                     <div className="swal2-content" style={{ display: "block" }}>
-                        <form className="form-horizontal">
-                            <div className="row">
-                                <label className="col-md-5 col-form-label">
-                                    Old Password
+                        <form
+                            class="form-horizontal"
+                            onSubmit={this.onSubmit}
+                            onReset={this.resetForm}
+                        >
+                            <div class="row">
+                                <label class="col-md-4 col-form-label">
+                                    Old password
                                 </label>
-                                <div className="col-md-6">
-                                    <div className="form-group">
+                                <div class="col-md-8">
+                                    <div class="form-group has-default">
                                         <input
                                             type="password"
                                             className="form-control"
@@ -88,12 +87,12 @@ class ChangePassword extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="row">
-                                <label className="col-md-5 col-form-label">
-                                    New Password
+                            <div class="row">
+                                <label class="col-md-4 col-form-label">
+                                    New password
                                 </label>
-                                <div className="col-md-6">
-                                    <div className="form-group">
+                                <div class="col-md-8">
+                                    <div class="form-group">
                                         <input
                                             type="password"
                                             className="form-control"
@@ -104,12 +103,12 @@ class ChangePassword extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="row">
-                                <label className="col-md-5 col-form-label">
-                                    Confirm Password
+                            <div class="row">
+                                <label class="col-md-4 col-form-label">
+                                    Confirm password
                                 </label>
-                                <div className="col-md-6">
-                                    <div className="form-group">
+                                <div class="col-md-8">
+                                    <div class="form-group">
                                         <input
                                             type="password"
                                             className="form-control"
@@ -120,31 +119,25 @@ class ChangePassword extends Component {
                                     </div>
                                 </div>
                             </div>
+                            <hr
+                                className="swal2-spacer"
+                                style={{ display: "block" }}
+                            />
+                            <button
+                                type="submit"
+                                className="swal2-confirm btn btn-success"
+                            >
+                                Change
+                            </button>
+                            <button
+                                type="reset"
+                                className="swal2-cancel btn btn-danger"
+                                style={{ display: "inline-block" }}
+                            >
+                                Cancel
+                            </button>
                         </form>
                     </div>
-                    <hr className="swal2-spacer" style={{ display: "block" }} />
-                    <button
-                        type="button"
-                        className="swal2-confirm btn btn-primary"
-                        onClick={this.onResetPassword}
-                    >
-                        Reset password
-                    </button>
-                    <button
-                        type="button"
-                        className="swal2-confirm btn btn-success"
-                        onClick={this.onSubmit}
-                    >
-                        Change
-                    </button>
-                    <button
-                        type="button"
-                        className="swal2-cancel btn btn-danger"
-                        style={{ display: "inline-block" }}
-                        onClick={this.resetForm}
-                    >
-                        Cancel
-                    </button>
                 </div>
             </div>
         );
