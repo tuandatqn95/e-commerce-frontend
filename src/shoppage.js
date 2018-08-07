@@ -5,7 +5,7 @@ import { ConnectedRouter, routerMiddleware } from "react-router-redux";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import App from "./shopPage/App";
-import reducers from "./admin/reducers";
+import reducers from "./shopPage/reducers";
 
 const history = createBrowserHistory();
 const store = createStore(reducers, applyMiddleware(routerMiddleware(history)));
@@ -21,7 +21,7 @@ render(
 
 if (process.env.NODE_ENV === "development" && module.hot) {
     module.hot.accept();
-    module.hot.accept("./admin/reducers", () => {
-        store.replaceReducer(require("./admin/reducers").default);
+    module.hot.accept("./shopPage/reducers", () => {
+        store.replaceReducer(require("./shopPage/reducers").default);
     });
 }
