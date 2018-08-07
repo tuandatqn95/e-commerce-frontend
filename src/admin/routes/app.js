@@ -2,6 +2,7 @@ import DashBoard from "../views/DashBoard/DashBoard";
 import Categories from "../views/Categories/Categories";
 import Products from "../views/Products/Products";
 import Users from "../views/UserManager/Users";
+import Customers from "../views/CustomerManager/Customers";
 
 const appRoutes = [
     {
@@ -29,8 +30,15 @@ const appRoutes = [
         path: "/users",
         sidebarName: "User",
         navbarName: "User Management",
-        icon: "face",
+        icon: "person",
         component: Users
+    },
+    {
+        path: "/customers",
+        sidebarName: "Customer",
+        navbarName: "Customer Management",
+        icon: "face",
+        component: Customers
     },
     {
         redirect: true,
