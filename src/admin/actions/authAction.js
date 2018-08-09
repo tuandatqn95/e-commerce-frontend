@@ -6,7 +6,7 @@ export const authRequest = () => {
         return callApi("admin/auth")
             .then(res => {
                 if (res.status === 200) {
-                    dispatch(login(res.data.payload));
+                    dispatch(login(res.data.user));
                 }
             })
             .catch(err => {
@@ -34,6 +34,17 @@ export const logoutRequest = user => {
     return dispatch => {
         localStorage.removeItem("token");
         dispatch(logout());
+    };
+};
+
+export const updatePasswordRequest = (id, oldPassword, newPassword) => {
+    return dispatch => {
+        return callApi(`api/users/${id}/password`, "PATCH", {
+            oldPassword,
+            newPassword
+        }).then(res => {
+            if (res.status === 204);
+        });
     };
 };
 

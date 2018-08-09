@@ -9,9 +9,7 @@ import {
     fetchUsersRequest,
     addUserRequest,
     deleteUserRequest,
-    updateUserRequest,
-    updatePasswordRequest,
-    resetPasswordRequest
+    updateUserRequest
 } from "../../actions/userAction";
 
 class Users extends Component {
@@ -62,14 +60,6 @@ class Users extends Component {
         this.setState({
             deletedUser: undefined
         });
-    };
-
-    onUpdatePassword = (id, oldPassword, newPassword) => {
-        this.props.onUpdatePassword(id, oldPassword, newPassword);
-    };
-
-    onResetPassword = id => {
-        this.props.onResetPassword(id);
     };
 
     componentDidMount() {
@@ -129,10 +119,7 @@ const mapDispatchToProps = dispatch => {
         onFetchUsers: () => dispatch(fetchUsersRequest()),
         onAddUser: user => dispatch(addUserRequest(user)),
         onDeleteUser: id => dispatch(deleteUserRequest(id)),
-        onUpdateUser: user => dispatch(updateUserRequest(user)),
-        onUpdatePassword: (id, oldPassword, newPassword) =>
-            dispatch(updatePasswordRequest(id, oldPassword, newPassword)),
-        onResetPassword: id => dispatch(resetPasswordRequest(id))
+        onUpdateUser: user => dispatch(updateUserRequest(user))
     };
 };
 export default connect(
